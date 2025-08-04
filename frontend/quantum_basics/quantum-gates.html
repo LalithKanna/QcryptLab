@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Gates and Operations - Quantum Crypto Tutorial</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/quantum-visualizations.css">
+    <style>
+        .gate-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            color: white;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .gate-matrix {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+        
+        .gate-visualization {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .gate-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .control-group {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .btn-simulate {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-simulate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .circuit-builder {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .gate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        
+        .gate-button {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .gate-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .circuit-display {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .results-display {
+            background: rgba(0,0,0,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">QuantumCrypto Tutorial</h1>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="quantum-intro.html">Quantum Basics</a></li>
+                    <li><a href="qubits-tutorial.html">Qubits</a></li>
+                    <li><a href="#quantum-gates" class="active">Quantum Gates</a></li>
+                    <li><a href="quantum-circuits.html">Circuits</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="quantum-gates" class="hero-section">
+            <div class="hero-container">
+                <h2 class="hero-title">Quantum Gates and Operations</h2>
+                <p class="hero-subtitle">
+                    Master the fundamental building blocks of quantum computing - 
+                    single and multi-qubit quantum gates
+                </p>
+            </div>
+        </section>
+
+        <section class="overview-section">
+            <div class="container">
+                <h2 class="section-title">Single Qubit Gates</h2>
+                <p class="section-description">
+                    Single qubit gates are the basic operations that can be performed on individual qubits. 
+                    They form the foundation of quantum computing and are represented by 2x2 unitary matrices.
+                </p>
+                
+                <div class="gate-card">
+                    <h3>Pauli-X Gate (NOT Gate)</h3>
+                    <p>The Pauli-X gate is the quantum equivalent of the classical NOT gate. It flips the qubit state.</p>
+                    <div class="gate-matrix">
+                        <strong>Matrix Representation:</strong><br>
+                        X = [0 1]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 0]
+                    </div>
+                    <div class="gate-visualization">
+                        <h4>Effect on Bloch Sphere</h4>
+                        <p>Rotates the qubit by π radians around the X-axis</p>
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <label>Input State:</label>
+                                <select id="x-input-state">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                    <option value="plus">|+⟩</option>
+                                    <option value="minus">|-⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn-simulate" onclick="simulateXGate()">Apply X Gate</button>
+                            </div>
+                        </div>
+                        <div class="results-display" id="x-gate-results">
+                            <p>Click "Apply X Gate" to see the transformation...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gate-card">
+                    <h3>Pauli-Y Gate</h3>
+                    <p>The Pauli-Y gate performs a rotation around the Y-axis of the Bloch sphere.</p>
+                    <div class="gate-matrix">
+                        <strong>Matrix Representation:</strong><br>
+                        Y = [0 -i]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[i  0]
+                    </div>
+                    <div class="gate-visualization">
+                        <h4>Effect on Bloch Sphere</h4>
+                        <p>Rotates the qubit by π radians around the Y-axis</p>
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <label>Input State:</label>
+                                <select id="y-input-state">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                    <option value="plus">|+⟩</option>
+                                    <option value="minus">|-⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn-simulate" onclick="simulateYGate()">Apply Y Gate</button>
+                            </div>
+                        </div>
+                        <div class="results-display" id="y-gate-results">
+                            <p>Click "Apply Y Gate" to see the transformation...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gate-card">
+                    <h3>Pauli-Z Gate</h3>
+                    <p>The Pauli-Z gate performs a rotation around the Z-axis of the Bloch sphere.</p>
+                    <div class="gate-matrix">
+                        <strong>Matrix Representation:</strong><br>
+                        Z = [1  0]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 -1]
+                    </div>
+                    <div class="gate-visualization">
+                        <h4>Effect on Bloch Sphere</h4>
+                        <p>Rotates the qubit by π radians around the Z-axis</p>
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <label>Input State:</label>
+                                <select id="z-input-state">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                    <option value="plus">|+⟩</option>
+                                    <option value="minus">|-⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn-simulate" onclick="simulateZGate()">Apply Z Gate</button>
+                            </div>
+                        </div>
+                        <div class="results-display" id="z-gate-results">
+                            <p>Click "Apply Z Gate" to see the transformation...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gate-card">
+                    <h3>Hadamard Gate (H)</h3>
+                    <p>The Hadamard gate creates superpositions and is essential for quantum algorithms.</p>
+                    <div class="gate-matrix">
+                        <strong>Matrix Representation:</strong><br>
+                        H = [1  1]/√2<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 -1]/√2
+                    </div>
+                    <div class="gate-visualization">
+                        <h4>Effect on Bloch Sphere</h4>
+                        <p>Rotates the qubit by π radians around the X+Z axis</p>
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <label>Input State:</label>
+                                <select id="h-input-state">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                    <option value="plus">|+⟩</option>
+                                    <option value="minus">|-⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn-simulate" onclick="simulateHGate()">Apply H Gate</button>
+                            </div>
+                        </div>
+                        <div class="results-display" id="h-gate-results">
+                            <p>Click "Apply H Gate" to see the transformation...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="multi-qubit-section">
+            <div class="container">
+                <h2 class="section-title">Multi-Qubit Gates</h2>
+                <p class="section-description">
+                    Multi-qubit gates operate on multiple qubits simultaneously and are essential for creating 
+                    entanglement and implementing quantum algorithms.
+                </p>
+                
+                <div class="gate-card">
+                    <h3>CNOT Gate (Controlled-NOT)</h3>
+                    <p>The CNOT gate is a two-qubit gate that flips the target qubit if the control qubit is |1⟩.</p>
+                    <div class="gate-matrix">
+                        <strong>Matrix Representation (4x4):</strong><br>
+                        CNOT = [1 0 0 0]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 1 0 0]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 0 0 1]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 0 1 0]
+                    </div>
+                    <div class="gate-visualization">
+                        <h4>Interactive CNOT Simulation</h4>
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <label>Control Qubit:</label>
+                                <select id="cnot-control">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Target Qubit:</label>
+                                <select id="cnot-target">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn-simulate" onclick="simulateCNOT()">Apply CNOT</button>
+                            </div>
+                        </div>
+                        <div class="results-display" id="cnot-results">
+                            <p>Click "Apply CNOT" to see the transformation...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gate-card">
+                    <h3>SWAP Gate</h3>
+                    <p>The SWAP gate exchanges the states of two qubits.</p>
+                    <div class="gate-matrix">
+                        <strong>Matrix Representation (4x4):</strong><br>
+                        SWAP = [1 0 0 0]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 0 1 0]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 1 0 0]<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 0 0 1]
+                    </div>
+                    <div class="gate-visualization">
+                        <h4>Interactive SWAP Simulation</h4>
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <label>Qubit 1:</label>
+                                <select id="swap-qubit1">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label>Qubit 2:</label>
+                                <select id="swap-qubit2">
+                                    <option value="0">|0⟩</option>
+                                    <option value="1">|1⟩</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn-simulate" onclick="simulateSWAP()">Apply SWAP</button>
+                            </div>
+                        </div>
+                        <div class="results-display" id="swap-results">
+                            <p>Click "Apply SWAP" to see the transformation...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-steps-section">
+            <div class="container">
+                <h2 class="section-title">Ready to Build Circuits?</h2>
+                <p class="section-description">
+                    Now that you understand individual quantum gates, you're ready to combine them into quantum circuits!
+                </p>
+                
+                <div class="gate-card">
+                    <h3>Next: Quantum Circuits</h3>
+                    <p>Learn how to combine these gates to create powerful quantum algorithms and protocols.</p>
+                    <div class="gate-controls">
+                        <div class="control-group">
+                            <a href="quantum-circuits.html" class="btn-simulate">Go to Circuit Builder →</a>
+                        </div>
+                    </div>
+                    
+                    <div class="gate-visualization">
+                        <h4>What You'll Learn:</h4>
+                        <ul style="text-align: left; margin: 20px 0;">
+                            <li>Building multi-gate quantum circuits</li>
+                            <li>Creating Bell states and GHZ states</li>
+                            <li>Understanding quantum algorithms</li>
+                            <li>Simulating complex quantum systems</li>
+                            <li>Analyzing measurement results</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let currentCircuit = [];
+        let circuitQubits = 2;
+
+        function simulateXGate() {
+            const inputState = document.getElementById('x-input-state').value;
+            const results = document.getElementById('x-gate-results');
+            
+            let outputState, description;
+            switch(inputState) {
+                case '0':
+                    outputState = '|1⟩';
+                    description = 'X|0⟩ = |1⟩ (flips 0 to 1)';
+                    break;
+                case '1':
+                    outputState = '|0⟩';
+                    description = 'X|1⟩ = |0⟩ (flips 1 to 0)';
+                    break;
+                case 'plus':
+                    outputState = '|+⟩';
+                    description = 'X|+⟩ = |+⟩ (unchanged)';
+                    break;
+                case 'minus':
+                    outputState = '|-⟩';
+                    description = 'X|-⟩ = -|-⟩ (phase flip)';
+                    break;
+            }
+            
+            results.innerHTML = `
+                <h4>X Gate Transformation</h4>
+                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Output:</strong> ${outputState}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+        }
+
+        function simulateYGate() {
+            const inputState = document.getElementById('y-input-state').value;
+            const results = document.getElementById('y-gate-results');
+            
+            let outputState, description;
+            switch(inputState) {
+                case '0':
+                    outputState = 'i|1⟩';
+                    description = 'Y|0⟩ = i|1⟩ (flips with phase)';
+                    break;
+                case '1':
+                    outputState = '-i|0⟩';
+                    description = 'Y|1⟩ = -i|0⟩ (flips with phase)';
+                    break;
+                case 'plus':
+                    outputState = 'i|+⟩';
+                    description = 'Y|+⟩ = i|+⟩ (phase change)';
+                    break;
+                case 'minus':
+                    outputState = '-i|-⟩';
+                    description = 'Y|-⟩ = -i|-⟩ (phase change)';
+                    break;
+            }
+            
+            results.innerHTML = `
+                <h4>Y Gate Transformation</h4>
+                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Output:</strong> ${outputState}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+        }
+
+        function simulateZGate() {
+            const inputState = document.getElementById('z-input-state').value;
+            const results = document.getElementById('z-gate-results');
+            
+            let outputState, description;
+            switch(inputState) {
+                case '0':
+                    outputState = '|0⟩';
+                    description = 'Z|0⟩ = |0⟩ (unchanged)';
+                    break;
+                case '1':
+                    outputState = '-|1⟩';
+                    description = 'Z|1⟩ = -|1⟩ (phase flip)';
+                    break;
+                case 'plus':
+                    outputState = '|-⟩';
+                    description = 'Z|+⟩ = |-⟩ (phase flip)';
+                    break;
+                case 'minus':
+                    outputState = '|+⟩';
+                    description = 'Z|-⟩ = |+⟩ (phase flip)';
+                    break;
+            }
+            
+            results.innerHTML = `
+                <h4>Z Gate Transformation</h4>
+                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Output:</strong> ${outputState}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+        }
+
+        function simulateHGate() {
+            const inputState = document.getElementById('h-input-state').value;
+            const results = document.getElementById('h-gate-results');
+            
+            let outputState, description;
+            switch(inputState) {
+                case '0':
+                    outputState = '|+⟩';
+                    description = 'H|0⟩ = |+⟩ (creates superposition)';
+                    break;
+                case '1':
+                    outputState = '|-⟩';
+                    description = 'H|1⟩ = |-⟩ (creates superposition)';
+                    break;
+                case 'plus':
+                    outputState = '|0⟩';
+                    description = 'H|+⟩ = |0⟩ (back to computational basis)';
+                    break;
+                case 'minus':
+                    outputState = '|1⟩';
+                    description = 'H|-⟩ = |1⟩ (back to computational basis)';
+                    break;
+            }
+            
+            results.innerHTML = `
+                <h4>H Gate Transformation</h4>
+                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Output:</strong> ${outputState}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+        }
+
+        function simulateCNOT() {
+            const control = document.getElementById('cnot-control').value;
+            const target = document.getElementById('cnot-target').value;
+            const results = document.getElementById('cnot-results');
+            
+            let outputState, description;
+            if (control === '0') {
+                outputState = `|${control}${target}⟩`;
+                description = 'Control is |0⟩, so target remains unchanged';
+            } else {
+                const flippedTarget = target === '0' ? '1' : '0';
+                outputState = `|${control}${flippedTarget}⟩`;
+                description = 'Control is |1⟩, so target is flipped';
+            }
+            
+            results.innerHTML = `
+                <h4>CNOT Gate Transformation</h4>
+                <p><strong>Input:</strong> |${control}${target}⟩</p>
+                <p><strong>Output:</strong> ${outputState}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+        }
+
+        function simulateSWAP() {
+            const qubit1 = document.getElementById('swap-qubit1').value;
+            const qubit2 = document.getElementById('swap-qubit2').value;
+            const results = document.getElementById('swap-results');
+            
+            const outputState = `|${qubit2}${qubit1}⟩`;
+            const description = 'SWAP exchanges the states of the two qubits';
+            
+            results.innerHTML = `
+                <h4>SWAP Gate Transformation</h4>
+                <p><strong>Input:</strong> |${qubit1}${qubit2}⟩</p>
+                <p><strong>Output:</strong> ${outputState}</p>
+                <p><strong>Description:</strong> ${description}</p>
+            `;
+        }
+
+        function initializeCircuit() {
+            circuitQubits = parseInt(document.getElementById('circuit-qubits').value);
+            currentCircuit = [];
+            updateCircuitDisplay();
+        }
+
+        function addGate(gateType) {
+            if (currentCircuit.length === 0) {
+                alert('Please initialize the circuit first!');
+                return;
+            }
+            currentCircuit.push(gateType);
+            updateCircuitDisplay();
+        }
+
+        function updateCircuitDisplay() {
+            const display = document.getElementById('circuit-display');
+            if (currentCircuit.length === 0) {
+                display.innerHTML = '<p>Circuit is empty. Add gates using the buttons above.</p>';
+            } else {
+                display.innerHTML = `
+                    <h4>Current Circuit (${circuitQubits} qubits):</h4>
+                    <p><strong>Gates:</strong> ${currentCircuit.join(' → ')}</p>
+                    <p><strong>Circuit Length:</strong> ${currentCircuit.length} gates</p>
+                `;
+            }
+        }
+
+        function clearCircuit() {
+            currentCircuit = [];
+            updateCircuitDisplay();
+            document.getElementById('circuit-results').innerHTML = '<p>Circuit cleared.</p>';
+        }
+
+        async function simulateCircuit() {
+            if (currentCircuit.length === 0) {
+                alert('Please add gates to the circuit first!');
+                return;
+            }
+
+            const results = document.getElementById('circuit-results');
+            results.innerHTML = '<p>Simulating circuit...</p>';
+
+            try {
+                const gates = currentCircuit.map(gate => ({
+                    type: gate,
+                    qubit: 0,
+                    control: gate === 'CNOT' ? 0 : undefined,
+                    target: gate === 'CNOT' ? 1 : undefined
+                }));
+
+                const response = await fetch('/api/simulate-circuit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        num_qubits: circuitQubits,
+                        gates: gates,
+                        shots: 1024
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    results.innerHTML = `
+                        <h4>Circuit Simulation Results</h4>
+                        <p><strong>Circuit:</strong> ${currentCircuit.join(' → ')}</p>
+                        <p><strong>Qubits:</strong> ${circuitQubits}</p>
+                        <p><strong>Shots:</strong> 1024</p>
+                        <p><strong>Measurement Results:</strong></p>
+                        <pre>${JSON.stringify(result.counts, null, 2)}</pre>
+                    `;
+                } else {
+                    results.innerHTML = `<p style="color: red;">Error: ${result.error}</p>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<p style="color: red;">Network error: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

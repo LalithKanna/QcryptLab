@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Cryptography Tutorial - Learn Quantum Computing & Cryptography</title>
+    <meta name="description" content="Interactive quantum cryptography tutorial with BB84 protocol simulation, quantum circuit builder, and Bloch sphere visualizations.">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/quantum-visualizations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">🔬 QuantumCrypto Tutorial</h1>
+                <ul class="nav-menu">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#quantum-basics">Quantum Basics</a></li>
+                    <li><a href="#bb84-protocol">BB84 Protocol</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <button class="theme-toggle">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-container">
+                <h2 class="hero-title">Master Quantum Cryptography</h2>
+                <p class="hero-subtitle">
+                    Dive into the fascinating world of quantum computing and cryptography through 
+                    interactive tutorials, real-time simulations, and hands-on experiments
+                </p>
+                <div class="hero-buttons">
+                    <a href="quantum_basics/quantum-intro.html" class="btn btn-primary">
+                        🚀 Start Learning Quantum Computing
+                    </a>
+                    <a href="bb84-protocol/bb84-tutorial.html" class="btn btn-secondary">
+                        🔐 Explore BB84 Protocol
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Overview -->
+        <section id="overview" class="overview-section">
+            <div class="container">
+                <h2 class="section-title">What You'll Master</h2>
+                <div class="course-grid">
+                    <div class="course-card">
+                        <div class="card-icon">🔬</div>
+                        <h3>Quantum Computing Fundamentals</h3>
+                        <p>
+                            Build a solid foundation in quantum mechanics, qubits, superposition, 
+                            and entanglement through interactive visualizations and hands-on experiments.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Interactive Bloch sphere visualizations</li>
+                            <li>Drag-and-drop quantum circuit builder</li>
+                            <li>Real-time quantum gate simulations</li>
+                            <li>Qiskit and QuTiP integration</li>
+                            <li>Step-by-step tutorials</li>
+                        </ul>
+                        <a href="quantum_basics/quantum-intro.html" class="card-link">
+                            Explore Quantum Basics →
+                        </a>
+                    </div>
+
+                    <div class="course-card">
+                        <div class="card-icon">🔐</div>
+                        <h3>BB84 Quantum Key Distribution</h3>
+                        <p>
+                            Master the groundbreaking BB84 protocol through comprehensive simulations 
+                            with Alice, Bob, and Eve scenarios. Understand quantum cryptography security.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Complete BB84 protocol simulation</li>
+                            <li>Eavesdropping detection demonstration</li>
+                            <li>Interactive Alice/Bob communication</li>
+                            <li>Security analysis tools</li>
+                            <li>Real-time protocol visualization</li>
+                        </ul>
+                        <a href="bb84-protocol/bb84-tutorial.html" class="card-link">
+                            Simulate BB84 Protocol →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Modules -->
+        <section id="modules" class="modules-section">
+            <div class="container">
+                <h2 class="section-title">Learning Journey</h2>
+                
+                <div class="module-category">
+                    <h3>🌊 Quantum Computing Fundamentals</h3>
+                    <div class="module-grid">
+                        <a href="quantum_basics/quantum-intro.html" class="module-item">
+                            <div class="module-number">01</div>
+                            <div class="module-content">
+                                <h4>Introduction to Quantum Computing</h4>
+                                <p>Basic concepts and mathematical foundations of quantum mechanics</p>
+                            </div>
+                        </a>
+                        
+                        <a href="quantum_basics/qubits-tutorial.html" class="module-item">
+                            <div class="module-number">02</div>
+                            <div class="module-content">
+                                <h4>Qubits and Superposition</h4>
+                                <p>Understanding quantum bits and the Bloch sphere representation</p>
+                            </div>
+                        </a>
+                        
+                        <a href="quantum_basics/quantum-gates.html" class="module-item">
+                            <div class="module-number">03</div>
+                            <div class="module-content">
+                                <h4>Quantum Gates and Operations</h4>
+                                <p>Single and multi-qubit quantum gate operations</p>
+                            </div>
+                        </a>
+                        
+                        <a href="quantum_basics/quantum-circuits.html" class="module-item">
+                            <div class="module-number">04</div>
+                            <div class="module-content">
+                                <h4>Interactive Circuit Builder</h4>
+                                <p>Build and simulate quantum circuits visually</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="module-category">
+                    <h3>🔐 Quantum Cryptography Protocols</h3>
+                    <div class="module-grid">
+                        <a href="bb84-protocol/bb84-tutorial.html" class="module-item">
+                            <div class="module-number">05</div>
+                            <div class="module-content">
+                                <h4>BB84 Protocol Tutorial</h4>
+                                <p>Learn the first quantum cryptography protocol step by step</p>
+                            </div>
+                        </a>
+                        
+                        <a href="bb84-protocol/bb84-simulator.html" class="module-item">
+                            <div class="module-number">06</div>
+                            <div class="module-content">
+                                <h4>Advanced BB84 Simulator</h4>
+                                <p>Interactive simulation with eavesdropping detection</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Stack -->
+        <section id="tech-stack" class="tech-section">
+            <div class="container">
+                <h2 class="section-title">Powered by Advanced Technology</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <h4>🔬 Qiskit</h4>
+                        <p>IBM's quantum computing framework for circuit simulation</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>⚛️ QuTiP</h4>
+                        <p>Advanced quantum mechanics and quantum optics toolkit</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>🐍 Python Flask</h4>
+                        <p>Modern web framework for backend API and simulations</p>
+                    </div>
+                    <div class="tech-item">
+                        <h4>🎨 Modern Web Tech</h4>
+                        <p>HTML5, CSS3, and JavaScript for interactive visualizations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features-section">
+            <div class="container">
+                <h2 class="section-title">Interactive Learning Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Real-time Simulations</h3>
+                        <p>Experience quantum phenomena through interactive simulations that respond to your inputs in real-time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Visual Learning</h3>
+                        <p>Complex quantum concepts made simple through intuitive visualizations and animations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Hands-on Practice</h3>
+                        <p>Build quantum circuits, run protocols, and experiment with different parameters.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Security Analysis</h3>
+                        <p>Understand quantum cryptography security through detailed analysis and eavesdropping detection.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section id="cta" class="cta-section">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Ready to Explore Quantum Cryptography?</h2>
+                    <p>Start your journey into the fascinating world of quantum computing and cryptography today.</p>
+                    <div class="cta-buttons">
+                        <a href="quantum_basics/quantum-intro.html" class="btn btn-primary">
+                            🚀 Start Learning Now
+                        </a>
+                        <a href="bb84-protocol/bb84-simulator.html" class="btn btn-secondary">
+                            🔐 Try BB84 Simulator
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quantum Cryptography Tutorial</h3>
+                    <p>An educational platform for learning quantum computing and cryptography through interactive simulations.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="quantum_basics/quantum-intro.html">Quantum Basics</a></li>
+                        <li><a href="bb84-protocol/bb84-tutorial.html">BB84 Protocol</a></li>
+                        <li><a href="quantum_basics/quantum-circuits.html">Circuit Builder</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Technologies</h4>
+                    <ul>
+                        <li>Qiskit</li>
+                        <li>QuTiP</li>
+                        <li>Python Flask</li>
+                        <li>Modern Web Tech</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Quantum Cryptography Tutorial. Educational use only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

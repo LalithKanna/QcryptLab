@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qubits and Superposition</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/quantum-visualizations.css">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo"><a href="../index.html">QuantumCrypto Tutorial</a></h1>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="quantum-intro.html">Quantum Basics</a></li>
+                    <li><a href="../bb84-protocol/bb84-tutorial.html">BB84 Protocol</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="lesson-content">
+        <div class="container">
+            <div class="lesson-header">
+                <h1>Qubits and Superposition</h1>
+                <p class="lesson-subtitle">
+                    Understanding quantum bits and the Bloch sphere visualization
+                </p>
+            </div>
+
+            <div class="lesson-navigation">
+                <div class="nav-item">
+                    <a href="quantum-intro.html">
+                        <span class="nav-number">01</span>
+                        <span class="nav-title">Introduction</span>
+                    </a>
+                </div>
+                <div class="nav-item current">
+                    <span class="nav-number">02</span>
+                    <span class="nav-title">Qubits</span>
+                </div>
+                <div class="nav-item">
+                    <a href="quantum-gates.html">
+                        <span class="nav-number">03</span>
+                        <span class="nav-title">Gates</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="quantum-circuits.html">
+                        <span class="nav-number">04</span>
+                        <span class="nav-title">Circuits</span>
+                    </a>
+                </div>
+            </div>
+
+            <article class="lesson-article">
+                <section class="content-section">
+                    <h2>What is a Qubit?</h2>
+                    
+                    <p>
+                        A <strong>qubit</strong> (quantum bit) is the fundamental unit of quantum information. 
+                        Unlike classical bits that can only be in state 0 or 1, qubits can exist in a 
+                        <em>superposition</em> of both states simultaneously.
+                    </p>
+
+                    <div class="math-box">
+                        <h4>Mathematical Representation</h4>
+                        <p>A qubit state |ψ⟩ can be written as:</p>
+                        <div class="equation">|ψ⟩ = α|0⟩ + β|1⟩</div>
+                        <p>Where α and β are complex numbers called <strong>amplitudes</strong>, and |α|² + |β|² = 1</p>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>The Bloch Sphere</h2>
+                    
+                    <p>
+                        The Bloch sphere is a geometric representation of qubit states. Every point on 
+                        the sphere's surface corresponds to a unique quantum state.
+                    </p>
+
+                    <div class="interactive-section">
+                        <h3>Interactive Bloch Sphere Visualization</h3>
+                        <div class="bloch-container">
+                            <div class="bloch-controls">
+                                <div class="control-group">
+                                    <label for="theta-slider">θ (Polar angle):</label>
+                                    <input type="range" id="theta-slider" min="0" max="180" value="90" step="1">
+                                    <span id="theta-value">90°</span>
+                                </div>
+                                <div class="control-group">
+                                    <label for="phi-slider">φ (Azimuthal angle):</label>
+                                    <input type="range" id="phi-slider" min="0" max="360" value="0" step="1">
+                                    <span id="phi-value">0°</span>
+                                </div>
+                                <button id="update-bloch" class="btn btn-primary">Update Visualization</button>
+                            </div>
+                            
+                            <div class="bloch-display">
+                                <div id="bloch-sphere-container">
+                                    <p>Loading Bloch sphere visualization...</p>
+                                </div>
+                                <div class="state-info">
+                                    <h4>Current State:</h4>
+                                    <div id="state-vector"></div>
+                                    <div id="state-probabilities"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Common Qubit States</h2>
+                    
+                    <div class="states-grid">
+                        <div class="state-card" data-state="0">
+                            <h4>|0⟩ State</h4>
+                            <p>Computational basis state</p>
+                            <div class="state-coords">θ = 0°, φ = 0°</div>
+                            <button class="btn btn-small">Visualize</button>
+                        </div>
+                        
+                        <div class="state-card" data-state="1">
+                            <h4>|1⟩ State</h4>
+                            <p>Computational basis state</p>
+                            <div class="state-coords">θ = 180°, φ = 0°</div>
+                            <button class="btn btn-small">Visualize</button>
+                        </div>
+                        
+                        <div class="state-card" data-state="+">
+                            <h4>|+⟩ State</h4>
+                            <p>Equal superposition</p>
+                            <div class="state-coords">θ = 90°, φ = 0°</div>
+                            <button class="btn btn-small">Visualize</button>
+                        </div>
+                        
+                        <div class="state-card" data-state="-">
+                            <h4>|-⟩ State</h4>
+                            <p>Equal superposition (opposite phase)</p>
+                            <div class="state-coords">θ = 90°, φ = 180°</div>
+                            <button class="btn btn-small">Visualize</button>
+                        </div>
+                        
+                        <div class="state-card" data-state="i">
+                            <h4>|i⟩ State</h4>
+                            <p>Imaginary superposition</p>
+                            <div class="state-coords">θ = 90°, φ = 90°</div>
+                            <button class="btn btn-small">Visualize</button>
+                        </div>
+                        
+                        <div class="state-card" data-state="-i">
+                            <h4>|-i⟩ State</h4>
+                            <p>Negative imaginary superposition</p>
+                            <div class="state-coords">θ = 90°, φ = 270°</div>
+                            <button class="btn btn-small">Visualize</button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Superposition and Measurement</h2>
+                    
+                    <p>
+                        When a qubit is in superposition, measuring it will collapse the state 
+                        to either |0⟩ or |1⟩ with probabilities determined by the amplitudes.
+                    </p>
+
+                    <div class="measurement-demo">
+                        <h3>Measurement Simulation</h3>
+                        <div class="demo-controls">
+                            <div class="preset-states">
+                                <button class="state-btn" data-alpha="1" data-beta="0">|0⟩</button>
+                                <button class="state-btn" data-alpha="0.707" data-beta="0.707">|+⟩</button>
+                                <button class="state-btn" data-alpha="0.6" data-beta="0.8">Custom</button>
+                                <button class="state-btn" data-alpha="0" data-beta="1">|1⟩</button>
+                            </div>
+                            <button id="measure-btn" class="btn btn-primary">Measure Qubit</button>
+                            <button id="reset-demo" class="btn btn-secondary">Reset</button>
+                        </div>
+                        
+                        <div class="measurement-results">
+                            <div class="probability-display">
+                                <div class="prob-bar">
+                                    <div class="prob-0">
+                                        <span>P(|0⟩) = <span id="prob-0">50%</span></span>
+                                        <div class="bar-fill" id="bar-0"></div>
+                                    </div>
+                                    <div class="prob-1">
+                                        <span>P(|1⟩) = <span id="prob-1">50%</span></span>
+                                        <div class="bar-fill" id="bar-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="measurement-history"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Real-Time Quantum State Simulation</h2>
+                    
+                    <div class="simulation-container">
+                        <div class="simulation-controls">
+                            <h3>Create Custom Quantum State</h3>
+                            <div class="amplitude-controls">
+                                <div class="amplitude-input">
+                                    <label>α (amplitude for |0⟩):</label>
+                                    <input type="number" id="alpha-real" step="0.1" value="0.707" placeholder="Real part">
+                                    <input type="number" id="alpha-imag" step="0.1" value="0" placeholder="Imaginary part">
+                                </div>
+                                <div class="amplitude-input">
+                                    <label>β (amplitude for |1⟩):</label>
+                                    <input type="number" id="beta-real" step="0.1" value="0.707" placeholder="Real part">
+                                    <input type="number" id="beta-imag" step="0.1" value="0" placeholder="Imaginary part">
+                                </div>
+                            </div>
+                            <button id="create-state" class="btn btn-primary">Create State</button>
+                            <div id="normalization-warning" class="warning hidden">
+                                ⚠ State will be automatically normalized
+                            </div>
+                        </div>
+                        
+                        <div class="simulation-display">
+                            <div id="live-bloch-sphere"></div>
+                            <div class="state-details">
+                                <h4>State Vector:</h4>
+                                <div id="state-equation"></div>
+                                <h4>Measurement Probabilities:</h4>
+                                <div id="measurement-probs"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <div class="lesson-footer">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="quantum-intro.html" class="btn btn-outline">← Previous: Introduction</a>
+                    <a href="quantum-gates.html" class="btn btn-primary">Next: Quantum Gates →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // **FIXED: Enhanced qubit tutorial with bulletproof error handling**
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeBlochSphere();
+            initializeMeasurementDemo();
+            initializeStateSimulation();
+        });
+
+        /**
+         * **FIXED: Safe property extraction helper function**
+         */
+        function safeGetProperty(obj, path, fallback = null) {
+            try {
+                if (!obj) return fallback;
+                
+                const keys = path.split('.');
+                let current = obj;
+                
+                for (const key of keys) {
+                    if (current && typeof current === 'object' && key in current) {
+                        current = current[key];
+                    } else {
+                        return fallback;
+                    }
+                }
+                
+                return current !== null && current !== undefined ? current : fallback;
+            } catch (error) {
+                console.warn(`Safe property extraction failed for path '${path}':`, error);
+                return fallback;
+            }
+        }
+
+        function initializeBlochSphere() {
+            const thetaSlider = document.getElementById('theta-slider');
+            const phiSlider = document.getElementById('phi-slider');
+            const thetaValue = document.getElementById('theta-value');
+            const phiValue = document.getElementById('phi-value');
+            const updateBtn = document.getElementById('update-bloch');
+
+            thetaSlider.addEventListener('input', function() {
+                thetaValue.textContent = this.value + '°';
+            });
+
+            phiSlider.addEventListener('input', function() {
+                phiValue.textContent = this.value + '°';
+            });
+
+            updateBtn.addEventListener('click', function() {
+                const theta = parseFloat(thetaSlider.value) * Math.PI / 180;
+                const phi = parseFloat(phiSlider.value) * Math.PI / 180;
+                updateBlochVisualization(theta, phi);
+            });
+
+            // Add event listeners for state card visualize buttons
+            const stateCards = document.querySelectorAll('.state-card');
+            stateCards.forEach(card => {
+                const visualizeBtn = card.querySelector('.btn');
+                const stateType = card.getAttribute('data-state');
+                
+                visualizeBtn.addEventListener('click', function() {
+                    // Get the coordinates from the card
+                    const coordsText = card.querySelector('.state-coords').textContent;
+                    const thetaMatch = coordsText.match(/θ = (\d+)°/);
+                    const phiMatch = coordsText.match(/φ = (\d+)°/);
+                    
+                    if (thetaMatch && phiMatch) {
+                        const thetaDegrees = parseInt(thetaMatch[1]);
+                        const phiDegrees = parseInt(phiMatch[1]);
+                        
+                        // Update sliders to match the state
+                        thetaSlider.value = thetaDegrees;
+                        phiSlider.value = phiDegrees;
+                        thetaValue.textContent = thetaDegrees + '°';
+                        phiValue.textContent = phiDegrees + '°';
+                        
+                        // Update visualization
+                        const theta = thetaDegrees * Math.PI / 180;
+                        const phi = phiDegrees * Math.PI / 180;
+                        updateBlochVisualization(theta, phi);
+                        
+                        // Add visual feedback
+                        card.style.borderColor = '#4CAF50';
+                        card.style.transform = 'scale(1.02)';
+                        setTimeout(() => {
+                            card.style.borderColor = '';
+                            card.style.transform = '';
+                        }, 500);
+                    }
+                });
+            });
+
+            // Initialize with default state
+            updateBlochVisualization(Math.PI/2, 0);
+        }
+
+        let blochVisualizer = null;
+
+        /**
+         * **BULLETPROOF: Enhanced Bloch visualization with comprehensive error handling**
+         */
+        async function updateBlochVisualization(theta, phi) {
+            try {
+                console.log(`Updating Bloch visualization: theta=${theta}, phi=${phi}`);
+                
+                // Call backend API for Python-based visualization
+                const response = await fetch('/api/visualize-bloch', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        theta: theta,
+                        phi: phi,
+                        size: { width: 400, height: 400 },
+                        show_state_info: true,
+                        style_theme: 'educational'
+                    })
+                });
+
+                console.log('API Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log('API Response data:', result);
+                
+                // **FIXED: Comprehensive response validation**
+                if (!result || typeof result !== 'object') {
+                    throw new Error('Invalid API response format');
+                }
+                
+                if (result.success === false) {
+                    throw new Error(result.error || 'API request failed');
+                }
+                
+                // **FIXED: Safe property access for Bloch image**
+                const blochImage = safeGetProperty(result, 'bloch_image');
+                if (blochImage) {
+                    const blochContainer = document.getElementById('bloch-sphere-container');
+                    if (blochContainer) {
+                        blochContainer.innerHTML = `
+                            <img src="data:image/png;base64,${blochImage}" 
+                                 alt="Bloch Sphere Visualization" 
+                                 style="max-width: 100%; height: auto; border-radius: 8px;">
+                        `;
+                    }
+                } else {
+                    console.warn('No bloch_image found in response');
+                }
+                
+                // **FIXED: Safe access to state analysis with multiple fallback paths**
+                const stateAnalysis = safeGetProperty(result, 'state_analysis', {});
+                const stateVector = safeGetProperty(result, 'statevector') || 
+                                  safeGetProperty(result, 'state_vector') || 
+                                  [1, 0];
+                
+                console.log('State analysis:', stateAnalysis);
+                console.log('State vector:', stateVector);
+                
+                // Update state information with enhanced error handling
+                updateStateInformation(stateAnalysis, stateVector, theta, phi);
+                
+                console.log('Bloch sphere visualization updated successfully');
+                
+            } catch (error) {
+                console.error('Error updating Bloch visualization:', error);
+                
+                // **ENHANCED: Show user-friendly error message**
+                const blochContainer = document.getElementById('bloch-sphere-container');
+                if (blochContainer) {
+                    blochContainer.innerHTML = `
+                        <div style="padding: 20px; text-align: center; color: #e74c3c; border: 2px dashed #e74c3c; border-radius: 8px;">
+                            <h4>❌ Visualization Error</h4>
+                            <p>Unable to load Bloch sphere visualization.</p>
+                            <p><small>Error: ${error.message}</small></p>
+                            <button onclick="updateBlochVisualization(${theta}, ${phi})" class="btn btn-small" style="margin-top: 10px;">
+                                🔄 Retry
+                            </button>
+                        </div>
+                    `;
+                }
+                
+                // **FALLBACK: Update state information with default values**
+                updateStateInformation({}, [1, 0], theta, phi);
+            }
+        }
+
+        /**
+         * **FIXED: Enhanced state information update with bulletproof property access**
+         */
+        function updateStateInformation(stateAnalysis, stateVector, theta, phi) {
+            try {
+                const stateVectorDiv = document.getElementById('state-vector');
+                const stateProbabilities = document.getElementById('state-probabilities');
+                
+                // **FIXED: Safe extraction of amplitudes with multiple fallback paths**
+                let alpha, betaReal, betaImag;
+                
+                // Try to get from state analysis amplitudes
+                const amplitudes = safeGetProperty(stateAnalysis, 'amplitudes');
+                if (amplitudes && amplitudes.alpha && amplitudes.beta) {
+                    alpha = safeGetProperty(amplitudes.alpha, 'real', 1);
+                    betaReal = safeGetProperty(amplitudes.beta, 'real', 0);
+                    betaImag = safeGetProperty(amplitudes.beta, 'imag', 0);
+                }
+                // Try to get from direct state vector
+                else if (stateVector && Array.isArray(stateVector) && stateVector.length >= 2) {
+                    if (typeof stateVector[0] === 'number') {
+                        alpha = stateVector[0];
+                    } else if (typeof stateVector[0] === 'object') {
+                        alpha = safeGetProperty(stateVector[0], 'real', 1);
+                    } else {
+                        alpha = 1;
+                    }
+                    
+                    if (typeof stateVector[1] === 'number') {
+                        betaReal = stateVector[1];
+                        betaImag = 0;
+                    } else if (typeof stateVector[1] === 'object') {
+                        betaReal = safeGetProperty(stateVector[1], 'real', 0);
+                        betaImag = safeGetProperty(stateVector[1], 'imag', 0);
+                    } else {
+                        betaReal = 0;
+                        betaImag = 0;
+                    }
+                }
+                // **FALLBACK: Calculate from spherical coordinates**
+                else {
+                    alpha = Math.cos(theta / 2);
+                    betaReal = Math.sin(theta / 2) * Math.cos(phi);
+                    betaImag = Math.sin(theta / 2) * Math.sin(phi);
+                }
+                
+                // **ENHANCED: Display state vector with proper formatting**
+                if (stateVectorDiv) {
+                    let betaStr = '';
+                    if (Math.abs(betaImag) > 0.001) {
+                        if (betaImag > 0) {
+                            betaStr = `${betaReal.toFixed(3)} + ${betaImag.toFixed(3)}i`;
+                        } else {
+                            betaStr = `${betaReal.toFixed(3)} - ${Math.abs(betaImag).toFixed(3)}i`;
+                        }
+                    } else {
+                        betaStr = betaReal.toFixed(3);
+                    }
+                    
+                    stateVectorDiv.innerHTML = `|ψ⟩ = ${alpha.toFixed(3)}|0⟩ + ${betaStr}|1⟩`;
+                }
+                
+                // **ENHANCED: Display probabilities with safe calculation**
+                if (stateProbabilities) {
+                    const prob0 = alpha * alpha;
+                    const prob1 = betaReal * betaReal + betaImag * betaImag;
+                    
+                    // **SAFE: Extract probabilities from state analysis if available**
+                    const apiProbs = safeGetProperty(stateAnalysis, 'probabilities');
+                    const displayProb0 = apiProbs ? safeGetProperty(apiProbs, 'P(|0⟩)', prob0) : prob0;
+                    const displayProb1 = apiProbs ? safeGetProperty(apiProbs, 'P(|1⟩)', prob1) : prob1;
+                    
+                    stateProbabilities.innerHTML = `
+                        <p><strong>Measurement Probabilities:</strong></p>
+                        <p>P(|0⟩) = ${displayProb0.toFixed(3)} (${(displayProb0 * 100).toFixed(1)}%)</p>
+                        <p>P(|1⟩) = ${displayProb1.toFixed(3)} (${(displayProb1 * 100).toFixed(1)}%)</p>
+                        <p><strong>Spherical Coordinates:</strong></p>
+                        <p>θ = ${(theta * 180 / Math.PI).toFixed(1)}°</p>
+                        <p>φ = ${(phi * 180 / Math.PI).toFixed(1)}°</p>
+                    `;
+                }
+                
+                console.log('State information updated successfully');
+                
+            } catch (error) {
+                console.error('Error updating state information:', error);
+                
+                // **ULTIMATE FALLBACK: Show basic information**
+                const stateVectorDiv = document.getElementById('state-vector');
+                const stateProbabilities = document.getElementById('state-probabilities');
+                
+                if (stateVectorDiv) {
+                    stateVectorDiv.innerHTML = '|ψ⟩ = State information unavailable';
+                }
+                
+                if (stateProbabilities) {
+                    stateProbabilities.innerHTML = `
+                        <p><strong>Error:</strong> Unable to display state information</p>
+                        <p>θ = ${(theta * 180 / Math.PI).toFixed(1)}°</p>
+                        <p>φ = ${(phi * 180 / Math.PI).toFixed(1)}°</p>
+                    `;
+                }
+            }
+        }
+
+        /**
+         * **ENHANCED: Backward compatibility function for existing code**
+         */
+        function updateStateDisplay(stateInfo) {
+            if (stateInfo && stateInfo.stateVector) {
+                const stateVector = document.getElementById('state-vector');
+                const stateProbabilities = document.getElementById('state-probabilities');
+                
+                if (stateVector && stateInfo.stateVector.length >= 2) {
+                    const alpha = stateInfo.stateVector[0];
+                    const beta = stateInfo.stateVector[1];
+                    const betaStr = typeof beta === 'object' ? 
+                        `${beta.real.toFixed(3)} + ${beta.imag.toFixed(3)}i` : 
+                        beta.toFixed(3);
+                    stateVector.innerHTML = `|ψ⟩ = ${alpha.toFixed(3)}|0⟩ + ${betaStr}|1⟩`;
+                }
+                
+                if (stateProbabilities && stateInfo.probabilities) {
+                    const sphericalCoords = stateInfo.sphericalCoords || {};
+                    stateProbabilities.innerHTML = `
+                        <p><strong>Measurement Probabilities:</strong></p>
+                        <p>P(|0⟩) = ${stateInfo.probabilities.zero.toFixed(3)}</p>
+                        <p>P(|1⟩) = ${stateInfo.probabilities.one.toFixed(3)}</p>
+                        <p><strong>Spherical Coordinates:</strong></p>
+                        <p>θ = ${sphericalCoords.theta ? sphericalCoords.theta.toFixed(1) : 'N/A'}°</p>
+                        <p>φ = ${sphericalCoords.phi ? sphericalCoords.phi.toFixed(1) : 'N/A'}°</p>
+                    `;
+                }
+            }
+        }
+
+        function initializeMeasurementDemo() {
+            const stateButtons = document.querySelectorAll('.state-btn');
+            const measureBtn = document.getElementById('measure-btn');
+            const resetBtn = document.getElementById('reset-demo');
+            const historyDiv = document.getElementById('measurement-history');
+            
+            let measurements = [];
+            let currentState = {alpha: 0.707, beta: 0.707};
+
+            stateButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    currentState.alpha = parseFloat(this.dataset.alpha);
+                    currentState.beta = parseFloat(this.dataset.beta);
+                    updateProbabilityDisplay();
+                });
+            });
+
+            measureBtn.addEventListener('click', function() {
+                const prob0 = currentState.alpha * currentState.alpha;
+                const result = Math.random() < prob0 ? 0 : 1;
+                measurements.push(result);
+                updateMeasurementHistory();
+            });
+
+            resetBtn.addEventListener('click', function() {
+                measurements = [];
+                updateMeasurementHistory();
+            });
+
+            function updateProbabilityDisplay() {
+                const prob0 = (currentState.alpha * currentState.alpha * 100).toFixed(1);
+                const prob1 = (currentState.beta * currentState.beta * 100).toFixed(1);
+                
+                const prob0Element = document.getElementById('prob-0');
+                const prob1Element = document.getElementById('prob-1');
+                const bar0Element = document.getElementById('bar-0');
+                const bar1Element = document.getElementById('bar-1');
+                
+                if (prob0Element) prob0Element.textContent = prob0 + '%';
+                if (prob1Element) prob1Element.textContent = prob1 + '%';
+                if (bar0Element) bar0Element.style.width = prob0 + '%';
+                if (bar1Element) bar1Element.style.width = prob1 + '%';
+            }
+
+            function updateMeasurementHistory() {
+                if (!historyDiv) return;
+                
+                if (measurements.length === 0) {
+                    historyDiv.innerHTML = '<p>No measurements yet</p>';
+                    return;
+                }
+
+                const count0 = measurements.filter(m => m === 0).length;
+                const count1 = measurements.filter(m => m === 1).length;
+                const total = measurements.length;
+
+                historyDiv.innerHTML = `
+                    <h4>Measurement Results (${total} measurements):</h4>
+                    <div class="results-summary">
+                        <span>|0⟩: ${count0} times (${(count0/total*100).toFixed(1)}%)</span>
+                        <span>|1⟩: ${count1} times (${(count1/total*100).toFixed(1)}%)</span>
+                    </div>
+                    <div class="recent-measurements">
+                        Recent: ${measurements.slice(-10).join(', ')}
+                    </div>
+                `;
+            }
+
+            // Initialize display
+            updateProbabilityDisplay();
+        }
+
+        function initializeStateSimulation() {
+            const createBtn = document.getElementById('create-state');
+            
+            if (createBtn) {
+                createBtn.addEventListener('click', function() {
+                    const alphaReal = parseFloat(document.getElementById('alpha-real').value) || 0;
+                    const alphaImag = parseFloat(document.getElementById('alpha-imag').value) || 0;
+                    const betaReal = parseFloat(document.getElementById('beta-real').value) || 0;
+                    const betaImag = parseFloat(document.getElementById('beta-imag').value) || 0;
+                    
+                    // Normalize the state
+                    const norm = Math.sqrt(alphaReal*alphaReal + alphaImag*alphaImag + betaReal*betaReal + betaImag*betaImag);
+                    
+                    if (norm === 0) {
+                        alert('Please enter non-zero amplitudes');
+                        return;
+                    }
+                    
+                    const alpha = {real: alphaReal/norm, imag: alphaImag/norm};
+                    const beta = {real: betaReal/norm, imag: betaImag/norm};
+                    
+                    updateCustomStateDisplay(alpha, beta);
+                });
+            }
+        }
+
+        function updateCustomStateDisplay(alpha, beta) {
+            const stateEq = document.getElementById('state-equation');
+            const measProbs = document.getElementById('measurement-probs');
+            
+            if (stateEq || measProbs) {
+                // Format complex numbers for display
+                const formatComplex = (c) => {
+                    if (Math.abs(c.imag) < 0.001) return c.real.toFixed(3);
+                    if (Math.abs(c.real) < 0.001) return c.imag.toFixed(3) + 'i';
+                    if (c.imag > 0) {
+                        return `${c.real.toFixed(3)} + ${c.imag.toFixed(3)}i`;
+                    } else {
+                        return `${c.real.toFixed(3)} - ${Math.abs(c.imag).toFixed(3)}i`;
+                    }
+                };
+                
+                if (stateEq) {
+                    stateEq.innerHTML = `|ψ⟩ = (${formatComplex(alpha)})|0⟩ + (${formatComplex(beta)})|1⟩`;
+                }
+                
+                if (measProbs) {
+                    const prob0 = alpha.real*alpha.real + alpha.imag*alpha.imag;
+                    const prob1 = beta.real*beta.real + beta.imag*beta.imag;
+                    
+                    measProbs.innerHTML = `
+                        P(|0⟩) = ${prob0.toFixed(3)}<br>
+                        P(|1⟩) = ${prob1.toFixed(3)}
+                    `;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

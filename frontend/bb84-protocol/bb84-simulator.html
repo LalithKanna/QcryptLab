@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BB84 Quantum Key Distribution Simulator - Interactive Quantum Crypto Tutorial</title>
+    <meta name="description" content="Advanced BB84 quantum key distribution simulator with real-time visualization, eavesdropping detection, and comprehensive security analysis.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/quantum-visualizations.css">
+    <link rel="stylesheet" href="bb84-interface.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #ec4899;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #3b82f6;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --border-color: rgba(255, 255, 255, 0.2);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-heavy: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+        }
+
+        .simulator-controls {
+            padding: 2rem 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .control-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .control-group {
+            background: var(--glass-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .control-group:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .control-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .control-group input[type="number"],
+        .control-group input[type="range"] {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .control-group input[type="number"]:focus,
+        .control-group input[type="range"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            margin: 0.5rem 0;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-label {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
+            border-radius: 30px;
+        }
+
+        .toggle-label:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-label {
+            background: var(--gradient-primary);
+        }
+
+        input:checked + .toggle-label:before {
+            transform: translateX(30px);
+        }
+
+        .control-hint {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .simulation-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .btn-simulate,
+        .btn-step,
+        .btn-reset {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-simulate {
+            background: var(--gradient-primary);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-step {
+            background: var(--gradient-secondary);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-reset {
+            background: rgba(239, 68, 68, 0.8);
+            color: white;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-simulate:hover,
+        .btn-step:hover,
+        .btn-reset:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-heavy);
+        }
+
+        .btn-simulate:disabled,
+        .btn-step:disabled,
+        .btn-reset:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .protocol-visualization {
+            padding: 3rem 0;
+        }
+
+        .visualization-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .alice-panel,
+        .bob-panel {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .alice-panel h3,
+        .bob-panel h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .quantum-channel {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quantum-channel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+            animation: channelPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes channelPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .quantum-channel h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .quantum-state-display,
+        .measurement-results,
+        .basis-selection,
+        .basis-comparison {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .state-header,
+        .measurement-header,
+        .basis-header {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .state-content,
+        .measurement-content,
+        .basis-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .channel-visualization {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qubit-stream {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .qubit {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            animation: qubitPulse 2s ease-in-out infinite;
+        }
+
+        .qubit-0 { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; }
+        .qubit-1 { background: linear-gradient(135deg, #ef4444, #dc2626); color: white; }
+        .qubit-plus { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+        .qubit-minus { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+
+        @keyframes qubitPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .eve-interception {
+            background: rgba(239, 68, 68, 0.1);
+            border: 2px dashed var(--danger-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+            animation: eveAlert 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes eveAlert {
+            0% { background: rgba(239, 68, 68, 0.1); }
+            100% { background: rgba(239, 68, 68, 0.2); }
+        }
+
+        .key-processing {
+            padding: 3rem 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .processing-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .step-card {
+            background: var(--glass-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .step-card h3 {
+            margin: 0.5rem 0 1rem 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .step-content {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .step-progress {
+            height: 6px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 3px;
+        }
+
+        .results-analysis {
+            padding: 3rem 0;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .result-card h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        .stat-grid,
+        .security-metrics {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stat-item,
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-label,
+        .metric-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-value,
+        .metric-value {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .key-display {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .key-header {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .key-content {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            word-break: break-all;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .key-security {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .security-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .security-badge.secure {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .security-badge.insecure {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .security-badge.warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .security-badge.pending {
+            background: var(--text-secondary);
+            color: var(--dark-bg);
+        }
+
+        .quantum-visualizer {
+            padding: 3rem 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .visualization-panels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .bloch-sphere-panel,
+        .quantum-circuit-panel {
+            background: var(--glass-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .bloch-sphere-panel h3,
+        .quantum-circuit-panel h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .bloch-container {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        #bloch-canvas {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .bloch-controls {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .bloch-controls label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .bloch-controls select {
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .circuit-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .circuit-diagram {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        .loading-indicator {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            color: var(--text-primary);
+            z-index: 1000;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .notification.warning {
+            border-left: 4px solid var(--warning-color);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .control-panel {
+                grid-template-columns: 1fr;
+            }
+            
+            .visualization-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .processing-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .visualization-panels {
+                grid-template-columns: 1fr;
+            }
+            
+            .simulation-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-simulate,
+            .btn-step,
+            .btn-reset {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animation for quantum bits */
+        .bit-animation {
+            animation: bitFlip 0.5s ease-in-out;
+        }
+
+        @keyframes bitFlip {
+            0% { transform: rotateY(0); }
+            50% { transform: rotateY(90deg); }
+            100% { transform: rotateY(0); }
+        }
+
+        /* Tooltip styles */
+        .tooltip {
+            position: relative;
+            cursor: help;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            z-index: 1000;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        /* Progress animation */
+        .progress-animation {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: progressSweep 2s linear infinite;
+        }
+
+        @keyframes progressSweep {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo">
+                    <i class="fas fa-lock"></i>
+                    QuantumCrypto Tutorial
+                </h1>
+                <ul class="nav-menu">
+                    <li><a href="../index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="../quantum-basics/quantum-intro.html"><i class="fas fa-atom"></i> Quantum Basics</a></li>
+                    <li><a href="bb84-tutorial.html"><i class="fas fa-book"></i> BB84 Tutorial</a></li>
+                    <li><a href="#bb84-simulator" class="active"><i class="fas fa-desktop"></i> BB84 Simulator</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <section id="bb84-simulator" class="hero-section">
+            <div class="hero-container">
+                <h2 class="hero-title">
+                    <i class="fas fa-satellite-dish"></i>
+                    BB84 Quantum Key Distribution Simulator
+                </h2>
+                <p class="hero-subtitle">
+                    Experience the power of quantum cryptography with our advanced interactive simulator. 
+                    Visualize quantum states, detect eavesdropping attempts, and analyze security in real-time.
+                </p>
+                <div class="hero-features">
+                    <div class="feature-badge">
+                        <i class="fas fa-shield-alt"></i>
+                        Quantum Security
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-eye"></i>
+                        Eavesdropping Detection
+                    </div>
+                    <div class="feature-badge">
+                        <i class="fas fa-chart-line"></i>
+                        Real-time Analysis
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="simulator-controls">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-sliders-h"></i>
+                    Simulation Parameters
+                </h2>
+                <div class="control-panel">
+                    <div class="control-group">
+                        <label for="num-bits" class="tooltip" data-tooltip="Number of qubits to transmit (10-1000)">
+                            <i class="fas fa-binary"></i> Number of Bits:
+                        </label>
+                        <input type="number" id="num-bits" value="100" min="10" max="1000" step="10">
+                        <span class="control-hint">10-1000 bits</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="eavesdropper" class="tooltip" data-tooltip="Simulate Eve intercepting the quantum channel">
+                            <i class="fas fa-user-secret"></i> Include Eve (Eavesdropper):
+                        </label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="eavesdropper">
+                            <label for="eavesdropper" class="toggle-label"></label>
+                        </div>
+                        <span class="control-hint">Simulate eavesdropping attack</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="noise-level" class="tooltip" data-tooltip="Environmental noise affecting quantum transmission">
+                            <i class="fas fa-wave-square"></i> Channel Noise Level:
+                        </label>
+                        <input type="range" id="noise-level" min="0" max="0.3" step="0.01" value="0.05">
+                        <span id="noise-value">5.0%</span>
+                        <span class="control-hint">0-30% noise</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="error-correction" class="tooltip" data-tooltip="Apply classical error correction algorithms">
+                            <i class="fas fa-tools"></i> Error Correction:
+                        </label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="error-correction" checked>
+                            <label for="error-correction" class="toggle-label"></label>
+                        </div>
+                        <span class="control-hint">Apply error correction</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="privacy-amplification" class="tooltip" data-tooltip="Reduce potential eavesdropper information">
+                            <i class="fas fa-compress-arrows-alt"></i> Privacy Amplification:
+                        </label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="privacy-amplification" checked>
+                            <label for="privacy-amplification" class="toggle-label"></label>
+                        </div>
+                        <span class="control-hint">Apply privacy amplification</span>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="animation-speed" class="tooltip" data-tooltip="Control the speed of visualizations">
+                            <i class="fas fa-tachometer-alt"></i> Animation Speed:
+                        </label>
+                        <input type="range" id="animation-speed" min="0.5" max="3" step="0.1" value="1">
+                        <span id="speed-value">1.0x</span>
+                        <span class="control-hint">0.5x - 3.0x speed</span>
+                    </div>
+                </div>
+                
+                <div class="simulation-buttons">
+                    <button class="btn-simulate" onclick="runBB84Simulation()" id="simulate-btn">
+                        <i class="fas fa-play"></i> Run BB84 Simulation
+                    </button>
+                    <button class="btn-step" onclick="runStepByStep()" id="step-btn">
+                        <i class="fas fa-step-forward"></i> Step-by-Step Mode
+                    </button>
+                    <button class="btn-reset" onclick="resetSimulation()" id="reset-btn">
+                        <i class="fas fa-redo"></i> Reset Simulation
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="protocol-visualization">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-project-diagram"></i>
+                    Protocol Visualization
+                </h2>
+                
+                <div class="visualization-grid">
+                    <div class="alice-panel">
+                        <h3><i class="fas fa-female"></i> Alice's Station</h3>
+                        <div class="quantum-state-display" id="alice-states">
+                            <div class="state-header">
+                                <i class="fas fa-atom"></i> Quantum States Prepared
+                            </div>
+                            <div class="state-content" id="alice-state-content">
+                                <p>Click "Run BB84 Simulation" to see Alice's quantum state preparation...</p>
+                            </div>
+                        </div>
+                        <div class="basis-selection" id="alice-basis">
+                            <div class="basis-header">
+                                <i class="fas fa-compass"></i> Basis Selection
+                            </div>
+                            <div class="basis-content" id="alice-basis-content">
+                                <p>Alice's measurement basis choices will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quantum-channel">
+                        <h3><i class="fas fa-satellite-dish"></i> Quantum Channel</h3>
+                        <div class="channel-visualization" id="quantum-channel-viz">
+                            <div class="channel-header">
+                                <i class="fas fa-broadcast-tower"></i> Quantum Transmission
+                            </div>
+                            <div class="channel-content" id="channel-content">
+                                <div class="qubit-stream" id="qubit-stream">
+                                    <p>Quantum bits will be transmitted through this channel...</p>
+                                </div>
+                                <div class="eve-interception" id="eve-interception" style="display: none;">
+                                    <i class="fas fa-user-secret"></i>
+                                    <p><strong>EVE DETECTED!</strong><br>Intercepting and measuring qubits...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bob-panel">
+                        <h3><i class="fas fa-male"></i> Bob's Station</h3>
+                        <div class="measurement-results" id="bob-measurements">
+                            <div class="measurement-header">
+                                <i class="fas fa-ruler"></i> Measurement Results
+                            </div>
+                            <div class="measurement-content" id="bob-measurement-content">
+                                <p>Bob's quantum measurement results will appear here...</p>
+                            </div>
+                        </div>
+                        <div class="basis-comparison" id="bob-basis">
+                            <div class="basis-header">
+                                <i class="fas fa-balance-scale"></i> Basis Comparison
+                            </div>
+                            <div class="basis-content" id="bob-basis-content">
+                                <p>Bob's measurement basis choices will appear here...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="key-processing">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-key"></i>
+                    Key Processing Pipeline
+                </h2>
+                
+                <div class="processing-steps">
+                    <div class="step-card" id="sifting-step">
+                        <div class="step-number">1</div>
+                        <h3><i class="fas fa-filter"></i> Key Sifting</h3>
+                        <div class="step-content" id="sifting-content">
+                            <p>Alice and Bob publicly compare their measurement bases and discard bits where they used different bases. This process eliminates random measurement outcomes.</p>
+                        </div>
+                        <div class="step-progress" id="sifting-progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card" id="error-estimation-step">
+                        <div class="step-number">2</div>
+                        <h3><i class="fas fa-chart-bar"></i> Error Estimation</h3>
+                        <div class="step-content" id="error-estimation-content">
+                            <p>A random subset of the sifted key is sacrificed to estimate the quantum bit error rate (QBER). High error rates indicate potential eavesdropping.</p>
+                        </div>
+                        <div class="step-progress" id="error-estimation-progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card" id="error-correction-step">
+                        <div class="step-number">3</div>
+                        <h3><i class="fas fa-wrench"></i> Error Correction</h3>
+                        <div class="step-content" id="error-correction-content">
+                            <p>Classical error correction protocols (like CASCADE) are applied to eliminate discrepancies between Alice's and Bob's keys.</p>
+                        </div>
+                        <div class="step-progress" id="error-correction-progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="step-card" id="privacy-amplification-step">
+                        <div class="step-number">4</div>
+                        <h3><i class="fas fa-compress"></i> Privacy Amplification</h3>
+                        <div class="step-content" id="privacy-amplification-content">
+                            <p>The key is compressed using universal hash functions to eliminate any partial information that an eavesdropper might have obtained.</p>
+                        </div>
+                        <div class="step-progress" id="privacy-amplification-progress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-analysis">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-analytics"></i>
+                    Results & Security Analysis
+                </h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3><i class="fas fa-chart-pie"></i> Protocol Statistics</h3>
+                        <div class="stat-grid" id="protocol-stats">
+                            <div class="stat-item">
+                                <span class="stat-label"><i class="fas fa-layer-group"></i> Total Bits:</span>
+                                <span class="stat-value" id="total-bits">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label"><i class="fas fa-filter"></i> Sifted Bits:</span>
+                                <span class="stat-value" id="sifted-bits">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label"><i class="fas fa-key"></i> Final Key Length:</span>
+                                <span class="stat-value" id="final-key-length">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label"><i class="fas fa-percentage"></i> Efficiency:</span>
+                                <span class="stat-value" id="protocol-efficiency">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3><i class="fas fa-shield-alt"></i> Security Analysis</h3>
+                        <div class="security-metrics" id="security-metrics">
+                            <div class="metric-item">
+                                <span class="metric-label"><i class="fas fa-exclamation-triangle"></i> Error Rate:</span>
+                                <span class="metric-value" id="error-rate">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label"><i class="fas fa-user-secret"></i> Eavesdropping:</span>
+                                <span class="metric-value" id="eavesdropping-detected">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label"><i class="fas fa-lock"></i> Security Level:</span>
+                                <span class="metric-value" id="security-level">-</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label"><i class="fas fa-check-circle"></i> Confidence:</span>
+                                <span class="metric-value" id="security-confidence">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3><i class="fas fa-key"></i> Final Shared Key</h3>
+                        <div class="key-display" id="final-key-display">
+                            <div class="key-header">
+                                <i class="fas fa-lock"></i> Cryptographic Key
+                            </div>
+                            <div class="key-content" id="final-key-content">
+                                <p>The final shared secret key will appear here after successful simulation...</p>
+                            </div>
+                            <div class="key-security" id="key-security-indicator">
+                                <span class="security-badge pending" id="security-badge">
+                                    <i class="fas fa-clock"></i> PENDING
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="quantum-visualizer">
+            <div class="container">
+                <h2 class="section-title">
+                    <i class="fas fa-cube"></i>
+                    Quantum State Visualizations
+                </h2>
+                
+                <div class="visualization-panels">
+                    <div class="bloch-sphere-panel">
+                        <h3><i class="fas fa-globe"></i> Bloch Sphere Visualization</h3>
+                        <div class="bloch-container" id="bloch-sphere-container">
+                            <canvas id="bloch-canvas" width="400" height="400"></canvas>
+                        </div>
+                        <div class="bloch-controls">
+                            <label><i class="fas fa-atom"></i> Quantum State Selection:</label>
+                            <select id="state-selector" onchange="updateBlochSphere()">
+                                <option value="0">|0⟩ (Ground State)</option>
+                                <option value="1">|1⟩ (Excited State)</option>
+                                <option value="plus">|+⟩ (Rectilinear Superposition)</option>
+                                <option value="minus">|-⟩ (Rectilinear Superposition)</option>
+                                <option value="plus-i">|+i⟩ (Diagonal Superposition)</option>
+                                <option value="minus-i">|-i⟩ (Diagonal Superposition)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="quantum-circuit-panel">
+                        <h3><i class="fas fa-sitemap"></i> BB84 Protocol Circuit</h3>
+                        <div class="circuit-container" id="bb84-circuit-container">
+                            <div class="circuit-diagram" id="bb84-circuit">
+                                <div style="padding: 2rem; text-align: center;">
+                                    <i class="fas fa-microchip" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                                    <p>Interactive quantum circuit diagram will be displayed here during simulation...</p>
+                                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 1rem;">
+                                        The circuit shows quantum state preparation, measurement bases, and the complete BB84 protocol flow.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <!-- Scripts -->
+    <script src="../js/bloch-sphere.js"></script>
+    <script src="../js/quantum-visualizer.js"></script>
+    <script src="bb84-simulator.js"></script>
+    
+    <script>
+        // Enhanced UI interactions and initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSimulator();
+            setupEventListeners();
+            updateBlochSphere();
+        });
+
+        function initializeSimulator() {
+            // Initialize noise level display
+            updateNoiseDisplay();
+            updateSpeedDisplay();
+            
+            // Initialize Bloch sphere
+            if (typeof initBlochSphere === 'function') {
+                initBlochSphere();
+            }
+            
+            showNotification('BB84 Quantum Simulator Initialized', 'success');
+        }
+
+        function setupEventListeners() {
+            // Noise level slider
+            document.getElementById('noise-level').addEventListener('input', updateNoiseDisplay);
+            
+            // Animation speed slider
+            document.getElementById('animation-speed').addEventListener('input', updateSpeedDisplay);
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        function updateNoiseDisplay() {
+            const noiseLevel = document.getElementById('noise-level').value;
+            const noiseValue = document.getElementById('noise-value');
+            const percentage = (parseFloat(noiseLevel) * 100).toFixed(1);
+            noiseValue.textContent = percentage + '%';
+        }
+
+        function updateSpeedDisplay() {
+            const speedLevel = document.getElementById('animation-speed').value;
+            const speedValue = document.getElementById('speed-value');
+            speedValue.textContent = parseFloat(speedLevel).toFixed(1) + 'x';
+        }
+
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('notification-container');
+            if (!container) {
+                const newContainer = document.createElement('div');
+                newContainer.id = 'notification-container';
+                newContainer.style.position = 'fixed';
+                newContainer.style.top = '20px';
+                newContainer.style.right = '20px';
+                newContainer.style.zIndex = '1000';
+                document.body.appendChild(newContainer);
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+            `;
+            
+            document.getElementById('notification-container').appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Placeholder functions - will be implemented in bb84-simulator.js
+        function runBB84Simulation() {
+            showNotification('Starting BB84 Simulation...', 'info');
+            // Implementation will be in bb84-simulator.js
+        }
+
+        function runStepByStep() {
+            showNotification('Entering Step-by-Step Mode...', 'info');
+            // Implementation will be in bb84-simulator.js
+        }
+
+        function resetSimulation() {
+            showNotification('Simulation Reset', 'warning');
+            // Implementation will be in bb84-simulator.js
+        }
+
+        function updateBlochSphere() {
+            // Implementation will be in bloch-sphere.js
+            const selectedState = document.getElementById('state-selector').value;
+            console.log('Updating Bloch sphere for state:', selectedState);
+        }
+    </script>
+</body>
+</html>

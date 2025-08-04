@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Quantum Computing - Quantum Cryptography Tutorial</title>
+    <meta name="description" content="Learn the fundamentals of quantum computing including superposition, entanglement, and quantum mechanics principles.">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/quantum-visualizations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="logo"><a href="../index.html">QuantumCrypto Tutorial</a></h1>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="quantum-intro.html" class="active">Quantum Basics</a></li>
+                    <li><a href="../bb84-protocol/bb84-tutorial.html">BB84 Protocol</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="lesson-content">
+        <div class="container">
+            <div class="lesson-header">
+                <h1>Introduction to Quantum Computing</h1>
+                <p class="lesson-subtitle">
+                    Explore the fundamental principles that make quantum computers revolutionary
+                </p>
+            </div>
+
+            <div class="lesson-navigation">
+                <div class="nav-item current">
+                    <span class="nav-number">01</span>
+                    <span class="nav-title">Introduction</span>
+                </div>
+                <div class="nav-item">
+                    <a href="qubits-tutorial.html">
+                        <span class="nav-number">02</span>
+                        <span class="nav-title">Qubits</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="quantum-gates.html">
+                        <span class="nav-number">03</span>
+                        <span class="nav-title">Gates</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="quantum-circuits.html">
+                        <span class="nav-number">04</span>
+                        <span class="nav-title">Circuits</span>
+                    </a>
+                </div>
+            </div>
+
+            <article class="lesson-article">
+                <section class="content-section">
+                    <h2>What is Quantum Computing?</h2>
+                    
+                    <p>
+                        Quantum computing represents a paradigm shift from classical computing, 
+                        leveraging the strange and counterintuitive principles of quantum mechanics 
+                        to process information in fundamentally new ways.
+                    </p>
+
+                    <p>
+                        While classical computers use <strong>bits</strong> that can only be in 
+                        states of 0 or 1, quantum computers use <strong>qubits</strong> (quantum bits) 
+                        that can exist in a <em>superposition</em> of both states simultaneously.
+                    </p>
+
+                    <div class="highlight-box">
+                        <h3>Key Quantum Principles</h3>
+                        <ul>
+                            <li><strong>Superposition:</strong> Qubits can be in multiple states at once</li>
+                            <li><strong>Entanglement:</strong> Qubits can be correlated across space</li>
+                            <li><strong>Interference:</strong> Quantum states can amplify or cancel each other</li>
+                            <li><strong>Measurement:</strong> Observing a qubit collapses it to a definite state</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Classical vs Quantum Computing</h2>
+                    
+                    <div class="comparison-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Classical Computing</th>
+                                    <th>Quantum Computing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Basic Unit</td>
+                                    <td>Bit (0 or 1)</td>
+                                    <td>Qubit (0, 1, or both)</td>
+                                </tr>
+                                <tr>
+                                    <td>Processing</td>
+                                    <td>Sequential operations</td>
+                                    <td>Parallel quantum operations</td>
+                                </tr>
+                                <tr>
+                                    <td>States</td>
+                                    <td>2ⁿ states processed sequentially</td>
+                                    <td>2ⁿ states processed simultaneously</td>
+                                </tr>
+                                <tr>
+                                    <td>Error Handling</td>
+                                    <td>Error correction well-established</td>
+                                    <td>Quantum error correction emerging</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Why Quantum Computing Matters</h2>
+                    
+                    <p>
+                        Quantum computers excel at specific types of problems that are 
+                        computationally intractable for classical computers:
+                    </p>
+
+                    <div class="application-grid">
+                        <div class="app-card">
+                            <h4>🔐 Cryptography</h4>
+                            <p>Breaking current encryption and creating quantum-safe protocols</p>
+                        </div>
+                        <div class="app-card">
+                            <h4>🧪 Chemistry</h4>
+                            <p>Simulating molecular interactions for drug discovery</p>
+                        </div>
+                        <div class="app-card">
+                            <h4>📈 Optimization</h4>
+                            <p>Solving complex logistics and financial modeling problems</p>
+                        </div>
+                        <div class="app-card">
+                            <h4>🤖 Machine Learning</h4>
+                            <p>Accelerating AI training and pattern recognition</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>Interactive Demo: Quantum vs Classical</h2>
+                    
+                    <div class="demo-container">
+                        <div class="demo-explanation">
+                            <p>
+                                This demonstration shows how a quantum computer can process 
+                                multiple possibilities simultaneously, while a classical 
+                                computer must check each possibility sequentially.
+                            </p>
+                        </div>
+                        
+                        <div class="demo-controls">
+                            <button id="classical-demo" class="btn btn-secondary">
+                                Run Classical Search
+                            </button>
+                            <button id="quantum-demo" class="btn btn-primary">
+                                Run Quantum Search
+                            </button>
+                        </div>
+                        
+                        <div id="demo-results" class="demo-results">
+                            <div id="demo-visualization"></div>
+                            <div id="demo-explanation"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2>The Quantum Advantage</h2>
+                    
+                    <p>
+                        The power of quantum computing comes from <strong>quantum parallelism</strong>. 
+                        While a classical computer with n bits can represent one of 2ⁿ possible states 
+                        at a time, a quantum computer with n qubits can represent all 2ⁿ states 
+                        simultaneously through superposition.
+                    </p>
+
+                    <div class="math-example">
+                        <h4>Example: 3-Bit vs 3-Qubit Systems</h4>
+                        <ul>
+                            <li><strong>Classical 3 bits:</strong> Can represent one state: 000, 001, 010, 011, 100, 101, 110, or 111</li>
+                            <li><strong>Quantum 3 qubits:</strong> Can represent a superposition of all 8 states simultaneously</li>
+                        </ul>
+                    </div>
+
+                    <p>
+                        This exponential scaling is what gives quantum computers their potential 
+                        to solve certain problems exponentially faster than classical computers.
+                    </p>
+                </section>
+            </article>
+
+            <div class="lesson-footer">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="../index.html" class="btn btn-outline">← Back to Home</a>
+                    <a href="qubits-tutorial.html" class="btn btn-primary">Next: Qubits →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/main.js"></script>
+    <script>
+        // Interactive demo functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const classicalBtn = document.getElementById('classical-demo');
+            const quantumBtn = document.getElementById('quantum-demo');
+            const resultsDiv = document.getElementById('demo-results');
+            const visualizationDiv = document.getElementById('demo-visualization');
+            const explanationDiv = document.getElementById('demo-explanation');
+
+            classicalBtn.addEventListener('click', function() {
+                runClassicalDemo();
+            });
+
+            quantumBtn.addEventListener('click', function() {
+                runQuantumDemo();
+            });
+
+            function runClassicalDemo() {
+                visualizationDiv.innerHTML = '<div class="classical-search">Searching through states sequentially...</div>';
+                explanationDiv.innerHTML = '<p>Classical computer checks each possibility one by one: 000 → 001 → 010 → 011 → ...</p>';
+                
+                // Simulate sequential search
+                let states = ['000', '001', '010', '011', '100', '101', '110', '111'];
+                let currentIndex = 0;
+                
+                const interval = setInterval(() => {
+                    visualizationDiv.innerHTML = `
+                        <div class="classical-search">
+                            <div class="search-state">Checking: ${states[currentIndex]}</div>
+                            <div class="search-progress">Progress: ${currentIndex + 1}/8 states</div>
+                        </div>
+                    `;
+                    
+                    currentIndex++;
+                    if (currentIndex >= states.length) {
+                        clearInterval(interval);
+                        visualizationDiv.innerHTML += '<div class="search-complete">✓ Search complete after checking all states</div>';
+                    }
+                }, 500);
+            }
+
+            function runQuantumDemo() {
+                visualizationDiv.innerHTML = `
+                    <div class="quantum-search">
+                        <div class="superposition-state">
+                            Processing all states simultaneously:<br>
+                            |000⟩ + |001⟩ + |010⟩ + |011⟩ + |100⟩ + |101⟩ + |110⟩ + |111⟩
+                        </div>
+                        <div class="quantum-parallelism">✓ All 8 states processed in parallel</div>
+                    </div>
+                `;
+                explanationDiv.innerHTML = '<p>Quantum computer processes all possibilities at once through superposition!</p>';
+            }
+        });
+    </script>
+</body>
+</html>

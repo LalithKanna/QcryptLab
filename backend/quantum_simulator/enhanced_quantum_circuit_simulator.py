@@ -1,18 +1,19 @@
 """
-Enhanced Quantum Circuit Simulator Module
-=========================================
+Enhanced Quantum Circuit Simulator with Educational Insights - Complete Implementation
+===================================================================================
 
 This module provides comprehensive quantum circuit simulation capabilities using Qiskit
-with advanced educational features, BB84 protocol integration, and enhanced
-visualizations using the BlochSphereVisualizer.
+with advanced educational features, BB84 protocol integration, and detailed
+visualizations with educational feedback.
 
 Features:
-- Interactive circuit building with enhanced gate support
-- Real-time statevector calculation with visualization
+- Complete gate library with all implementations
+- Real-time statevector calculation with visualization  
 - Circuit diagram generation with professional styling
 - BB84-specific gates and protocol templates
-- Integration with BlochSphereVisualizer for state visualization
 - Advanced measurement analysis and statistics
+- Comprehensive educational insights system
+- Adaptive learning recommendations
 - Multi-backend compatibility with automatic fallbacks
 """
 
@@ -51,7 +52,7 @@ logger = logging.getLogger(__name__)
 
 class EnhancedQuantumCircuitSimulator:
     """
-    Enhanced quantum circuit simulator with advanced visualization and BB84 support
+    Enhanced quantum circuit simulator with advanced visualization and comprehensive educational features
     """
     
     def __init__(self, backend='qiskit'):
@@ -218,7 +219,7 @@ class EnhancedQuantumCircuitSimulator:
     
     def simulate_circuit(self, num_qubits: int, gates: List[Dict], shots: int = 1024,
                         include_statevector: bool = True, include_density_matrix: bool = False,
-                        include_bloch_sphere: bool = True) -> Dict[str, Any]:
+                        include_bloch_sphere: bool = True, user_context: Optional[Dict] = None) -> Dict[str, Any]:
         """
         Enhanced circuit simulation with comprehensive analysis and visualization
         
@@ -229,9 +230,10 @@ class EnhancedQuantumCircuitSimulator:
             include_statevector: Whether to calculate statevector
             include_density_matrix: Whether to calculate density matrix
             include_bloch_sphere: Whether to generate Bloch sphere visualization
+            user_context: User context for personalized insights
             
         Returns:
-            dict: Comprehensive simulation results with visualizations
+            dict: Comprehensive simulation results with visualizations and educational insights
         """
         try:
             # Validation
@@ -300,9 +302,9 @@ class EnhancedQuantumCircuitSimulator:
                 qc, statevector_data, counts, shots, num_qubits
             )
             
-            # Generate educational insights
-            insights = self._generate_educational_insights(
-                gates, statevector_data, counts, num_qubits
+            # Generate ENHANCED educational insights (NEW)
+            insights = self._generate_enhanced_educational_insights(
+                gates, statevector_data, counts, num_qubits, user_context or {}
             )
             
             return {
@@ -326,6 +328,401 @@ class EnhancedQuantumCircuitSimulator:
         except Exception as e:
             logger.error(f"Enhanced circuit simulation failed: {str(e)}")
             return {'error': str(e), 'success': False}
+
+    # ================================================================
+    # NEW EDUCATIONAL INSIGHTS SYSTEM
+    # ================================================================
+
+    def _generate_enhanced_educational_insights(
+        self,
+        gates: List[Dict],
+        statevector: Optional[List[complex]],
+        counts: Dict[str, int],
+        num_qubits: int,
+        user_context: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        """Central orchestrator for all educational insights"""
+        return {
+            "gate_by_gate_insights": [self._analyze_gate_specific_insights(g, gates) for g in gates],
+            "quantum_phenomena": self._detect_quantum_phenomena_detailed(gates, statevector, counts),
+            "circuit_story": self._generate_circuit_story(gates),
+            "difficulty_assessment": self._assess_circuit_difficulty(gates),
+            "misconception_warnings": self._detect_and_correct_misconceptions(gates),
+            "adaptive_challenges": self._generate_adaptive_challenges(gates),
+            "visualization_guides": {
+                "histogram": self._generate_visualization_insights("histogram", counts, gates),
+                "circuit_diagram": self._generate_visualization_insights("circuit_diagram", None, gates),
+                "statevector": self._generate_visualization_insights("statevector", statevector, gates)
+            },
+            "real_world_applications": self._suggest_real_world_applications(gates),
+            "learning_path": self._suggest_learning_path(gates, user_context)
+        }
+
+    def _analyze_gate_specific_insights(self, gate: Dict[str, Any], context: List[Dict]) -> Dict[str, Any]:
+        """Return rich pedagogy per gate"""
+        g = gate.get("type", "").upper()
+        info = {"gate": g}
+
+        if g == "H":
+            info.update({
+                "physics_explanation": "Creates equal superposition of |0⟩ and |1⟩ states",
+                "visual_analogy": "Like a spinning coin - both heads and tails simultaneously",
+                "mathematical_detail": "H|0⟩ = (|0⟩ + |1⟩)/√2, H|1⟩ = (|0⟩ - |1⟩)/√2",
+                "practical_tips": [
+                    "Applying H twice returns to original state",
+                    "Use before CNOT to create entanglement",
+                    "Essential for quantum algorithms initialization"
+                ],
+                "common_applications": ["Quantum random number generation", "Algorithm initialization", "Creating Bell states"]
+            })
+        elif g == "X":
+            info.update({
+                "physics_explanation": "Bit-flip: maps |0⟩→|1⟩ and |1⟩→|0⟩",
+                "visual_analogy": "Classical NOT gate in quantum form",
+                "mathematical_detail": "X|0⟩ = |1⟩, X|1⟩ = |0⟩",
+                "practical_tips": [
+                    "Combine with H to get |−⟩ superposition",
+                    "Used in quantum error correction",
+                    "Building block for more complex operations"
+                ]
+            })
+        elif g == "CNOT":
+            info.update({
+                "physics_explanation": "Entangles control and target qubits (conditional flip)",
+                "visual_analogy": "Quantum 'if' statement - flips target IF control is |1⟩",
+                "mathematical_detail": "CNOT|00⟩=|00⟩, CNOT|01⟩=|01⟩, CNOT|10⟩=|11⟩, CNOT|11⟩=|10⟩",
+                "practical_tips": [
+                    "Use H on control then CNOT to create Bell states",
+                    "Essential for quantum teleportation",
+                    "Creates 'spooky action at a distance'"
+                ],
+                "entanglement_creation": True
+            })
+        elif g in ["RX", "RY", "RZ"]:
+            angle = gate.get("angle", "θ")
+            info.update({
+                "physics_explanation": f"Rotation around {g[1]}-axis by angle {angle}",
+                "practical_tips": [
+                    "Controls precise quantum state manipulation",
+                    "Used for creating arbitrary superpositions",
+                    "Essential for quantum optimization algorithms"
+                ]
+            })
+        
+        return info
+
+    def _detect_quantum_phenomena_detailed(
+        self, gates: List[Dict], statevector: Optional[List[complex]], counts: Dict[str, int]
+    ) -> Dict[str, Any]:
+        """Enhanced detection of quantum phenomena with explanations"""
+        phenomena = {}
+        gate_types = {g["type"].upper() for g in gates}
+        
+        # Superposition detection
+        if "H" in gate_types or any(g.startswith("R") for g in gate_types):
+            phenomena["superposition"] = {
+                "detected": True,
+                "explanation": "Your circuit creates quantum superposition - qubits exist in multiple states simultaneously",
+                "evidence": "Hadamard or rotation gates create superposition",
+                "visualization_tip": "Look for equal probabilities in measurement results",
+                "real_world_analogy": "Like Schrödinger's cat being alive AND dead until observed"
+            }
+        
+        # Entanglement detection
+        if any(g in gate_types for g in ["CNOT", "CZ", "SWAP"]):
+            phenomena["entanglement"] = {
+                "detected": True,
+                "explanation": "Your circuit creates quantum entanglement - qubits become mysteriously connected",
+                "evidence": "Two-qubit gates create correlations between qubits",
+                "einstein_quote": "Spooky action at a distance",
+                "applications": ["Quantum teleportation", "Quantum cryptography", "Quantum computing speedup"]
+            }
+            
+            # Measure entanglement strength if statevector available
+            if statevector and len(statevector) == 4:  # Two-qubit system
+                entropy = self._calculate_entanglement_entropy(statevector)
+                phenomena["entanglement"]["strength"] = f"{entropy:.2f} bits"
+        
+        # Interference detection
+        if len(set(counts.values())) > 1 and len(counts) > 1:
+            phenomena["interference"] = {
+                "detected": True,
+                "explanation": "Quantum interference affects measurement probabilities",
+                "evidence": "Unequal measurement outcomes suggest wave-like interference",
+                "analogy": "Like waves in water - they can add up or cancel out"
+            }
+        
+        return phenomena
+
+    def _generate_circuit_story(self, gates: List[Dict]) -> Dict[str, str]:
+        """Create educational narrative of circuit execution"""
+        story_parts = []
+        quantum_state = "|000...⟩"  # Initial state
+        
+        for i, gate in enumerate(gates, 1):
+            gate_type = gate["type"].upper()
+            if gate_type == "H":
+                story_parts.append(f"Step {i}: Applied Hadamard gate, creating superposition")
+                quantum_state = "superposition state"
+            elif gate_type == "CNOT":
+                story_parts.append(f"Step {i}: Applied CNOT gate, creating entanglement")
+                quantum_state = "entangled state"
+            elif gate_type.startswith("MEASURE"):
+                story_parts.append(f"Step {i}: Measured qubit, collapsing quantum state")
+                quantum_state = "classical state"
+            else:
+                story_parts.append(f"Step {i}: Applied {gate_type} gate")
+        
+        return {
+            "step_by_step": " → ".join(story_parts),
+            "final_state": quantum_state,
+            "physics_summary": self._generate_physics_summary(gates)
+        }
+
+    def _generate_physics_summary(self, gates: List[Dict]) -> str:
+        """Generate physics summary of what the circuit accomplishes"""
+        gate_types = {g["type"].upper() for g in gates}
+        
+        if "H" in gate_types and "CNOT" in gate_types:
+            return "This circuit demonstrates quantum superposition and entanglement - the two key quantum phenomena that give quantum computers their power."
+        elif "H" in gate_types:
+            return "This circuit explores quantum superposition - the ability of qubits to exist in multiple states simultaneously."
+        elif "CNOT" in gate_types:
+            return "This circuit creates quantum entanglement - mysterious correlations between qubits."
+        else:
+            return "This circuit performs quantum operations on qubits."
+
+    def _assess_circuit_difficulty(self, gates: List[Dict]) -> Dict[str, Any]:
+        """Assess circuit difficulty and provide guidance"""
+        complexity_factors = {
+            "gate_count": len(gates),
+            "gate_variety": len(set(g["type"].upper() for g in gates)),
+            "entangling_gates": sum(1 for g in gates if g["type"].upper() in ["CNOT", "CZ", "SWAP"]),
+            "rotation_gates": sum(1 for g in gates if g["type"].upper().startswith("R")),
+        }
+        
+        # Calculate difficulty score
+        score = (
+            complexity_factors["gate_count"] +
+            2 * complexity_factors["entangling_gates"] +
+            complexity_factors["rotation_gates"]
+        )
+        
+        if score < 4:
+            level = "beginner"
+            guidance = "Great starting circuit! Try adding more gates to explore quantum phenomena."
+        elif score < 10:
+            level = "intermediate"
+            guidance = "Nice complexity! You're exploring interesting quantum effects."
+        else:
+            level = "advanced"
+            guidance = "Complex circuit! Consider breaking it into smaller parts for analysis."
+        
+        return {
+            "level": level,
+            "score": score,
+            "factors": complexity_factors,
+            "guidance": guidance,
+            "next_steps": self._suggest_next_steps(level, gates)
+        }
+
+    def _suggest_next_steps(self, level: str, gates: List[Dict]) -> List[str]:
+        """Suggest next learning steps based on current level"""
+        gate_types = {g["type"].upper() for g in gates}
+        
+        if level == "beginner":
+            suggestions = []
+            if "H" not in gate_types:
+                suggestions.append("Try adding a Hadamard gate to create superposition")
+            if "CNOT" not in gate_types:
+                suggestions.append("Add a CNOT gate to explore entanglement")
+            return suggestions
+            
+        elif level == "intermediate":
+            return [
+                "Experiment with rotation gates (RX, RY, RZ) for precise control",
+                "Try creating different Bell states",
+                "Explore quantum algorithms like Deutsch-Jozsa"
+            ]
+        else:
+            return [
+                "Implement quantum algorithms like Grover's search",
+                "Explore quantum error correction",
+                "Try multi-qubit entangled states like GHZ"
+            ]
+
+    def _detect_and_correct_misconceptions(self, gates: List[Dict]) -> List[Dict[str, str]]:
+        """Identify and address common quantum computing misconceptions"""
+        misconceptions = []
+        
+        # Check for measurement misconceptions
+        measure_positions = [i for i, g in enumerate(gates) if g["type"].upper().startswith("MEASURE")]
+        if measure_positions and measure_positions[0] < len(gates) - 1:
+            misconceptions.append({
+                "type": "measurement_collapse",
+                "issue": "Measurement found mid-circuit",
+                "explanation": "Measurement collapses the quantum state irreversibly!",
+                "correction": "Move measurements to the end to preserve quantum effects",
+                "demonstration": "Try the same circuit with measurements at different positions"
+            })
+        
+        # Check for classical thinking
+        gate_types = {g["type"].upper() for g in gates}
+        if not any(g in gate_types for g in ["H", "RX", "RY", "RZ"]):
+            misconceptions.append({
+                "type": "classical_mindset",
+                "issue": "No superposition gates detected",
+                "explanation": "Your circuit operates only on computational basis states",
+                "correction": "Add Hadamard or rotation gates to explore quantum superposition",
+                "quantum_advantage": "Quantum computers excel when using superposition and entanglement"
+            })
+        
+        return misconceptions
+
+    def _generate_adaptive_challenges(self, gates: List[Dict]) -> List[Dict[str, str]]:
+        """Generate personalized challenges based on current circuit"""
+        challenges = []
+        gate_types = {g["type"].upper() for g in gates}
+        
+        # Entanglement challenge
+        if "H" in gate_types and "CNOT" not in gate_types:
+            challenges.append({
+                "title": "Entanglement Explorer",
+                "description": "You've mastered superposition! Now create quantum entanglement.",
+                "task": "Add a CNOT gate after your Hadamard to create a Bell state",
+                "success_criteria": "Measure correlated outcomes between qubits",
+                "physics_goal": "Experience 'spooky action at a distance'"
+            })
+        
+        # Bell state variants
+        if "H" in gate_types and "CNOT" in gate_types:
+            challenges.append({
+                "title": "Bell State Master",
+                "description": "Create all four Bell states",
+                "task": "Use X and Z gates to create |Φ-⟩, |Ψ+⟩, and |Ψ-⟩ states",
+                "learning_outcome": "Understand the Bell state basis"
+            })
+        
+        # Algorithm challenge
+        if len(gates) < 5:
+            challenges.append({
+                "title": "Quantum Algorithm Pioneer",
+                "description": "Build your first quantum algorithm",
+                "task": "Implement Deutsch's algorithm to distinguish constant vs balanced functions",
+                "real_world_connection": "This demonstrates quantum computational advantage"
+            })
+        
+        return challenges
+
+    def _generate_visualization_insights(
+        self, viz_type: str, data: Any, gates: List[Dict]
+    ) -> Dict[str, str]:
+        """Generate insights for specific visualizations"""
+        insights = {}
+        
+        if viz_type == "histogram":
+            insights = {
+                "how_to_read": "Bar height shows measurement frequency",
+                "equal_bars": "Equal bars suggest perfect superposition",
+                "skewed_bars": "Unequal bars indicate interference or bias",
+                "interpretation_tip": "Compare with classical expectations"
+            }
+            
+        elif viz_type == "circuit_diagram":
+            insights = {
+                "how_to_read": "Time flows left to right, each horizontal line is a qubit",
+                "gate_symbols": "H = Hadamard, ⊕ = CNOT target, • = CNOT control",
+                "depth_meaning": "Circuit depth affects decoherence in real quantum computers"
+            }
+            
+        elif viz_type == "statevector":
+            insights = {
+                "amplitude_bars": "Height = √probability, shows quantum amplitudes",
+                "phase_information": "Phase differences create interference effects",
+                "complex_plane": "Distance from origin = amplitude, angle = phase"
+            }
+        
+        return insights
+
+    def _suggest_real_world_applications(self, gates: List[Dict]) -> List[Dict[str, str]]:
+        """Connect circuit concepts to real-world applications"""
+        gate_types = {g["type"].upper() for g in gates}
+        applications = []
+        
+        if "H" in gate_types:
+            applications.append({
+                "concept": "Superposition (Hadamard gates)",
+                "application": "Quantum random number generation",
+                "description": "True randomness for cryptography and simulations",
+                "companies": "ID Quantique, QuintessenceLabs"
+            })
+        
+        if "CNOT" in gate_types:
+            applications.append({
+                "concept": "Entanglement (CNOT gates)",
+                "application": "Quantum key distribution",
+                "description": "Unbreakable communication security",
+                "real_deployment": "Chinese quantum satellite network"
+            })
+        
+        return applications
+
+    def _suggest_learning_path(self, gates: List[Dict], user_context: Dict[str, Any]) -> Dict[str, Any]:
+        """Suggest personalized learning progression"""
+        current_level = user_context.get("level", "beginner")
+        completed_concepts = set(g["type"].upper() for g in gates)
+        
+        learning_path = {
+            "current_concepts": list(completed_concepts),
+            "mastered_skills": [],
+            "next_concepts": [],
+            "long_term_goals": []
+        }
+        
+        # Assess mastered skills
+        if "H" in completed_concepts:
+            learning_path["mastered_skills"].append("Quantum superposition")
+        if "CNOT" in completed_concepts:
+            learning_path["mastered_skills"].append("Quantum entanglement")
+        
+        # Suggest next concepts
+        if "H" not in completed_concepts:
+            learning_path["next_concepts"].append("Learn Hadamard gates for superposition")
+        elif "CNOT" not in completed_concepts:
+            learning_path["next_concepts"].append("Explore CNOT gates for entanglement")
+        else:
+            learning_path["next_concepts"].append("Try quantum algorithms like Deutsch-Jozsa")
+        
+        return learning_path
+
+    def _calculate_entanglement_entropy(self, statevector: List[complex]) -> float:
+        """Calculate entanglement entropy for two-qubit systems"""
+        try:
+            if len(statevector) != 4:
+                return 0.0
+            
+            # Calculate reduced density matrix for first qubit
+            psi = np.array(statevector).reshape((2, 2))
+            rho = np.outer(psi.flatten(), np.conj(psi.flatten()))
+            
+            # Partial trace over second qubit
+            rho_reduced = np.array([
+                [rho[0,0] + rho[1,1], rho[0,2] + rho[1,3]],
+                [rho[2,0] + rho[3,1], rho[2,2] + rho[3,3]]
+            ])
+            
+            # Von Neumann entropy
+            eigenvals = np.linalg.eigvals(rho_reduced)
+            eigenvals = eigenvals[eigenvals > 1e-12]
+            entropy = -sum(ev * np.log2(ev) for ev in eigenvals)
+            
+            return float(entropy)
+        except:
+            return 0.0
+
+    # ================================================================
+    # ORIGINAL METHODS (unchanged but complete implementations)
+    # ================================================================
     
     def _serialize_complex_list(self, complex_list: List[complex]) -> List[Dict]:
         """Convert complex numbers to JSON-serializable format"""
@@ -433,6 +830,7 @@ class EnhancedQuantumCircuitSimulator:
         except Exception as e:
             logger.error(f"Two-qubit Bloch sphere generation failed: {str(e)}")
             return {}
+
     def _create_teleportation_template(self, **kwargs) -> List[Dict]:
         """Create quantum teleportation circuit template"""
         return [
@@ -522,59 +920,59 @@ class EnhancedQuantumCircuitSimulator:
         return gates
 
     def _generate_enhanced_histogram(self, counts: Dict[str, int], num_qubits: int) -> Optional[str]:
-            """Generate enhanced histogram with better styling and analysis"""
-            try:
-                fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
-                
-                states = list(counts.keys())
-                values = list(counts.values())
-                total_shots = sum(values)
-                
-                # Sort by binary value for better visualization
-                state_pairs = list(zip(states, values))
-                state_pairs.sort(key=lambda x: int(x[0], 2))
-                states, values = zip(*state_pairs)
-                
-                # Histogram
-                colors = plt.cm.viridis(np.linspace(0, 1, len(states)))
-                bars = ax1.bar(range(len(states)), values, color=colors, edgecolor='white', linewidth=2)
-                
-                ax1.set_xlabel('Quantum States', fontsize=14, fontweight='bold')
-                ax1.set_ylabel('Measurement Counts', fontsize=14, fontweight='bold')
-                ax1.set_title('Measurement Results Histogram', fontsize=16, fontweight='bold')
-                ax1.set_xticks(range(len(states)))
-                ax1.set_xticklabels([f'|{s}⟩' for s in states], rotation=45)
-                ax1.grid(axis='y', alpha=0.3, linestyle='--')
-                
-                # Add value labels
-                for i, (bar, value) in enumerate(zip(bars, values)):
-                    height = bar.get_height()
-                    ax1.text(bar.get_x() + bar.get_width()/2., height + max(values)*0.01,
-                            f'{int(value)}', ha='center', va='bottom', fontweight='bold')
-                
-                # Probability pie chart
-                ax2.pie(values, labels=[f'|{s}⟩' for s in states], autopct='%1.1f%%', 
-                    colors=colors, startangle=90)
-                ax2.set_title('Probability Distribution', fontsize=16, fontweight='bold')
-                
-                # Add statistics text
-                fig.suptitle(f'Circuit Results ({num_qubits} Qubits, {total_shots} Shots)', 
-                            fontsize=18, fontweight='bold', y=0.98)
-                
-                plt.tight_layout()
-                
-                buffer = io.BytesIO()
-                fig.savefig(buffer, format='png', dpi=150, bbox_inches='tight', 
-                        facecolor='white', edgecolor='none')
-                buffer.seek(0)
-                image_base64 = base64.b64encode(buffer.getvalue()).decode()
-                plt.close(fig)
-                
-                return image_base64
-                
-            except Exception as e:
-                logger.error(f"Enhanced histogram generation failed: {str(e)}")
-                return None
+        """Generate enhanced histogram with better styling and analysis"""
+        try:
+            fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 6))
+            
+            states = list(counts.keys())
+            values = list(counts.values())
+            total_shots = sum(values)
+            
+            # Sort by binary value for better visualization
+            state_pairs = list(zip(states, values))
+            state_pairs.sort(key=lambda x: int(x[0], 2))
+            states, values = zip(*state_pairs)
+            
+            # Histogram
+            colors = plt.cm.viridis(np.linspace(0, 1, len(states)))
+            bars = ax1.bar(range(len(states)), values, color=colors, edgecolor='white', linewidth=2)
+            
+            ax1.set_xlabel('Quantum States', fontsize=14, fontweight='bold')
+            ax1.set_ylabel('Measurement Counts', fontsize=14, fontweight='bold')
+            ax1.set_title('Measurement Results Histogram', fontsize=16, fontweight='bold')
+            ax1.set_xticks(range(len(states)))
+            ax1.set_xticklabels([f'|{s}⟩' for s in states], rotation=45)
+            ax1.grid(axis='y', alpha=0.3, linestyle='--')
+            
+            # Add value labels
+            for i, (bar, value) in enumerate(zip(bars, values)):
+                height = bar.get_height()
+                ax1.text(bar.get_x() + bar.get_width()/2., height + max(values)*0.01,
+                        f'{int(value)}', ha='center', va='bottom', fontweight='bold')
+            
+            # Probability pie chart
+            ax2.pie(values, labels=[f'|{s}⟩' for s in states], autopct='%1.1f%%', 
+                colors=colors, startangle=90)
+            ax2.set_title('Probability Distribution', fontsize=16, fontweight='bold')
+            
+            # Add statistics text
+            fig.suptitle(f'Circuit Results ({num_qubits} Qubits, {total_shots} Shots)', 
+                        fontsize=18, fontweight='bold', y=0.98)
+            
+            plt.tight_layout()
+            
+            buffer = io.BytesIO()
+            fig.savefig(buffer, format='png', dpi=150, bbox_inches='tight', 
+                    facecolor='white', edgecolor='none')
+            buffer.seek(0)
+            image_base64 = base64.b64encode(buffer.getvalue()).decode()
+            plt.close(fig)
+            
+            return image_base64
+            
+        except Exception as e:
+            logger.error(f"Enhanced histogram generation failed: {str(e)}")
+            return None
         
     def _generate_statevector_plot(self, statevector: List[complex], num_qubits: int) -> Optional[str]:
         """Generate comprehensive statevector visualization"""
@@ -608,7 +1006,7 @@ class EnhancedQuantumCircuitSimulator:
             ax2.set_xticklabels(state_labels, rotation=45)
             ax2.grid(axis='y', alpha=0.3)
             ax2.axhline(y=0, color='black', linestyle='-', alpha=0.5)
-            
+
             # Probability plot
             bars3 = ax3.bar(range(num_states), probabilities, color='lightgreen', 
                            edgecolor='darkgreen', alpha=0.8)
@@ -779,70 +1177,6 @@ class EnhancedQuantumCircuitSimulator:
             logger.error(f"Entanglement measures calculation failed: {str(e)}")
             return {}
     
-    def _generate_educational_insights(self, gates: List[Dict], 
-                                     statevector: Optional[List],
-                                     counts: Dict[str, int],
-                                     num_qubits: int) -> Dict[str, Any]:
-        """Generate educational insights about the circuit and results"""
-        try:
-            insights = {
-                'circuit_analysis': {},
-                'quantum_behavior': {},
-                'suggestions': []
-            }
-            
-            # Analyze circuit structure
-            gate_types = [gate.get('type', '').upper() for gate in gates]
-            
-            if 'H' in gate_types:
-                insights['quantum_behavior']['superposition'] = True
-                insights['suggestions'].append(
-                    "Your circuit creates quantum superposition using Hadamard gates."
-                )
-            
-            if 'CNOT' in gate_types or 'CZ' in gate_types:
-                insights['quantum_behavior']['entanglement'] = True
-                insights['suggestions'].append(
-                    "Your circuit creates quantum entanglement using two-qubit gates."
-                )
-            
-            # Analyze measurement outcomes
-            if counts:
-                num_outcomes = len(counts)
-                max_possible = 2**num_qubits
-                
-                if num_outcomes == max_possible:
-                    insights['quantum_behavior']['full_superposition'] = True
-                    insights['suggestions'].append(
-                        "Your circuit explores the full quantum state space."
-                    )
-                elif num_outcomes == 2:
-                    insights['quantum_behavior']['bipartite'] = True
-                    insights['suggestions'].append(
-                        "Your circuit creates a bipartite quantum state."
-                    )
-            
-            # Circuit complexity analysis
-            total_gates = len(gates)
-            if total_gates > 10:
-                insights['circuit_analysis']['complexity'] = 'high'
-                insights['suggestions'].append(
-                    "This is a complex circuit. Consider breaking it into smaller parts for analysis."
-                )
-            elif total_gates < 3:
-                insights['circuit_analysis']['complexity'] = 'low'
-                insights['suggestions'].append(
-                    "This is a simple circuit. Try adding more gates to explore quantum phenomena."
-                )
-            else:
-                insights['circuit_analysis']['complexity'] = 'moderate'
-            
-            return insights
-            
-        except Exception as e:
-            logger.error(f"Educational insights generation failed: {str(e)}")
-            return {'error': str(e)}
-    
     # Gate implementation methods (enhanced versions)
     def _add_gate_to_circuit(self, circuit: QuantumCircuit, gate_spec: Dict[str, Any]) -> None:
         """Enhanced gate addition with comprehensive error checking"""
@@ -920,7 +1254,7 @@ class EnhancedQuantumCircuitSimulator:
         angle = gate_spec.get('angle', np.pi/2)
         self._validate_qubit_index(circuit, qubit)
         circuit.rz(angle, qubit)
-    
+
     def _add_s_gate(self, circuit: QuantumCircuit, gate_spec: Dict[str, Any]) -> None:
         qubit = gate_spec.get('qubit', 0)
         self._validate_qubit_index(circuit, qubit)
@@ -1167,30 +1501,113 @@ class EnhancedQuantumCircuitSimulator:
 
 # Example usage and testing functions
 def example_usage():
-    """Demonstrate usage of the enhanced simulator"""
+    """Demonstrate usage of the enhanced simulator with comprehensive educational insights"""
+    print("="*80)
+    print("ENHANCED QUANTUM CIRCUIT SIMULATOR - EDUCATIONAL EDITION")
+    print("="*80)
+    
     # Initialize simulator
     simulator = EnhancedQuantumCircuitSimulator()
     
-    # Example 1: Bell state
-    print("Creating Bell state...")
-    bell_result = simulator.create_algorithm_circuit('bell_state', bell_type='00')
-    print(f"Bell state simulation: {bell_result['success']}")
-    
-    # Example 2: Custom circuit
-    print("\nSimulating custom circuit...")
+    # Example: Bell state with comprehensive educational context
+    print("\n🔬 Creating Bell state with educational insights...")
     gates = [
         {'type': 'H', 'qubit': 0},
         {'type': 'CNOT', 'control': 0, 'target': 1},
-        {'type': 'RZ', 'qubit': 1, 'angle': np.pi/4}
     ]
     
-    result = simulator.simulate_circuit(2, gates, shots=1024)
-    print(f"Custom circuit simulation: {result['success']}")
+    result = simulator.simulate_circuit(
+        2, gates, shots=1024, 
+        user_context={'level': 'beginner', 'interests': ['entanglement', 'cryptography']}
+    )
     
     if result['success']:
-        print(f"Measurement counts: {result['counts']}")
-        print(f"Circuit depth: {result['metrics']['circuit_depth']}")
-        print(f"Educational insights: {len(result['insights']['suggestions'])} suggestions")
+        print(f"\n📊 Measurement counts: {result['counts']}")
+        print(f"📈 Probabilities: {result['probabilities']}")
+        
+        print("\n" + "="*60)
+        print("🎓 COMPREHENSIVE EDUCATIONAL INSIGHTS")
+        print("="*60)
+        
+        insights = result['insights']
+        
+        print("\n1️⃣ Gate-by-Gate Analysis:")
+        for i, gate_insight in enumerate(insights['gate_by_gate_insights'], 1):
+            print(f"   Gate {i} ({gate_insight['gate']}):")
+            print(f"      • Physics: {gate_insight.get('physics_explanation', 'N/A')}")
+            print(f"      • Analogy: {gate_insight.get('visual_analogy', 'N/A')}")
+            if 'practical_tips' in gate_insight:
+                print(f"      • Tips: {', '.join(gate_insight['practical_tips'][:2])}")
+        
+        print(f"\n2️⃣ Quantum Phenomena Detected:")
+        for phenomenon, details in insights['quantum_phenomena'].items():
+            if details.get('detected'):
+                print(f"   ✅ {phenomenon.title()}:")
+                print(f"      • {details.get('explanation', '')}")
+                if 'applications' in details:
+                    print(f"      • Applications: {', '.join(details['applications'][:2])}")
+        
+        print(f"\n3️⃣ Circuit Story:")
+        story = insights['circuit_story']
+        print(f"   📖 {story['step_by_step']}")
+        print(f"   🔬 Physics Summary: {story['physics_summary']}")
+        
+        print(f"\n4️⃣ Difficulty Assessment:")
+        difficulty = insights['difficulty_assessment']
+        print(f"   📊 Level: {difficulty['level'].title()}")
+        print(f"   💡 Guidance: {difficulty['guidance']}")
+        
+        if insights['misconception_warnings']:
+            print(f"\n5️⃣ Learning Alerts:")
+            for warning in insights['misconception_warnings']:
+                print(f"   ⚠️  {warning['explanation']}")
+                print(f"      💡 Solution: {warning['correction']}")
+        
+        print(f"\n6️⃣ Next Challenges:")
+        for challenge in insights['adaptive_challenges']:
+            print(f"   🎯 {challenge['title']}: {challenge['description']}")
+            print(f"      📝 Task: {challenge['task']}")
+        
+        print(f"\n7️⃣ Real-World Applications:")
+        for app in insights['real_world_applications']:
+            print(f"   🌍 {app['concept']} → {app['application']}")
+            print(f"      📖 {app['description']}")
+        
+        print(f"\n8️⃣ Learning Path:")
+        path = insights['learning_path']
+        print(f"   ✅ Mastered: {', '.join(path['mastered_skills'])}")
+        print(f"   📚 Next: {', '.join(path['next_concepts'])}")
+        
+        print(f"\n9️⃣ Visualization Guides:")
+        for viz_type, guide in insights['visualization_guides'].items():
+            if guide:
+                print(f"   📊 {viz_type.title()}: {guide.get('how_to_read', 'N/A')}")
+    
+    else:
+        print(f"❌ Simulation failed: {result['error']}")
+    
+    # Example 2: Advanced circuit
+    print("\n" + "="*60)
+    print("🔬 ADVANCED EXAMPLE: GHZ State")
+    print("="*60)
+    
+    advanced_gates = [
+        {'type': 'H', 'qubit': 0},
+        {'type': 'CNOT', 'control': 0, 'target': 1},
+        {'type': 'CNOT', 'control': 0, 'target': 2},
+    ]
+    
+    advanced_result = simulator.simulate_circuit(
+        3, advanced_gates, shots=1024,
+        user_context={'level': 'intermediate', 'interests': ['algorithms']}
+    )
+    
+    if advanced_result['success']:
+        print(f"📊 Measurement counts: {advanced_result['counts']}")
+        insights = advanced_result['insights']
+        print(f"🎓 Difficulty: {insights['difficulty_assessment']['level']}")
+        print(f"🔬 Physics: {insights['circuit_story']['physics_summary']}")
+
 
 if __name__ == "__main__":
     example_usage()

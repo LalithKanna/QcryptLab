@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantum Gates and Operations - Quantum Cryptography Tutorial</title>
-    <meta name="description" content="Master the fundamental building blocks of quantum computing - single and multi-qubit quantum gates.">
+    <title>Quantum Gates and Operations - Enhanced Quantum Tutorial</title>
+    <meta name="description" content="Master all quantum gates with the Enhanced Quantum Circuit Simulator - including rotation, phase, and BB84 gates.">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/quantum-visualizations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -70,7 +70,7 @@
             font-size: 0.9rem;
         }
         
-        .control-group select {
+        .control-group select, .control-group input {
             width: 100%;
             padding: 0.8rem;
             border-radius: 8px;
@@ -162,6 +162,14 @@
             margin-top: 4rem;
         }
         
+        .rotation-section {
+            margin-top: 4rem;
+        }
+        
+        .bb84-section {
+            margin-top: 4rem;
+        }
+        
         .next-steps-section {
             margin-top: 4rem;
             padding-top: 4rem;
@@ -201,6 +209,61 @@
             color: white;
             text-decoration: none;
         }
+        
+        .bb84-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+        }
+        
+        .educational-insights {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .educational-insights h5 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .educational-insights ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+        
+        .educational-insights li {
+            margin: 0.5rem 0;
+            color: #d0d0d0;
+            font-size: 0.9rem;
+        }
+        
+        .phase-gates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .angle-slider {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+        
+        .angle-display {
+            font-family: 'JetBrains Mono', monospace;
+            color: #667eea;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -224,7 +287,7 @@
             <div class="lesson-header">
                 <h1>Quantum Gates and Operations</h1>
                 <p class="lesson-subtitle">
-                    Master the fundamental building blocks of quantum computing - single and multi-qubit quantum gates
+                    Master all quantum gates supported by the Enhanced Quantum Circuit Simulator - from basic Pauli gates to advanced rotation and BB84 preparation gates
                 </p>
             </div>
 
@@ -255,12 +318,30 @@
 
             <article class="lesson-article">
                 <section class="content-section">
-                    <h2 class="section-title">Single Qubit Gates</h2>
+                    <h2 class="section-title">Basic Single Qubit Gates</h2>
                     <p class="section-description">
-                        Single qubit gates are the basic operations that can be performed on individual qubits. 
-                        They form the foundation of quantum computing and are represented by 2×2 unitary matrices.
+                        Single qubit gates are the fundamental building blocks of quantum computing. 
+                        They are represented by 2×2 unitary matrices and form the foundation for all quantum operations.
                     </p>
                     
+                    <div class="gate-card">
+                        <h3>Identity Gate (I)</h3>
+                        <p>The identity gate performs no operation on the qubit. It's useful for timing and circuit alignment.</p>
+                        <div class="gate-matrix">
+                            <strong>Matrix Representation:</strong><br>
+                            I = [1 0]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 1]
+                        </div>
+                        <div class="educational-insights">
+                            <h5>Educational Insights:</h5>
+                            <ul>
+                                <li>Acts as a "do nothing" operation</li>
+                                <li>Useful for maintaining quantum circuit timing</li>
+                                <li>Identity applied twice still gives identity: I² = I</li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="gate-card">
                         <h3>Pauli-X Gate (NOT Gate)</h3>
                         <p>The Pauli-X gate is the quantum equivalent of the classical NOT gate. It flips the qubit state from |0⟩ to |1⟩ and vice versa.</p>
@@ -270,8 +351,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 0]
                         </div>
                         <div class="gate-visualization">
-                            <h4>Effect on Bloch Sphere</h4>
-                            <p>Rotates the qubit by π radians around the X-axis</p>
+                            <h4>Interactive X Gate Simulation</h4>
                             <div class="gate-controls">
                                 <div class="control-group">
                                     <label>Input State:</label>
@@ -290,6 +370,15 @@
                                 <p>Click "Apply X Gate" to see the transformation...</p>
                             </div>
                         </div>
+                        <div class="educational-insights">
+                            <h5>Physics Explanation:</h5>
+                            <ul>
+                                <li>Bit-flip operation: maps |0⟩→|1⟩ and |1⟩→|0⟩</li>
+                                <li>Rotates qubit by π radians around the X-axis on Bloch sphere</li>
+                                <li>Applying X twice returns to original state: X² = I</li>
+                                <li>Essential for quantum error correction</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="gate-card">
@@ -301,8 +390,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[i  0]
                         </div>
                         <div class="gate-visualization">
-                            <h4>Effect on Bloch Sphere</h4>
-                            <p>Rotates the qubit by π radians around the Y-axis</p>
+                            <h4>Interactive Y Gate Simulation</h4>
                             <div class="gate-controls">
                                 <div class="control-group">
                                     <label>Input State:</label>
@@ -321,6 +409,15 @@
                                 <p>Click "Apply Y Gate" to see the transformation...</p>
                             </div>
                         </div>
+                        <div class="educational-insights">
+                            <h5>Physics Explanation:</h5>
+                            <ul>
+                                <li>Combined bit and phase flip operation</li>
+                                <li>Rotates qubit by π radians around the Y-axis</li>
+                                <li>Y|0⟩ = i|1⟩, Y|1⟩ = -i|0⟩</li>
+                                <li>Important for universal quantum gate sets</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="gate-card">
@@ -332,8 +429,7 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0 -1]
                         </div>
                         <div class="gate-visualization">
-                            <h4>Effect on Bloch Sphere</h4>
-                            <p>Rotates the qubit by π radians around the Z-axis</p>
+                            <h4>Interactive Z Gate Simulation</h4>
                             <div class="gate-controls">
                                 <div class="control-group">
                                     <label>Input State:</label>
@@ -352,6 +448,15 @@
                                 <p>Click "Apply Z Gate" to see the transformation...</p>
                             </div>
                         </div>
+                        <div class="educational-insights">
+                            <h5>Physics Explanation:</h5>
+                            <ul>
+                                <li>Phase flip: Z|0⟩ = |0⟩, Z|1⟩ = -|1⟩</li>
+                                <li>Rotates qubit by π radians around the Z-axis</li>
+                                <li>Converts |+⟩ ↔ |-⟩ superposition states</li>
+                                <li>Fundamental for quantum phase manipulation</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="gate-card">
@@ -359,12 +464,11 @@
                         <p>The Hadamard gate is fundamental for creating superpositions. It transforms computational basis states into superposition states and vice versa.</p>
                         <div class="gate-matrix">
                             <strong>Matrix Representation:</strong><br>
-                            H = [1  1]/√2<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 -1]/√2
+                            H = (1/√2) [1  1]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1 -1]
                         </div>
                         <div class="gate-visualization">
-                            <h4>Effect on Bloch Sphere</h4>
-                            <p>Rotates the qubit by π radians around the X+Z axis</p>
+                            <h4>Interactive Hadamard Simulation</h4>
                             <div class="gate-controls">
                                 <div class="control-group">
                                     <label>Input State:</label>
@@ -382,6 +486,166 @@
                             <div class="results-display" id="h-gate-results">
                                 <p>Click "Apply H Gate" to see the transformation...</p>
                             </div>
+                        </div>
+                        <div class="educational-insights">
+                            <h5>Physics Explanation:</h5>
+                            <ul>
+                                <li>Creates equal superposition of |0⟩ and |1⟩ states</li>
+                                <li>H|0⟩ = |+⟩ = (|0⟩ + |1⟩)/√2</li>
+                                <li>H|1⟩ = |-⟩ = (|0⟩ - |1⟩)/√2</li>
+                                <li>Essential for quantum algorithms initialization</li>
+                                <li>Use before CNOT to create entanglement</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2 class="section-title">Phase Gates</h2>
+                    <p class="section-description">
+                        Phase gates add specific phase rotations to qubit states without changing the computational basis amplitudes.
+                    </p>
+                    
+                    <div class="phase-gates-grid">
+                        <div class="gate-card">
+                            <h3>S Gate (Phase π/2)</h3>
+                            <p>Adds a π/2 phase to |1⟩ state. Also known as the phase gate.</p>
+                            <div class="gate-matrix">
+                                <strong>Matrix:</strong><br>
+                                S = [1  0]<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0  i]
+                            </div>
+                            <div class="educational-insights">
+                                <h5>Key Properties:</h5>
+                                <ul>
+                                    <li>S|0⟩ = |0⟩, S|1⟩ = i|1⟩</li>
+                                    <li>Quarter turn around Z-axis</li>
+                                    <li>S² = Z (two S gates equal a Z gate)</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="gate-card">
+                            <h3>T Gate (Phase π/4)</h3>
+                            <p>Adds a π/4 phase to |1⟩ state. Essential for universal quantum computation.</p>
+                            <div class="gate-matrix">
+                                <strong>Matrix:</strong><br>
+                                T = [1  0]<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0  e^(iπ/4)]
+                            </div>
+                            <div class="educational-insights">
+                                <h5>Key Properties:</h5>
+                                <ul>
+                                    <li>T|0⟩ = |0⟩, T|1⟩ = e^(iπ/4)|1⟩</li>
+                                    <li>Eighth turn around Z-axis</li>
+                                    <li>T² = S, T⁴ = Z</li>
+                                    <li>Critical for fault-tolerant quantum computing</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section rotation-section">
+                    <h2 class="section-title">Rotation Gates</h2>
+                    <p class="section-description">
+                        Rotation gates allow precise control over quantum state manipulation by rotating around specific axes of the Bloch sphere.
+                    </p>
+                    
+                    <div class="gate-card">
+                        <h3>Parametric Rotation Gates (RX, RY, RZ)</h3>
+                        <p>These gates rotate the qubit state around the X, Y, or Z axis by an arbitrary angle θ.</p>
+                        <div class="gate-matrix">
+                            <strong>General Form:</strong><br>
+                            R_axis(θ) = cos(θ/2)I - i·sin(θ/2)·Pauli_axis
+                        </div>
+                        <div class="gate-visualization">
+                            <h4>Interactive Rotation Gate Simulator</h4>
+                            <div class="gate-controls">
+                                <div class="control-group">
+                                    <label>Rotation Axis:</label>
+                                    <select id="rotation-axis">
+                                        <option value="RX">X-axis (RX)</option>
+                                        <option value="RY">Y-axis (RY)</option>
+                                        <option value="RZ">Z-axis (RZ)</option>
+                                    </select>
+                                </div>
+                                <div class="control-group">
+                                    <label>Input State:</label>
+                                    <select id="rotation-input">
+                                        <option value="0">|0⟩</option>
+                                        <option value="1">|1⟩</option>
+                                        <option value="plus">|+⟩</option>
+                                        <option value="minus">|-⟩</option>
+                                    </select>
+                                </div>
+                                <div class="control-group">
+                                    <label>Angle (θ in radians): <span class="angle-display" id="angle-display">1.571</span></label>
+                                    <input type="range" id="rotation-angle" class="angle-slider" 
+                                           min="0" max="6.283" step="0.1" value="1.571"
+                                           oninput="updateAngleDisplay()">
+                                </div>
+                                <div class="control-group">
+                                    <button class="btn-simulate" onclick="simulateRotationGate()">Apply Rotation</button>
+                                </div>
+                            </div>
+                            <div class="results-display" id="rotation-results">
+                                <p>Select axis, input state, angle and click "Apply Rotation"...</p>
+                            </div>
+                        </div>
+                        <div class="educational-insights">
+                            <h5>Rotation Gate Applications:</h5>
+                            <ul>
+                                <li>Precise quantum state manipulation</li>
+                                <li>Creating arbitrary superpositions</li>
+                                <li>Essential for quantum optimization algorithms</li>
+                                <li>Used in quantum machine learning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section bb84-section">
+                    <h2 class="section-title">BB84 Preparation Gates</h2>
+                    <p class="section-description">
+                        Special preparation gates optimized for BB84 quantum key distribution protocol. These gates quickly prepare the four BB84 basis states.
+                    </p>
+                    
+                    <div class="gate-card">
+                        <h3>BB84 State Preparation <span class="bb84-badge">BB84</span></h3>
+                        <p>These gates are specifically designed for preparing the four states used in the BB84 quantum cryptography protocol.</p>
+                        
+                        <div class="gate-visualization">
+                            <h4>BB84 State Preparation Demo</h4>
+                            <div class="gate-controls">
+                                <div class="control-group">
+                                    <label>BB84 State:</label>
+                                    <select id="bb84-state">
+                                        <option value="PREPARE_0">|0⟩ - Computational 0</option>
+                                        <option value="PREPARE_1">|1⟩ - Computational 1</option>
+                                        <option value="PREPARE_PLUS">|+⟩ - Superposition +</option>
+                                        <option value="PREPARE_MINUS">|-⟩ - Superposition -</option>
+                                    </select>
+                                </div>
+                                <div class="control-group">
+                                    <button class="btn-simulate" onclick="simulateBB84Gate()">Prepare BB84 State</button>
+                                </div>
+                            </div>
+                            <div class="results-display" id="bb84-results">
+                                <p>Select a BB84 state to prepare...</p>
+                            </div>
+                        </div>
+                        
+                        <div class="educational-insights">
+                            <h5>BB84 Protocol Context:</h5>
+                            <ul>
+                                <li><strong>PREPARE_0:</strong> Reset qubit to computational |0⟩</li>
+                                <li><strong>PREPARE_1:</strong> Reset then apply X gate → |1⟩</li>
+                                <li><strong>PREPARE_PLUS:</strong> Reset then apply H gate → |+⟩</li>
+                                <li><strong>PREPARE_MINUS:</strong> Reset, X, then H → |-⟩</li>
+                                <li>Used in quantum key distribution for secure communication</li>
+                                <li>Forms the basis for quantum cryptography protocols</li>
+                            </ul>
                         </div>
                     </div>
                 </section>
@@ -428,6 +692,37 @@
                                 <p>Click "Apply CNOT" to see the transformation...</p>
                             </div>
                         </div>
+                        <div class="educational-insights">
+                            <h5>CNOT Gate Properties:</h5>
+                            <ul>
+                                <li>Entangles control and target qubits</li>
+                                <li>Quantum 'if' statement - flips target IF control is |1⟩</li>
+                                <li>Use H on control then CNOT to create Bell states</li>
+                                <li>Essential for quantum teleportation</li>
+                                <li>Creates 'spooky action at a distance'</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="gate-card">
+                        <h3>Controlled-Z Gate (CZ)</h3>
+                        <p>The CZ gate adds a -1 phase to the |11⟩ state only, leaving all other states unchanged.</p>
+                        <div class="gate-matrix">
+                            <strong>Matrix Representation (4×4):</strong><br>
+                            CZ = [1  0  0  0]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0  1  0  0]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0  0  1  0]<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0  0  0 -1]
+                        </div>
+                        <div class="educational-insights">
+                            <h5>CZ Gate Properties:</h5>
+                            <ul>
+                                <li>Controlled phase flip operation</li>
+                                <li>Symmetric - control and target can be swapped</li>
+                                <li>Often used in entanglement generation</li>
+                                <li>Key component in many quantum algorithms</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="gate-card">
@@ -465,33 +760,45 @@
                                 <p>Click "Apply SWAP" to see the transformation...</p>
                             </div>
                         </div>
+                        <div class="educational-insights">
+                            <h5>SWAP Gate Applications:</h5>
+                            <ul>
+                                <li>Exchange quantum states between qubits</li>
+                                <li>Quantum circuit routing and optimization</li>
+                                <li>Building block for more complex operations</li>
+                                <li>Can be decomposed into three CNOT gates</li>
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
                 <section class="content-section next-steps-section">
-                    <h2 class="section-title">Ready to Build Circuits?</h2>
+                    <h2 class="section-title">Ready to Build Quantum Circuits?</h2>
                     <p class="section-description">
-                        Now that you understand individual quantum gates, you're ready to combine them into quantum circuits!
+                        Now that you've mastered all quantum gates from the Enhanced Quantum Circuit Simulator, 
+                        you're ready to combine them into powerful quantum circuits and algorithms!
                     </p>
                     
                     <div class="gate-card">
-                        <h3>Next: Quantum Circuits</h3>
-                        <p>Learn how to combine these gates to create powerful quantum algorithms and protocols.</p>
-                        <div class="gate-controls">
-                            <div class="control-group">
-                                <a href="quantum-circuits.html" class="btn-link">Go to Circuit Builder →</a>
-                            </div>
-                        </div>
+                        <h3>Next: Interactive Circuit Builder</h3>
+                        <p>Use all these gates to build real quantum circuits with live simulation and educational insights.</p>
                         
                         <div class="gate-visualization">
-                            <h4>What You'll Learn:</h4>
+                            <h4>What You'll Learn Next:</h4>
                             <ul>
-                                <li>Building multi-gate quantum circuits</li>
-                                <li>Creating Bell states and GHZ states</li>
-                                <li>Understanding quantum algorithms</li>
-                                <li>Simulating complex quantum systems</li>
-                                <li>Analyzing measurement results</li>
+                                <li>Building multi-gate quantum circuits with all supported gates</li>
+                                <li>Creating Bell states, GHZ states, and entangled systems</li>
+                                <li>Implementing quantum algorithms (Deutsch-Jozsa, Grover's)</li>
+                                <li>Advanced circuit analysis with comprehensive educational insights</li>
+                                <li>Real-time statevector visualization and measurement analysis</li>
+                                <li>BB84 quantum cryptography protocol implementation</li>
                             </ul>
+                        </div>
+                        
+                        <div class="gate-controls">
+                            <div class="control-group">
+                                <a href="quantum-circuits.html" class="btn-link">Launch Circuit Builder →</a>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -511,36 +818,43 @@
 
     <script src="../js/main.js"></script>
     <script>
-        // Quantum gate simulation functions
+        // Enhanced quantum gate simulation functions based on EnhancedQuantumCircuitSimulator
+        
         function simulateXGate() {
             const inputState = document.getElementById('x-input-state').value;
             const results = document.getElementById('x-gate-results');
             
-            let outputState, description;
+            let outputState, description, analogy;
             switch(inputState) {
                 case '0':
                     outputState = '|1⟩';
                     description = 'X|0⟩ = |1⟩ (bit flip: 0 → 1)';
+                    analogy = 'Like flipping a classical bit from 0 to 1';
                     break;
                 case '1':
                     outputState = '|0⟩';
                     description = 'X|1⟩ = |0⟩ (bit flip: 1 → 0)';
+                    analogy = 'Like flipping a classical bit from 1 to 0';
                     break;
                 case 'plus':
                     outputState = '|+⟩';
                     description = 'X|+⟩ = |+⟩ (superposition unchanged)';
+                    analogy = 'X gate has no effect on |+⟩ superposition';
                     break;
                 case 'minus':
                     outputState = '|-⟩';
                     description = 'X|-⟩ = |-⟩ (superposition unchanged)';
+                    analogy = 'X gate has no effect on |-⟩ superposition';
                     break;
             }
             
             results.innerHTML = `
                 <h4>X Gate Transformation</h4>
-                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Input:</strong> ${getStateLabel(inputState)}</p>
                 <p><strong>Output:</strong> ${outputState}</p>
                 <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Visual Analogy:</strong> ${analogy}</p>
+                <p><strong>Practical Tip:</strong> Applying X twice returns to original state (X² = I)</p>
             `;
         }
 
@@ -570,9 +884,11 @@
             
             results.innerHTML = `
                 <h4>Y Gate Transformation</h4>
-                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Input:</strong> ${getStateLabel(inputState)}</p>
                 <p><strong>Output:</strong> ${outputState}</p>
                 <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Physics:</strong> Combined bit-flip and phase-flip (180° rotation around Y-axis)</p>
+                <p><strong>Mathematical Detail:</strong> Y = iXZ (product of X and Z gates with phase)</p>
             `;
         }
 
@@ -602,9 +918,11 @@
             
             results.innerHTML = `
                 <h4>Z Gate Transformation</h4>
-                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Input:</strong> ${getStateLabel(inputState)}</p>
                 <p><strong>Output:</strong> ${outputState}</p>
                 <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Physics:</strong> Phase flip - adds -1 phase to |1⟩ component</p>
+                <p><strong>Bloch Sphere:</strong> 180° rotation around Z-axis</p>
             `;
         }
 
@@ -612,31 +930,96 @@
             const inputState = document.getElementById('h-input-state').value;
             const results = document.getElementById('h-gate-results');
             
-            let outputState, description;
+            let outputState, description, insight;
             switch(inputState) {
                 case '0':
                     outputState = '|+⟩ = (|0⟩ + |1⟩)/√2';
                     description = 'H|0⟩ = |+⟩ (creates equal superposition)';
+                    insight = 'This creates quantum superposition - both 0 and 1 simultaneously!';
                     break;
                 case '1':
                     outputState = '|-⟩ = (|0⟩ - |1⟩)/√2';
                     description = 'H|1⟩ = |-⟩ (creates superposition with relative phase)';
+                    insight = 'Notice the minus sign - this relative phase is crucial for interference';
                     break;
                 case 'plus':
                     outputState = '|0⟩';
                     description = 'H|+⟩ = |0⟩ (returns to computational basis)';
+                    insight = 'Hadamard is its own inverse: H² = I';
                     break;
                 case 'minus':
                     outputState = '|1⟩';
                     description = 'H|-⟩ = |1⟩ (returns to computational basis)';
+                    insight = 'The phase information is preserved and extracted';
                     break;
             }
             
             results.innerHTML = `
                 <h4>Hadamard Gate Transformation</h4>
-                <p><strong>Input:</strong> ${inputState === 'plus' ? '|+⟩' : inputState === 'minus' ? '|-⟩' : '|' + inputState + '⟩'}</p>
+                <p><strong>Input:</strong> ${getStateLabel(inputState)}</p>
                 <p><strong>Output:</strong> ${outputState}</p>
                 <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Quantum Insight:</strong> ${insight}</p>
+                <p><strong>Applications:</strong> Algorithm initialization, creating Bell states, quantum random numbers</p>
+            `;
+        }
+
+        function simulateRotationGate() {
+            const axis = document.getElementById('rotation-axis').value;
+            const inputState = document.getElementById('rotation-input').value;
+            const angle = parseFloat(document.getElementById('rotation-angle').value);
+            const results = document.getElementById('rotation-results');
+            
+            const axisName = axis.substring(1); // Remove 'R' prefix
+            const degrees = (angle * 180 / Math.PI).toFixed(1);
+            
+            results.innerHTML = `
+                <h4>${axis} Rotation Applied</h4>
+                <p><strong>Input State:</strong> ${getStateLabel(inputState)}</p>
+                <p><strong>Rotation Axis:</strong> ${axisName}-axis</p>
+                <p><strong>Angle:</strong> ${angle.toFixed(3)} radians (${degrees}°)</p>
+                <p><strong>Physics:</strong> Rotation around ${axisName}-axis by angle θ</p>
+                <p><strong>Matrix Form:</strong> R_${axisName}(θ) = cos(θ/2)I - i·sin(θ/2)·σ_${axisName}</p>
+                <p><strong>Applications:</strong> Precise quantum state control, optimization algorithms, quantum machine learning</p>
+                <p><em>Note: Exact output state depends on complex amplitude calculations</em></p>
+            `;
+        }
+
+        function simulateBB84Gate() {
+            const bb84State = document.getElementById('bb84-state').value;
+            const results = document.getElementById('bb84-results');
+            
+            let outputState, sequence, description;
+            switch(bb84State) {
+                case 'PREPARE_0':
+                    outputState = '|0⟩';
+                    sequence = 'Reset → |0⟩';
+                    description = 'Computational basis state 0 - used for bit value 0 in rectilinear basis';
+                    break;
+                case 'PREPARE_1':
+                    outputState = '|1⟩';
+                    sequence = 'Reset → X → |1⟩';
+                    description = 'Computational basis state 1 - used for bit value 1 in rectilinear basis';
+                    break;
+                case 'PREPARE_PLUS':
+                    outputState = '|+⟩ = (|0⟩ + |1⟩)/√2';
+                    sequence = 'Reset → H → |+⟩';
+                    description = 'Superposition plus state - used for bit value 0 in diagonal basis';
+                    break;
+                case 'PREPARE_MINUS':
+                    outputState = '|-⟩ = (|0⟩ - |1⟩)/√2';
+                    sequence = 'Reset → X → H → |-⟩';
+                    description = 'Superposition minus state - used for bit value 1 in diagonal basis';
+                    break;
+            }
+            
+            results.innerHTML = `
+                <h4>BB84 State Preparation</h4>
+                <p><strong>Target State:</strong> ${outputState}</p>
+                <p><strong>Gate Sequence:</strong> ${sequence}</p>
+                <p><strong>BB84 Context:</strong> ${description}</p>
+                <p><strong>Cryptographic Use:</strong> These four states form the complete BB84 encoding basis</p>
+                <p><strong>Security Feature:</strong> Measurement in wrong basis gives random results</p>
             `;
         }
 
@@ -645,7 +1028,7 @@
             const target = document.getElementById('cnot-target').value;
             const results = document.getElementById('cnot-results');
             
-            let outputState, description;
+            let outputState, description, entanglement = '';
             if (control === '0') {
                 outputState = `|${control}${target}⟩`;
                 description = 'Control qubit is |0⟩, so target qubit remains unchanged';
@@ -655,11 +1038,19 @@
                 description = 'Control qubit is |1⟩, so target qubit is flipped';
             }
             
+            // Check for Bell state creation
+            if (control === '0' && target === '0') {
+                entanglement = '<p><strong>Tip:</strong> Apply H to control first, then CNOT to create Bell state |Φ+⟩!</p>';
+            }
+            
             results.innerHTML = `
                 <h4>CNOT Gate Transformation</h4>
                 <p><strong>Input:</strong> |${control}${target}⟩ (Control: |${control}⟩, Target: |${target}⟩)</p>
                 <p><strong>Output:</strong> ${outputState}</p>
                 <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Quantum Logic:</strong> IF control = |1⟩ THEN flip target, ELSE do nothing</p>
+                <p><strong>Entanglement:</strong> Creates quantum correlations between qubits</p>
+                ${entanglement}
             `;
         }
 
@@ -669,20 +1060,35 @@
             const results = document.getElementById('swap-results');
             
             const outputState = `|${qubit2}${qubit1}⟩`;
-            const description = 'SWAP gate exchanges the states of the two qubits';
             
             results.innerHTML = `
                 <h4>SWAP Gate Transformation</h4>
                 <p><strong>Input:</strong> |${qubit1}${qubit2}⟩ (Qubit 1: |${qubit1}⟩, Qubit 2: |${qubit2}⟩)</p>
                 <p><strong>Output:</strong> ${outputState} (Qubit 1: |${qubit2}⟩, Qubit 2: |${qubit1}⟩)</p>
-                <p><strong>Description:</strong> ${description}</p>
+                <p><strong>Description:</strong> SWAP gate exchanges the quantum states of two qubits</p>
+                <p><strong>Implementation:</strong> Can be built from three CNOT gates</p>
+                <p><strong>Applications:</strong> Circuit routing, quantum algorithms, state transfer</p>
             `;
+        }
+
+        // Helper functions
+        function getStateLabel(value) {
+            switch(value) {
+                case 'plus': return '|+⟩';
+                case 'minus': return '|-⟩';
+                default: return '|' + value + '⟩';
+            }
+        }
+
+        function updateAngleDisplay() {
+            const angle = document.getElementById('rotation-angle').value;
+            document.getElementById('angle-display').textContent = parseFloat(angle).toFixed(3);
         }
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            // Add any initialization code here if needed
-            console.log('Quantum Gates tutorial loaded');
+            console.log('Enhanced Quantum Gates tutorial loaded with full simulator support');
+            updateAngleDisplay();
         });
     </script>
 </body>

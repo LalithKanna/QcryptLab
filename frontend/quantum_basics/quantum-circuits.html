@@ -10,66 +10,82 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        .circuit-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            color: white;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        .circuit-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: #ffffff;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .circuit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
         }
         
         .circuit-builder {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
         }
         
         .circuit-controls {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
         }
         
         .control-group {
-            margin-bottom: 15px;
+            margin-bottom: 1.5rem;
         }
         
         .control-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 0.8rem;
             font-weight: 600;
+            color: #e0e0e0;
+            font-size: 0.9rem;
         }
         
         .control-group input, .control-group select {
             width: 100%;
-            padding: 8px 12px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 6px;
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-family: var(--font-family);
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
         
         .control-group input:focus, .control-group select:focus {
             outline: none;
-            border-color: rgba(255,255,255,0.8);
+            border-color: rgba(102, 126, 234, 0.8);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
         }
         
         .circuit-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
+            gap: 1rem;
+            margin: 2rem 0;
         }
         
         .gate-button {
-            background: rgba(255,255,255,0.2);
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 8px;
-            padding: 12px 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 1rem 0.8rem;
             cursor: pointer;
             transition: all 0.3s ease;
             text-align: center;
@@ -79,50 +95,55 @@
         }
         
         .gate-button:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background: rgba(102, 126, 234, 0.3);
+            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.2);
         }
         
         .gate-button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
             transform: none;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .circuit-display {
-            background: rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
             min-height: 150px;
-            font-family: 'Courier New', monospace;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
         }
         
         .circuit-visualization {
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             text-align: center;
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
             line-height: 1.8;
         }
         
         .control-panel {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 20px 0;
+            gap: 1rem;
+            margin: 2rem 0;
         }
         
         .btn-simulate {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -131,7 +152,7 @@
         
         .btn-simulate:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
         
         .btn-simulate:disabled {
@@ -141,18 +162,20 @@
         }
         
         .results-display {
-            background: rgba(0,0,0,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.6;
         }
         
         .measurement-item {
             display: flex;
             align-items: center;
-            margin: 12px 0;
-            gap: 15px;
+            margin: 1rem 0;
+            gap: 1rem;
         }
         
         .measurement-item span {
@@ -162,101 +185,116 @@
         
         .probability-bar {
             flex: 1;
-            height: 20px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             overflow: hidden;
         }
         
         .probability-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4CAF50, #8BC34A);
-            border-radius: 10px;
-            transition: width 0.5s ease;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 12px;
+            transition: width 0.8s ease;
         }
         
         .algorithm-card {
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             position: relative;
         }
         
         .step-indicator {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            top: -15px;
+            left: -15px;
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 1rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         .circuit-status {
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 12px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
-            margin: 5px;
+            margin: 0.5rem;
         }
         
-        .status-ready { background: #4CAF50; }
-        .status-building { background: #FF9800; }
-        .status-error { background: #F44336; }
+        .status-ready { 
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+        }
+        .status-building { 
+            background: linear-gradient(135deg, #FF9800, #FF5722);
+            color: white;
+        }
+        .status-error { 
+            background: linear-gradient(135deg, #F44336, #E91E63);
+            color: white;
+        }
         
         .gate-info {
-            background: rgba(255,255,255,0.1);
-            border-radius: 6px;
-            padding: 8px 12px;
-            margin: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin: 0.5rem;
             display: inline-block;
             font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Enhanced styles for better visualization */
         .results-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            margin: 15px 0;
-            padding: 15px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
         }
 
         .counts-display {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 8px;
-            margin: 10px 0;
+            gap: 1rem;
+            margin: 1rem 0;
         }
 
         .count-item {
-            background: rgba(255,255,255,0.1);
-            padding: 8px 12px;
-            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
             text-align: center;
             font-family: 'JetBrains Mono', monospace;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .insights-list {
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .insights-list li {
-            margin: 8px 0;
-            padding-left: 20px;
+            margin: 1rem 0;
+            padding-left: 2rem;
             position: relative;
+            line-height: 1.6;
         }
 
         .insights-list li::before {
@@ -267,59 +305,65 @@
 
         .statevector-display {
             font-family: 'JetBrains Mono', monospace;
-            background: rgba(0,0,0,0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 10px 0;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .amplitude-item {
-            margin: 8px 0;
-            padding: 8px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .magnitude {
-            color: #ccc;
+            color: #b0b0b0;
             font-size: 0.9em;
         }
 
         .quantum-metrics {
-            background: rgba(255,255,255,0.1);
-            padding: 12px;
-            border-radius: 6px;
-            margin: 10px 0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .visualization-container {
-            margin: 20px 0;
-            padding: 15px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .visualization-container h6 {
-            margin: 0 0 15px 0;
-            color: #fff;
+            margin: 0 0 1.5rem 0;
+            color: #ffffff;
             font-weight: 600;
+            font-size: 1.1rem;
         }
 
         .count-label {
             font-size: 0.9em;
-            color: #ccc;
+            color: #b0b0b0;
             min-width: 80px;
         }
 
         .notification {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
 
         .loading-indicator {
             display: inline-block;
             width: 20px;
             height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
@@ -332,30 +376,95 @@
         .error-message {
             background: rgba(244, 67, 54, 0.1);
             border: 2px solid rgba(244, 67, 54, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
             color: #ffcdd2;
+            backdrop-filter: blur(10px);
         }
 
         .success-message {
             background: rgba(76, 175, 80, 0.1);
             border: 2px solid rgba(76, 175, 80, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
             color: #c8e6c9;
+            backdrop-filter: blur(10px);
         }
 
         .debug-info {
             background: rgba(33, 150, 243, 0.1);
             border: 2px solid rgba(33, 150, 243, 0.3);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
             color: #bbdefb;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.9em;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-description {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .circuit-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .circuit-card p {
+            color: #d0d0d0;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .measurement-results {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .measurement-results h4 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
         }
     </style>
 </head>
@@ -363,228 +472,261 @@
     <header class="main-header">
         <nav class="navbar">
             <div class="nav-container">
-                <h1 class="logo"><a href="../index.html">🔬 QuantumCrypto Tutorial</a></h1>
+                <h1 class="logo"><a href="../index.html">QuantumCrypto Tutorial</a></h1>
                 <ul class="nav-menu">
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="quantum-intro.html">Quantum Basics</a></li>
-                    <li><a href="quantum-circuits.html" class="active">Quantum Circuits</a></li>
-                    <li><a href="../bb84-protocol/bb84-tutorial.html">BB84 Protocol</a></li>
+                    <li><a href="qubits-tutorial.html">Qubits</a></li>
+                    <li><a href="quantum-gates.html">Gates</a></li>
+                    <li><a href="quantum-circuits.html" class="active">Circuits</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <main class="main-content">
-        <section class="hero-section">
-            <div class="hero-container">
-                <h2 class="hero-title">Interactive Quantum Circuit Builder</h2>
-                <p class="hero-subtitle">
+    <main class="lesson-content">
+        <div class="container">
+            <div class="lesson-header">
+                <h1>Interactive Quantum Circuit Builder</h1>
+                <p class="lesson-subtitle">
                     Build, simulate, and analyze quantum circuits with our advanced interactive tool. 
                     Learn about famous quantum algorithms, visualize quantum states, and understand measurement results.
                 </p>
             </div>
-        </section>
 
-        <section class="circuit-builder-section">
-            <div class="container">
-                <h2 class="section-title">Advanced Circuit Builder</h2>
-                <p class="section-description">
-                    Create quantum circuits by adding gates and simulate their behavior with enhanced visualizations. 
-                    Our simulator provides comprehensive analysis including Bloch sphere representations and educational insights.
-                </p>
-                
-                <div class="circuit-section">
-                    <h3>Circuit Controls</h3>
-                    <div class="circuit-controls">
-                        <div class="control-group">
-                            <label for="circuit-qubits">Number of Qubits:</label>
-                            <select id="circuit-qubits">
-                                <option value="1">1 Qubit</option>
-                                <option value="2" selected>2 Qubits</option>
-                                <option value="3">3 Qubits</option>
-                                <option value="4">4 Qubits</option>
-                                <option value="5">5 Qubits</option>
-                            </select>
-                        </div>
-                        <div class="control-group">
-                            <label for="circuit-shots">Number of Shots:</label>
-                            <input type="number" id="circuit-shots" value="1024" min="100" max="10000">
-                        </div>
-                        <div class="control-group">
-                            <label for="include-visualizations">Include Advanced Visualizations:</label>
-                            <select id="include-visualizations">
-                                <option value="true" selected>Yes (Recommended)</option>
-                                <option value="false">No (Faster)</option>
-                            </select>
-                        </div>
-                        <div class="control-group">
-                            <label for="debug-mode">Debug Mode:</label>
-                            <select id="debug-mode">
-                                <option value="false" selected>Off</option>
-                                <option value="true">On (Show Network Details)</option>
-                            </select>
-                        </div>
-                        <button class="btn-simulate" onclick="initializeCircuit()">Initialize Circuit</button>
-                    </div>
-                    
-                    <div class="circuit-builder">
-                        <h4>Available Quantum Gates</h4>
-                        <div class="circuit-grid">
-                            <div class="gate-button" onclick="addGate('X')" id="gate-X" title="Pauli-X (NOT) Gate">X Gate</div>
-                            <div class="gate-button" onclick="addGate('Y')" id="gate-Y" title="Pauli-Y Gate">Y Gate</div>
-                            <div class="gate-button" onclick="addGate('Z')" id="gate-Z" title="Pauli-Z Gate">Z Gate</div>
-                            <div class="gate-button" onclick="addGate('H')" id="gate-H" title="Hadamard Gate">H Gate</div>
-                            <div class="gate-button" onclick="addGate('S')" id="gate-S" title="S Phase Gate">S Gate</div>
-                            <div class="gate-button" onclick="addGate('T')" id="gate-T" title="T Gate">T Gate</div>
-                            <div class="gate-button" onclick="addGate('CNOT')" id="gate-CNOT" title="Controlled-NOT Gate">CNOT</div>
-                            <div class="gate-button" onclick="addGate('CZ')" id="gate-CZ" title="Controlled-Z Gate">CZ</div>
-                            <div class="gate-button" onclick="addGate('SWAP')" id="gate-SWAP" title="SWAP Gate">SWAP</div>
-                            <div class="gate-button" onclick="addGate('RX')" id="gate-RX" title="X-Rotation Gate">RX(π/2)</div>
-                            <div class="gate-button" onclick="addGate('RY')" id="gate-RY" title="Y-Rotation Gate">RY(π/2)</div>
-                            <div class="gate-button" onclick="addGate('RZ')" id="gate-RZ" title="Z-Rotation Gate">RZ(π/2)</div>
-                        </div>
-                        
-                        <div class="circuit-display" id="circuit-display">
-                            <p>Click "Initialize Circuit" to start building your quantum circuit...</p>
-                        </div>
-                        
-                        <div class="control-panel">
-                            <button class="btn-simulate" onclick="simulateCircuit()" id="simulate-btn" disabled>
-                                <span id="simulate-text">Simulate Circuit</span>
-                            </button>
-                            <button class="btn-simulate" onclick="clearCircuit()">Clear Circuit</button>
-                            <button class="btn-simulate" onclick="loadPreset('bell')">Load Bell State</button>
-                            <button class="btn-simulate" onclick="loadPreset('ghz')">Load GHZ State</button>
-                            <button class="btn-simulate" onclick="loadPreset('superposition')">Load Superposition</button>
-                            <button class="btn-simulate" onclick="testEndpoint()">Test API Endpoint</button>
-                        </div>
-                        
-                        <div class="results-display" id="circuit-results">
-                            <p>🔬 Circuit simulation results will appear here...</p>
-                        </div>
-                    </div>
+            <div class="lesson-navigation">
+                <div class="nav-item">
+                    <a href="quantum-intro.html">
+                        <span class="nav-number">01</span>
+                        <span class="nav-title">Introduction</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="qubits-tutorial.html">
+                        <span class="nav-number">02</span>
+                        <span class="nav-title">Qubits</span>
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="quantum-gates.html">
+                        <span class="nav-number">03</span>
+                        <span class="nav-title">Gates</span>
+                    </a>
+                </div>
+                <div class="nav-item current">
+                    <span class="nav-number">04</span>
+                    <span class="nav-title">Circuits</span>
                 </div>
             </div>
-        </section>
 
-        <section class="algorithms-section">
-            <div class="container">
-                <h2 class="section-title">Famous Quantum Circuits</h2>
-                <p class="section-description">
-                    Learn about important quantum circuits and algorithms that demonstrate 
-                    the power of quantum computing and form the foundation of quantum technologies.
-                </p>
-                
-                <div class="circuit-section">
-                    <h3>🔗 Bell State Circuit</h3>
-                    <p>The Bell state is a maximally entangled two-qubit state that demonstrates quantum entanglement - a key resource for quantum computing and quantum cryptography.</p>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">1</div>
-                        <strong>Apply Hadamard gate to first qubit:</strong> H|0⟩ = (|0⟩ + |1⟩)/√2 = |+⟩
-                        <div class="circuit-visualization">
-                            <p>H ────</p>
+            <article class="lesson-article">
+                <section class="content-section">
+                    <h2 class="section-title">Advanced Circuit Builder</h2>
+                    <p class="section-description">
+                        Create quantum circuits by adding gates and simulate their behavior with enhanced visualizations. 
+                        Our simulator provides comprehensive analysis including Bloch sphere representations and educational insights.
+                    </p>
+                    
+                    <div class="circuit-card">
+                        <h3>Circuit Controls</h3>
+                        <div class="circuit-controls">
+                            <div class="control-group">
+                                <label for="circuit-qubits">Number of Qubits:</label>
+                                <select id="circuit-qubits">
+                                    <option value="1">1 Qubit</option>
+                                    <option value="2" selected>2 Qubits</option>
+                                    <option value="3">3 Qubits</option>
+                                    <option value="4">4 Qubits</option>
+                                    <option value="5">5 Qubits</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="circuit-shots">Number of Shots:</label>
+                                <input type="number" id="circuit-shots" value="1024" min="100" max="10000">
+                            </div>
+                            <div class="control-group">
+                                <label for="include-visualizations">Include Advanced Visualizations:</label>
+                                <select id="include-visualizations">
+                                    <option value="true" selected>Yes (Recommended)</option>
+                                    <option value="false">No (Faster)</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label for="debug-mode">Debug Mode:</label>
+                                <select id="debug-mode">
+                                    <option value="false" selected>Off</option>
+                                    <option value="true">On (Show Network Details)</option>
+                                </select>
+                            </div>
+                            <button class="btn-simulate" onclick="initializeCircuit()">Initialize Circuit</button>
+                        </div>
+                        
+                        <div class="circuit-builder">
+                            <h4>Available Quantum Gates</h4>
+                            <div class="circuit-grid">
+                                <div class="gate-button" onclick="addGate('X')" id="gate-X" title="Pauli-X (NOT) Gate">X Gate</div>
+                                <div class="gate-button" onclick="addGate('Y')" id="gate-Y" title="Pauli-Y Gate">Y Gate</div>
+                                <div class="gate-button" onclick="addGate('Z')" id="gate-Z" title="Pauli-Z Gate">Z Gate</div>
+                                <div class="gate-button" onclick="addGate('H')" id="gate-H" title="Hadamard Gate">H Gate</div>
+                                <div class="gate-button" onclick="addGate('S')" id="gate-S" title="S Phase Gate">S Gate</div>
+                                <div class="gate-button" onclick="addGate('T')" id="gate-T" title="T Gate">T Gate</div>
+                                <div class="gate-button" onclick="addGate('CNOT')" id="gate-CNOT" title="Controlled-NOT Gate">CNOT</div>
+                                <div class="gate-button" onclick="addGate('CZ')" id="gate-CZ" title="Controlled-Z Gate">CZ</div>
+                                <div class="gate-button" onclick="addGate('SWAP')" id="gate-SWAP" title="SWAP Gate">SWAP</div>
+                                <div class="gate-button" onclick="addGate('RX')" id="gate-RX" title="X-Rotation Gate">RX(π/2)</div>
+                                <div class="gate-button" onclick="addGate('RY')" id="gate-RY" title="Y-Rotation Gate">RY(π/2)</div>
+                                <div class="gate-button" onclick="addGate('RZ')" id="gate-RZ" title="Z-Rotation Gate">RZ(π/2)</div>
+                            </div>
+                            
+                            <div class="circuit-display" id="circuit-display">
+                                <p>Click "Initialize Circuit" to start building your quantum circuit...</p>
+                            </div>
+                            
+                            <div class="control-panel">
+                                <button class="btn-simulate" onclick="simulateCircuit()" id="simulate-btn" disabled>
+                                    <span id="simulate-text">Simulate Circuit</span>
+                                </button>
+                                <button class="btn-simulate" onclick="clearCircuit()">Clear Circuit</button>
+                                <button class="btn-simulate" onclick="loadPreset('bell')">Load Bell State</button>
+                                <button class="btn-simulate" onclick="loadPreset('ghz')">Load GHZ State</button>
+                                <button class="btn-simulate" onclick="loadPreset('superposition')">Load Superposition</button>
+                                <button class="btn-simulate" onclick="testEndpoint()">Test API Endpoint</button>
+                            </div>
+                            
+                            <div class="results-display" id="circuit-results">
+                                <p>🔬 Circuit simulation results will appear here...</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">2</div>
-                        <strong>Apply CNOT gate with first qubit as control:</strong> Creates entanglement
-                        <div class="circuit-visualization">
-                            <p>H ────●────</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊕</p>
+                </section>
+
+                <section class="content-section">
+                    <h2 class="section-title">Famous Quantum Circuits</h2>
+                    <p class="section-description">
+                        Learn about important quantum circuits and algorithms that demonstrate 
+                        the power of quantum computing and form the foundation of quantum technologies.
+                    </p>
+                    
+                    <div class="circuit-card">
+                        <h3>🔗 Bell State Circuit</h3>
+                        <p>The Bell state is a maximally entangled two-qubit state that demonstrates quantum entanglement - a key resource for quantum computing and quantum cryptography.</p>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">1</div>
+                            <strong>Apply Hadamard gate to first qubit:</strong> H|0⟩ = (|0⟩ + |1⟩)/√2 = |+⟩
+                            <div class="circuit-visualization">
+                                <p>H ────</p>
+                            </div>
+                        </div>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">2</div>
+                            <strong>Apply CNOT gate with first qubit as control:</strong> Creates entanglement
+                            <div class="circuit-visualization">
+                                <p>H ────●────</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊕</p>
+                            </div>
+                        </div>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">3</div>
+                            <strong>Result:</strong> |Φ+⟩ = (|00⟩ + |11⟩)/√2 - Perfect correlation!
+                            <div class="measurement-results" id="bell-results">
+                                <p>Click "Load Bell State" to see the measurement results and visualizations...</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">3</div>
-                        <strong>Result:</strong> |Φ+⟩ = (|00⟩ + |11⟩)/√2 - Perfect correlation!
-                        <div class="measurement-results" id="bell-results">
-                            <p>Click "Load Bell State" to see the measurement results and visualizations...</p>
+
+                    <div class="circuit-card">
+                        <h3>🌐 GHZ State Circuit</h3>
+                        <p>The GHZ (Greenberger-Horne-Zeilinger) state is a three-qubit entangled state that demonstrates multipartite quantum entanglement.</p>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">1</div>
+                            <strong>Apply Hadamard gate to first qubit:</strong> Creates superposition
+                        </div>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">2</div>
+                            <strong>Apply CNOT gates to create entanglement:</strong>
+                            <div class="circuit-visualization">
+                                <p>H ────●────●────</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;│</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊕&nbsp;&nbsp;&nbsp;&nbsp;│</p>
+                                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊕</p>
+                            </div>
+                        </div>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">3</div>
+                            <strong>Result:</strong> |GHZ⟩ = (|000⟩ + |111⟩)/√2 - Three-way entanglement!
+                            <div class="measurement-results" id="ghz-results">
+                                <p>Click "Load GHZ State" to see the measurement results and analysis...</p>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="circuit-card">
+                        <h3>🌊 Quantum Fourier Transform</h3>
+                        <p>The Quantum Fourier Transform is a key component in many quantum algorithms, including Shor's factoring algorithm.</p>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">1</div>
+                            <strong>Apply Hadamard gates to create superposition</strong>
+                        </div>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">2</div>
+                            <strong>Apply controlled phase rotations for interference</strong>
+                        </div>
+                        <div class="algorithm-card">
+                            <div class="step-indicator">3</div>
+                            <strong>Apply SWAP gates to reverse qubit order</strong>
+                        </div>
+                        <div class="measurement-results" id="qft-results">
+                            <p>QFT transforms computational basis states to Fourier basis states, enabling efficient period-finding algorithms.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="content-section">
+                    <h2 class="section-title">📊 Measurement and Results Analysis</h2>
+                    <p class="section-description">
+                        Understanding quantum measurements and interpreting results is crucial for quantum computing. 
+                        Our simulator provides comprehensive analysis and educational insights.
+                    </p>
+                    
+                    <div class="circuit-card">
+                        <h3>📈 Measurement Statistics</h3>
+                        <p>Quantum measurements are probabilistic. Multiple measurements (shots) 
+                        help us understand the probability distribution of outcomes and verify theoretical predictions.</p>
+                        
+                        <div class="measurement-results" id="measurement-stats">
+                            <h4>🎯 Measurement Results Visualization</h4>
+                            <div id="probability-bars">
+                                <p>Run a circuit simulation to see detailed measurement statistics with probability bars...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="circuit-card">
+                        <h3>🔢 Quantum State Vector Analysis</h3>
+                        <p>For small circuits, we can compute the exact quantum state vector and visualize it on the Bloch sphere for single qubits.</p>
+                        
+                        <div class="measurement-results" id="state-vector">
+                            <h4>🌐 Quantum State Information</h4>
+                            <p>State vector information and Bloch sphere visualizations will appear here after simulation...</p>
+                        </div>
+                    </div>
+                </section>
+            </article>
+
+            <div class="lesson-footer">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
                 </div>
-
-                <div class="circuit-section">
-                    <h3>🌐 GHZ State Circuit</h3>
-                    <p>The GHZ (Greenberger-Horne-Zeilinger) state is a three-qubit entangled state that demonstrates multipartite quantum entanglement.</p>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">1</div>
-                        <strong>Apply Hadamard gate to first qubit:</strong> Creates superposition
-                    </div>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">2</div>
-                        <strong>Apply CNOT gates to create entanglement:</strong>
-                        <div class="circuit-visualization">
-                            <p>H ────●────●────</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;│</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊕&nbsp;&nbsp;&nbsp;&nbsp;│</p>
-                            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⊕</p>
-                        </div>
-                    </div>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">3</div>
-                        <strong>Result:</strong> |GHZ⟩ = (|000⟩ + |111⟩)/√2 - Three-way entanglement!
-                        <div class="measurement-results" id="ghz-results">
-                            <p>Click "Load GHZ State" to see the measurement results and analysis...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="circuit-section">
-                    <h3>🌊 Quantum Fourier Transform</h3>
-                    <p>The Quantum Fourier Transform is a key component in many quantum algorithms, including Shor's factoring algorithm.</p>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">1</div>
-                        <strong>Apply Hadamard gates to create superposition</strong>
-                    </div>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">2</div>
-                        <strong>Apply controlled phase rotations for interference</strong>
-                    </div>
-                    <div class="algorithm-card">
-                        <div class="step-indicator">3</div>
-                        <strong>Apply SWAP gates to reverse qubit order</strong>
-                    </div>
-                    <div class="measurement-results" id="qft-results">
-                        <p>QFT transforms computational basis states to Fourier basis states, enabling efficient period-finding algorithms.</p>
-                    </div>
+                <div class="lesson-actions">
+                    <a href="quantum-gates.html" class="btn btn-outline">← Back to Gates</a>
+                    <a href="../bb84-protocol/bb84-tutorial.html" class="btn btn-primary">Next: BB84 Protocol →</a>
                 </div>
             </div>
-        </section>
-
-        <section class="measurement-section">
-            <div class="container">
-                <h2 class="section-title">📊 Measurement and Results Analysis</h2>
-                <p class="section-description">
-                    Understanding quantum measurements and interpreting results is crucial for quantum computing. 
-                    Our simulator provides comprehensive analysis and educational insights.
-                </p>
-                
-                <div class="circuit-section">
-                    <h3>📈 Measurement Statistics</h3>
-                    <p>Quantum measurements are probabilistic. Multiple measurements (shots) 
-                    help us understand the probability distribution of outcomes and verify theoretical predictions.</p>
-                    
-                    <div class="measurement-results" id="measurement-stats">
-                        <h4>🎯 Measurement Results Visualization</h4>
-                        <div id="probability-bars">
-                            <p>Run a circuit simulation to see detailed measurement statistics with probability bars...</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="circuit-section">
-                    <h3>🔢 Quantum State Vector Analysis</h3>
-                    <p>For small circuits, we can compute the exact quantum state vector and visualize it on the Bloch sphere for single qubits.</p>
-                    
-                    <div class="measurement-results" id="state-vector">
-                        <h4>🌐 Quantum State Information</h4>
-                        <p>State vector information and Bloch sphere visualizations will appear here after simulation...</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 
+    <script src="../js/main.js"></script>
     <script>
         // Enhanced Quantum Circuit Client with improved error handling
         class QuantumCircuitApp {
@@ -1211,7 +1353,7 @@
                     top: '20px',
                     right: '20px',
                     padding: '15px 20px',
-                    borderRadius: '8px',
+                    borderRadius: '12px',
                     color: 'white',
                     fontWeight: '600',
                     zIndex: '1000',
@@ -1219,14 +1361,15 @@
                     transition: 'transform 0.3s ease',
                     maxWidth: '350px',
                     wordWrap: 'break-word',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+                    boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
+                    backdropFilter: 'blur(10px)'
                 });
                 
                 const colors = {
-                    'success': '#4CAF50',
-                    'error': '#F44336',
-                    'warning': '#FF9800',
-                    'info': '#2196F3'
+                    'success': 'linear-gradient(135deg, #4CAF50, #8BC34A)',
+                    'error': 'linear-gradient(135deg, #F44336, #E91E63)',
+                    'warning': 'linear-gradient(135deg, #FF9800, #FF5722)',
+                    'info': 'linear-gradient(135deg, #2196F3, #21CBF3)'
                 };
                 notification.style.background = colors[type] || colors.info;
                 
@@ -1254,6 +1397,7 @@
         // Initialize display on page load
         document.addEventListener('DOMContentLoaded', function() {
             quantumApp.updateCircuitDisplay();
+            console.log('Quantum Circuits tutorial loaded');
         });
     </script>
 </body>

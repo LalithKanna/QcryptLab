@@ -308,7 +308,7 @@ class EnhancedQuantumCircuitSimulator:
             return {
                 'simulation_metadata': {
                     'timestamp': datetime.datetime.now().isoformat(),
-                    'backend': 'Enhanced Qiskit',
+                    'backend': 'Qiskit',
                     'num_qubits': num_qubits,
                     'shots': shots,
                     'circuit_depth': qc.depth(),

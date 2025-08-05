@@ -62,9 +62,10 @@ quantum-crypto-tutorial/
 │   ├── app.py                        # Main Flask application
 │   ├── quantum_simulator/            # Quantum simulation modules
 │   │   ├── __init__.py
-│   │   ├── circuit_simulator.py      # Qiskit-based circuit simulation
-│   │   ├── state_visualizer.py       # Bloch sphere generation
-│   │   └── advanced_simulator.py     # QuTiP integration
+│   │   ├── enhanced_quantum_circuit_simulator.py # Qiskit-based circuit simulation
+│   │   ├── state_visualizer.py                   # Statevector calculations
+│   │   ├── advanced_simulator.py                 # QuTiP integration
+│   │   └── bloch_sphere_visualizer.py            # Bloch sphere visualization
 │   ├── cryptography/                 # Quantum cryptography implementations
 │   │   ├── __init__.py
 │   │   ├── bb84_protocol.py          # Complete BB84 implementation

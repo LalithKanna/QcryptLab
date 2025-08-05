@@ -5931,3 +5931,335 @@ TypeError: Object of type bool_ is not JSON serializable
 2025-08-04 16:28:55,536 - backend.app - INFO - BB84 protocol simulation completed successfully
 2025-08-04 16:28:55,541 - werkzeug - INFO - 172.16.1.158 - - [04/Aug/2025 16:28:55] "POST /api/bb84/simulate HTTP/1.1" 200 -
 2025-08-04 16:28:55,546 - werkzeug - INFO - 172.16.1.158 - - [04/Aug/2025 16:28:55] "POST /api/bb84/simulate HTTP/1.1" 200 -
+2025-08-04 22:01:50,196 - backend.app - INFO - Successfully initialized EnhancedQuantumCircuitSimulator
+2025-08-04 22:01:50,196 - backend.quantum_simulator.state_visualizer - INFO - QuTiP detected – enabling QuTiP backend.
+2025-08-04 22:01:50,198 - backend.app - INFO - Successfully initialized BlochSphereVisualizer
+2025-08-04 22:01:50,198 - backend.app - INFO - Successfully initialized AdvancedQuantumSimulator
+2025-08-04 22:01:50,202 - backend.cryptography.bb84_protocol - INFO - QuTiP operators initialized successfully
+2025-08-04 22:01:50,204 - backend.app - INFO - Successfully initialized BB84Protocol
+2025-08-04 22:01:50,204 - backend.app - INFO - Successfully initialized QuantumChannel
+2025-08-04 22:01:50,204 - backend.app - INFO - Successfully initialized QKDSecurityAnalyzer
+2025-08-04 22:01:50,204 - backend.app - INFO - Successfully initialized ImageGenerator
+2025-08-04 22:01:50,204 - backend.app - INFO - Successfully initialized DataValidator
+2025-08-04 22:01:50,349 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.2:5000
+2025-08-04 22:01:50,350 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-04 22:01:50,355 - werkzeug - INFO -  * Restarting with stat
+2025-08-04 22:01:56,023 - backend.app - INFO - Successfully initialized EnhancedQuantumCircuitSimulator
+2025-08-04 22:01:56,023 - backend.quantum_simulator.state_visualizer - INFO - QuTiP detected – enabling QuTiP backend.
+2025-08-04 22:01:56,024 - backend.app - INFO - Successfully initialized BlochSphereVisualizer
+2025-08-04 22:01:56,024 - backend.app - INFO - Successfully initialized AdvancedQuantumSimulator
+2025-08-04 22:01:56,030 - backend.cryptography.bb84_protocol - INFO - QuTiP operators initialized successfully
+2025-08-04 22:01:56,031 - backend.app - INFO - Successfully initialized BB84Protocol
+2025-08-04 22:01:56,033 - backend.app - INFO - Successfully initialized QuantumChannel
+2025-08-04 22:01:56,034 - backend.app - INFO - Successfully initialized QKDSecurityAnalyzer
+2025-08-04 22:01:56,035 - backend.app - INFO - Successfully initialized ImageGenerator
+2025-08-04 22:01:56,036 - backend.app - INFO - Successfully initialized DataValidator
+2025-08-04 22:01:56,088 - werkzeug - WARNING -  * Debugger is active!
+2025-08-04 22:01:56,114 - werkzeug - INFO -  * Debugger PIN: 999-569-316
+2025-08-04 22:03:57,451 - backend.app - INFO - Serving main index page
+2025-08-04 22:03:57,644 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:03:57] "GET / HTTP/1.1" 200 -
+2025-08-04 22:03:58,085 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:03:58] "GET /css/quantum-visualizations.css HTTP/1.1" 200 -
+2025-08-04 22:03:58,089 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:03:58] "GET /css/styles.css HTTP/1.1" 200 -
+2025-08-04 22:03:58,136 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:03:58] "GET /js/main.js HTTP/1.1" 200 -
+2025-08-04 22:03:59,282 - backend.app - WARNING - 404 error: http://192.168.1.2:5000/favicon.ico
+2025-08-04 22:03:59,283 - backend.app - ERROR - API Error (404): Resource not found
+2025-08-04 22:03:59,284 - backend.app - ERROR - Error details: The requested endpoint http://192.168.1.2:5000/favicon.ico does not exist
+2025-08-04 22:03:59,285 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:03:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-04 22:04:00,963 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:04:00] "GET /quantum_basics/quantum-intro.html HTTP/1.1" 200 -
+2025-08-04 22:04:00,985 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:04:00] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:04:00,991 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:04:00] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:04:00,996 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:04:00] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:06:25,781 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:25] "GET /quantum_basics/qubits-tutorial.html HTTP/1.1" 200 -
+2025-08-04 22:06:25,811 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:25] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:06:25,814 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:25] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:06:25,820 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:25] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:06:26,137 - backend.app - INFO - Starting Bloch sphere visualization request
+2025-08-04 22:06:26,138 - backend.app - INFO - Received request data: {'theta': 1.5707963267948966, 'phi': 0, 'size': {'width': 400, 'height': 400}, 'show_state_info': True, 'style_theme': 'educational'}
+2025-08-04 22:06:26,140 - backend.app - INFO - Extracted parameters: title='Quantum State', show_state_info=True
+2025-08-04 22:06:26,141 - backend.app - INFO - Converted spherical coordinates (theta=1.571, phi=0.000) to statevector
+2025-08-04 22:06:26,141 - backend.app - INFO - Applied style theme: educational
+2025-08-04 22:06:26,142 - backend.app - INFO - Generating Bloch sphere visualization...
+2025-08-04 22:06:26,153 - backend.quantum_simulator.state_visualizer - WARNING - QuTiP rendering failed – switching to Matplotlib fallback ('NoneType' object has no attribute 'suptitle')
+2025-08-04 22:06:28,923 - backend.app - INFO - Successfully generated Bloch sphere image
+2025-08-04 22:06:28,923 - backend.app - INFO - Analyzing quantum state properties...
+2025-08-04 22:06:28,923 - backend.app - INFO - Successfully analyzed state properties
+2025-08-04 22:06:28,923 - backend.app - INFO - Response data serialization test passed
+2025-08-04 22:06:28,923 - backend.app - INFO - Successfully created response data structure
+2025-08-04 22:06:28,923 - backend.app - INFO - Successfully completed Bloch sphere visualization request
+2025-08-04 22:06:28,941 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:28] "POST /api/visualize-bloch HTTP/1.1" 200 -
+2025-08-04 22:06:47,479 - backend.app - INFO - Starting Bloch sphere visualization request
+2025-08-04 22:06:47,480 - backend.app - INFO - Received request data: {'theta': 1.5707963267948966, 'phi': 0, 'size': {'width': 400, 'height': 400}, 'show_state_info': True, 'style_theme': 'educational'}
+2025-08-04 22:06:47,482 - backend.app - INFO - Extracted parameters: title='Quantum State', show_state_info=True
+2025-08-04 22:06:47,482 - backend.app - INFO - Converted spherical coordinates (theta=1.571, phi=0.000) to statevector
+2025-08-04 22:06:47,484 - backend.app - INFO - Applied style theme: educational
+2025-08-04 22:06:47,485 - backend.app - INFO - Generating Bloch sphere visualization...
+2025-08-04 22:06:47,490 - backend.quantum_simulator.state_visualizer - WARNING - QuTiP rendering failed – switching to Matplotlib fallback ('NoneType' object has no attribute 'suptitle')
+2025-08-04 22:06:49,464 - backend.app - INFO - Successfully generated Bloch sphere image
+2025-08-04 22:06:49,466 - backend.app - INFO - Analyzing quantum state properties...
+2025-08-04 22:06:49,468 - backend.app - INFO - Successfully analyzed state properties
+2025-08-04 22:06:49,472 - backend.app - INFO - Response data serialization test passed
+2025-08-04 22:06:49,474 - backend.app - INFO - Successfully created response data structure
+2025-08-04 22:06:49,478 - backend.app - INFO - Successfully completed Bloch sphere visualization request
+2025-08-04 22:06:49,484 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:49] "POST /api/visualize-bloch HTTP/1.1" 200 -
+2025-08-04 22:06:54,147 - backend.app - INFO - Starting Bloch sphere visualization request
+2025-08-04 22:06:54,148 - backend.app - INFO - Received request data: {'theta': 1.5707963267948966, 'phi': 0.8552113334772214, 'size': {'width': 400, 'height': 400}, 'show_state_info': True, 'style_theme': 'educational'}
+2025-08-04 22:06:54,150 - backend.app - INFO - Extracted parameters: title='Quantum State', show_state_info=True
+2025-08-04 22:06:54,151 - backend.app - INFO - Converted spherical coordinates (theta=1.571, phi=0.855) to statevector
+2025-08-04 22:06:54,152 - backend.app - INFO - Applied style theme: educational
+2025-08-04 22:06:54,153 - backend.app - INFO - Generating Bloch sphere visualization...
+2025-08-04 22:06:54,159 - backend.quantum_simulator.state_visualizer - WARNING - QuTiP rendering failed – switching to Matplotlib fallback ('NoneType' object has no attribute 'suptitle')
+2025-08-04 22:06:56,393 - backend.app - INFO - Successfully generated Bloch sphere image
+2025-08-04 22:06:56,395 - backend.app - INFO - Analyzing quantum state properties...
+2025-08-04 22:06:56,395 - backend.app - INFO - Successfully analyzed state properties
+2025-08-04 22:06:56,400 - backend.app - INFO - Response data serialization test passed
+2025-08-04 22:06:56,400 - backend.app - INFO - Successfully created response data structure
+2025-08-04 22:06:56,402 - backend.app - INFO - Successfully completed Bloch sphere visualization request
+2025-08-04 22:06:56,404 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:06:56] "POST /api/visualize-bloch HTTP/1.1" 200 -
+2025-08-04 22:08:24,993 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:24] "GET /quantum_basics/quantum-gates.html HTTP/1.1" 200 -
+2025-08-04 22:08:25,016 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:25] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:08:25,021 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:25] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:08:35,734 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:35] "GET /quantum_basics/quantum-circuits.html HTTP/1.1" 200 -
+2025-08-04 22:08:35,760 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:35] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:08:35,763 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:35] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:08:43,973 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-04 22:08:43,974 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 1, 'gates': [{'type': 'H', 'qubit': 0}], 'shots': 1024, 'include_statevector': True, 'include_bloch_sphere': True}
+2025-08-04 22:08:43,976 - backend.app - INFO - Simulating circuit: 1 qubits, 1 gates, 1024 shots
+2025-08-04 22:08:44,177 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Circuit diagram generation failed: "The 'pylatexenc' library is required to use 'MatplotlibDrawer'. You can install it with 'pip install pylatexenc'."
+2025-08-04 22:08:44,304 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '1 0'
+2025-08-04 22:08:49,011 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-04 22:08:49,011 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-04 22:08:49,011 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-04 22:08:49,026 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:08:49] "POST /api/simulate-circuit HTTP/1.1" 200 -
+2025-08-04 22:10:38,855 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-04 22:10:38,857 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 5, 'gates': [{'type': 'X', 'qubit': 0}, {'type': 'Y', 'qubit': 0}, {'type': 'Z', 'qubit': 0}, {'type': 'H', 'qubit': 0}, {'type': 'S', 'qubit': 0}], 'shots': 1024, 'include_statevector': True, 'include_bloch_sphere': True}
+2025-08-04 22:10:38,858 - backend.app - INFO - Simulating circuit: 5 qubits, 5 gates, 1024 shots
+2025-08-04 22:10:38,971 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Circuit diagram generation failed: "The 'pylatexenc' library is required to use 'MatplotlibDrawer'. You can install it with 'pip install pylatexenc'."
+2025-08-04 22:10:39,067 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '00000 00000'
+2025-08-04 22:10:46,523 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-04 22:10:46,523 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-04 22:10:46,523 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-04 22:10:46,539 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:10:46] "POST /api/simulate-circuit HTTP/1.1" 200 -
+2025-08-04 22:11:15,239 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:15] "[36mGET /quantum_basics/quantum-circuits.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:15,278 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:15] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:15,278 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:15] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:17,117 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:17] "[36mGET /quantum_basics/quantum-intro.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:17,151 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:17] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:17,156 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:17] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:17,163 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:17] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:11:22,654 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:22] "[36mGET /quantum_basics/quantum-gates.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:22,688 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:22] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:22,695 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:22] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:29,170 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:29] "[36mGET /quantum_basics/quantum-circuits.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:29,204 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:29] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:29,207 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:29] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:30,733 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:30] "[36mGET /quantum_basics/quantum-circuits.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:30,777 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:30] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:30,781 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:30] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:32,183 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:32] "GET /index.html HTTP/1.1" 200 -
+2025-08-04 22:11:32,219 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:32] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:32,225 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:32] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:32,228 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:32] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:11:33,948 - backend.app - INFO - Serving BB84 protocol page: bb84-tutorial.html
+2025-08-04 22:11:34,087 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:34] "GET /bb84-protocol/bb84-tutorial.html HTTP/1.1" 200 -
+2025-08-04 22:11:34,127 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:34] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:34,128 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:34] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:34,820 - werkzeug - INFO - 127.0.0.1 - - [04/Aug/2025 22:11:34] "GET /api/health HTTP/1.1" 200 -
+2025-08-04 22:11:44,648 - backend.app - INFO - Serving quantum basics page: quantum-intro.html
+2025-08-04 22:11:44,652 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:44] "GET /quantum-basics/quantum-intro.html HTTP/1.1" 200 -
+2025-08-04 22:11:44,692 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:44] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:44,692 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:44] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:44,704 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:44] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:11:46,462 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:46] "[36mGET /index.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:46,501 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:46] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:46,502 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:46] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:46,508 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:46] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:11:50,130 - backend.app - INFO - Serving BB84 protocol page: bb84-simulator.html
+2025-08-04 22:11:50,132 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "GET /bb84-protocol/bb84-simulator.html HTTP/1.1" 200 -
+2025-08-04 22:11:50,168 - backend.app - INFO - Serving BB84 protocol page: bb84-interface.css
+2025-08-04 22:11:50,186 - backend.app - INFO - Serving BB84 protocol page: bb84-simulator.js
+2025-08-04 22:11:50,186 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:50,196 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:50,209 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "GET /bb84-protocol/bb84-interface.css HTTP/1.1" 200 -
+2025-08-04 22:11:50,269 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "GET /js/bloch-sphere.js HTTP/1.1" 200 -
+2025-08-04 22:11:50,296 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "GET /js/quantum-visualizer.js HTTP/1.1" 200 -
+2025-08-04 22:11:50,307 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:50] "GET /bb84-protocol/bb84-simulator.js HTTP/1.1" 200 -
+2025-08-04 22:11:50,522 - backend.app - INFO - Starting Bloch sphere visualization request
+2025-08-04 22:11:50,522 - backend.app - INFO - Received request data: {'theta': 0, 'phi': 0, 'show_state_info': True, 'bb84_context': None, 'style_theme': 'educational'}
+2025-08-04 22:11:50,522 - backend.app - INFO - Extracted parameters: title='Quantum State', show_state_info=True
+2025-08-04 22:11:50,522 - backend.app - INFO - Converted spherical coordinates (theta=0.000, phi=0.000) to statevector
+2025-08-04 22:11:50,536 - backend.app - INFO - Applied style theme: educational
+2025-08-04 22:11:50,537 - backend.app - INFO - Generating Bloch sphere visualization...
+2025-08-04 22:11:50,548 - backend.quantum_simulator.state_visualizer - WARNING - QuTiP rendering failed – switching to Matplotlib fallback ('NoneType' object has no attribute 'suptitle')
+2025-08-04 22:11:51,556 - backend.app - INFO - Starting Bloch sphere visualization request
+2025-08-04 22:11:51,559 - backend.app - INFO - Received request data: {'theta': 0, 'phi': 0, 'show_state_info': True, 'bb84_context': None, 'style_theme': 'educational'}
+2025-08-04 22:11:51,564 - backend.app - INFO - Extracted parameters: title='Quantum State', show_state_info=True
+2025-08-04 22:11:51,567 - backend.app - INFO - Converted spherical coordinates (theta=0.000, phi=0.000) to statevector
+2025-08-04 22:11:51,572 - backend.app - INFO - Applied style theme: educational
+2025-08-04 22:11:51,576 - backend.app - INFO - Generating Bloch sphere visualization...
+2025-08-04 22:11:51,596 - backend.quantum_simulator.state_visualizer - WARNING - QuTiP rendering failed – switching to Matplotlib fallback ('NoneType' object has no attribute 'suptitle')
+2025-08-04 22:11:53,989 - backend.app - INFO - Successfully generated Bloch sphere image
+2025-08-04 22:11:54,003 - backend.app - INFO - Analyzing quantum state properties...
+2025-08-04 22:11:54,053 - backend.app - INFO - Successfully analyzed state properties
+2025-08-04 22:11:54,088 - backend.app - INFO - Response data serialization test passed
+2025-08-04 22:11:54,095 - backend.app - INFO - Successfully created response data structure
+2025-08-04 22:11:54,114 - backend.app - INFO - Successfully completed Bloch sphere visualization request
+2025-08-04 22:11:54,127 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:54] "POST /api/visualize-bloch HTTP/1.1" 200 -
+2025-08-04 22:11:55,232 - backend.app - INFO - Successfully generated Bloch sphere image
+2025-08-04 22:11:55,244 - backend.app - INFO - Analyzing quantum state properties...
+2025-08-04 22:11:55,244 - backend.app - INFO - Successfully analyzed state properties
+2025-08-04 22:11:55,244 - backend.app - INFO - Response data serialization test passed
+2025-08-04 22:11:55,244 - backend.app - INFO - Successfully created response data structure
+2025-08-04 22:11:55,244 - backend.app - INFO - Successfully completed Bloch sphere visualization request
+2025-08-04 22:11:55,260 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:55] "POST /api/visualize-bloch HTTP/1.1" 200 -
+2025-08-04 22:11:59,275 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:59] "[36mGET /index.html HTTP/1.1[0m" 304 -
+2025-08-04 22:11:59,322 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:59] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:59,323 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:59] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:11:59,327 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:11:59] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:12:07,443 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:07] "[36mGET /quantum_basics/quantum-intro.html HTTP/1.1[0m" 304 -
+2025-08-04 22:12:07,486 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:07] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:07,488 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:07] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:07,492 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:07] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:12:08,969 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:08] "[36mGET /quantum_basics/qubits-tutorial.html HTTP/1.1[0m" 304 -
+2025-08-04 22:12:09,017 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:09] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:09,018 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:09] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:09,020 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:09] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-04 22:12:09,045 - backend.app - INFO - Starting Bloch sphere visualization request
+2025-08-04 22:12:09,045 - backend.app - INFO - Received request data: {'theta': 1.5707963267948966, 'phi': 0, 'size': {'width': 400, 'height': 400}, 'show_state_info': True, 'style_theme': 'educational'}
+2025-08-04 22:12:09,047 - backend.app - INFO - Extracted parameters: title='Quantum State', show_state_info=True
+2025-08-04 22:12:09,049 - backend.app - INFO - Converted spherical coordinates (theta=1.571, phi=0.000) to statevector
+2025-08-04 22:12:09,051 - backend.app - INFO - Applied style theme: educational
+2025-08-04 22:12:09,051 - backend.app - INFO - Generating Bloch sphere visualization...
+2025-08-04 22:12:09,059 - backend.quantum_simulator.state_visualizer - WARNING - QuTiP rendering failed – switching to Matplotlib fallback ('NoneType' object has no attribute 'suptitle')
+2025-08-04 22:12:10,984 - backend.app - INFO - Successfully generated Bloch sphere image
+2025-08-04 22:12:10,985 - backend.app - INFO - Analyzing quantum state properties...
+2025-08-04 22:12:10,985 - backend.app - INFO - Successfully analyzed state properties
+2025-08-04 22:12:10,985 - backend.app - INFO - Response data serialization test passed
+2025-08-04 22:12:10,985 - backend.app - INFO - Successfully created response data structure
+2025-08-04 22:12:10,992 - backend.app - INFO - Successfully completed Bloch sphere visualization request
+2025-08-04 22:12:10,992 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:10] "POST /api/visualize-bloch HTTP/1.1" 200 -
+2025-08-04 22:12:12,912 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:12] "[36mGET /quantum_basics/quantum-gates.html HTTP/1.1[0m" 304 -
+2025-08-04 22:12:12,946 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:12] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:12,948 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:12] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:23,623 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:23] "[36mGET /quantum_basics/quantum-circuits.html HTTP/1.1[0m" 304 -
+2025-08-04 22:12:23,662 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:23] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:23,665 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:23] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-04 22:12:32,877 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-04 22:12:32,878 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 1, 'gates': [{'type': 'H', 'qubit': 0}], 'shots': 1024, 'include_statevector': True, 'include_bloch_sphere': True}
+2025-08-04 22:12:32,879 - backend.app - INFO - Simulating circuit: 1 qubits, 1 gates, 1024 shots
+2025-08-04 22:12:32,977 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Circuit diagram generation failed: "The 'pylatexenc' library is required to use 'MatplotlibDrawer'. You can install it with 'pip install pylatexenc'."
+2025-08-04 22:12:33,065 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '0 0'
+2025-08-04 22:12:37,665 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-04 22:12:37,665 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-04 22:12:37,665 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-04 22:12:37,681 - werkzeug - INFO - 192.168.1.2 - - [04/Aug/2025 22:12:37] "POST /api/simulate-circuit HTTP/1.1" 200 -
+2025-08-05 08:53:56,070 - backend.app - INFO - Successfully initialized EnhancedQuantumCircuitSimulator
+2025-08-05 08:53:56,070 - backend.quantum_simulator.state_visualizer - INFO - QuTiP detected – enabling QuTiP backend.
+2025-08-05 08:53:56,070 - backend.app - INFO - Successfully initialized BlochSphereVisualizer
+2025-08-05 08:53:56,098 - backend.app - INFO - Successfully initialized AdvancedQuantumSimulator
+2025-08-05 08:53:56,100 - backend.cryptography.bb84_protocol - INFO - QuTiP operators initialized successfully
+2025-08-05 08:53:56,100 - backend.app - INFO - Successfully initialized BB84Protocol
+2025-08-05 08:53:56,100 - backend.app - INFO - Successfully initialized QuantumChannel
+2025-08-05 08:53:56,100 - backend.app - INFO - Successfully initialized QKDSecurityAnalyzer
+2025-08-05 08:53:56,100 - backend.app - INFO - Successfully initialized ImageGenerator
+2025-08-05 08:53:56,100 - backend.app - INFO - Successfully initialized DataValidator
+2025-08-05 08:53:56,245 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.16.1.158:5000
+2025-08-05 08:53:56,245 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 08:53:56,303 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized EnhancedQuantumCircuitSimulator
+2025-08-05 08:54:05,143 - backend.quantum_simulator.state_visualizer - INFO - QuTiP detected – enabling QuTiP backend.
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized BlochSphereVisualizer
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized AdvancedQuantumSimulator
+2025-08-05 08:54:05,143 - backend.cryptography.bb84_protocol - INFO - QuTiP operators initialized successfully
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized BB84Protocol
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized QuantumChannel
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized QKDSecurityAnalyzer
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized ImageGenerator
+2025-08-05 08:54:05,143 - backend.app - INFO - Successfully initialized DataValidator
+2025-08-05 08:54:05,229 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 08:54:05,254 - werkzeug - INFO -  * Debugger PIN: 128-801-660
+2025-08-05 08:54:50,831 - backend.app - INFO - Serving main index page
+2025-08-05 08:54:51,077 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:51] "[36mGET / HTTP/1.1[0m" 304 -
+2025-08-05 08:54:51,319 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:51] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-05 08:54:51,319 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:51] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-05 08:54:51,493 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:51] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-05 08:54:52,069 - backend.app - WARNING - 404 error: http://172.16.1.158:5000/favicon.ico
+2025-08-05 08:54:52,069 - backend.app - ERROR - API Error (404): Resource not found
+2025-08-05 08:54:52,069 - backend.app - ERROR - Error details: The requested endpoint http://172.16.1.158:5000/favicon.ico does not exist
+2025-08-05 08:54:52,071 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 08:54:59,123 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:59] "[36mGET /quantum_basics/quantum-intro.html HTTP/1.1[0m" 304 -
+2025-08-05 08:54:59,152 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:59] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-05 08:54:59,156 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:59] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-05 08:54:59,178 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:54:59] "[36mGET /js/main.js HTTP/1.1[0m" 304 -
+2025-08-05 08:55:00,965 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:55:00] "[36mGET /quantum_basics/quantum-circuits.html HTTP/1.1[0m" 304 -
+2025-08-05 08:55:00,998 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:55:00] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+2025-08-05 08:55:01,016 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:55:01] "[36mGET /css/quantum-visualizations.css HTTP/1.1[0m" 304 -
+2025-08-05 08:55:08,531 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-05 08:55:08,531 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 2, 'gates': [{'type': 'CNOT', 'control': 0, 'target': 1}], 'shots': 1024, 'include_statevector': True, 'include_bloch_sphere': True}
+2025-08-05 08:55:08,533 - backend.app - INFO - Simulating circuit: 2 qubits, 1 gates, 1024 shots
+2025-08-05 08:55:09,648 - werkzeug - INFO -  * Detected change in 'C:\\Users\\ayail\\AppData\\Roaming\\Python\\Python310\\site-packages\\matplotlib\\_mathtext.py', reloading
+2025-08-05 08:55:10,790 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '00 00'
+2025-08-05 08:55:12,368 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-08-05 08:55:21,220 - backend.app - INFO - Successfully initialized EnhancedQuantumCircuitSimulator
+2025-08-05 08:55:21,220 - backend.quantum_simulator.state_visualizer - INFO - QuTiP detected – enabling QuTiP backend.
+2025-08-05 08:55:21,225 - backend.app - INFO - Successfully initialized BlochSphereVisualizer
+2025-08-05 08:55:21,225 - backend.app - INFO - Successfully initialized AdvancedQuantumSimulator
+2025-08-05 08:55:21,228 - backend.cryptography.bb84_protocol - INFO - QuTiP operators initialized successfully
+2025-08-05 08:55:21,228 - backend.app - INFO - Successfully initialized BB84Protocol
+2025-08-05 08:55:21,228 - backend.app - INFO - Successfully initialized QuantumChannel
+2025-08-05 08:55:21,228 - backend.app - INFO - Successfully initialized QKDSecurityAnalyzer
+2025-08-05 08:55:21,228 - backend.app - INFO - Successfully initialized ImageGenerator
+2025-08-05 08:55:21,228 - backend.app - INFO - Successfully initialized DataValidator
+2025-08-05 08:55:21,290 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 08:55:21,316 - werkzeug - INFO -  * Debugger PIN: 128-801-660
+2025-08-05 08:55:21,628 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-05 08:55:21,628 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 1, 'gates': [{'type': 'H', 'qubit': 0}], 'shots': 100}
+2025-08-05 08:55:21,628 - backend.app - INFO - Simulating circuit: 1 qubits, 1 gates, 100 shots
+2025-08-05 08:55:23,108 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '0 0'
+2025-08-05 08:55:23,802 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-05 08:55:23,805 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 1, 'gates': [{'type': 'H', 'qubit': 0}], 'shots': 100}
+2025-08-05 08:55:23,807 - backend.app - INFO - Simulating circuit: 1 qubits, 1 gates, 100 shots
+2025-08-05 08:55:25,510 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '1 0'
+2025-08-05 08:55:29,099 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-05 08:55:29,113 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-05 08:55:29,113 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-05 08:55:29,115 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:55:29] "POST /api/simulate-circuit HTTP/1.1" 200 -
+2025-08-05 08:55:29,865 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-05 08:55:29,874 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-05 08:55:29,874 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-05 08:55:29,882 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:55:29] "POST /api/simulate-circuit HTTP/1.1" 200 -
+2025-08-05 08:55:31,024 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-05 08:55:31,034 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 2, 'gates': [{'type': 'CNOT', 'control': 0, 'target': 1}], 'shots': 1024, 'include_statevector': True, 'include_bloch_sphere': True}
+2025-08-05 08:55:31,062 - backend.app - INFO - Simulating circuit: 2 qubits, 1 gates, 1024 shots
+2025-08-05 08:55:32,201 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '00 00'
+2025-08-05 08:55:35,076 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-05 08:55:35,076 - werkzeug - INFO -  * Detected change in 'K:\\Quantum_crypto_tutorial\\backend\\quantum_simulator\\enhanced_quantum_circuit_simulator.py', reloading
+2025-08-05 08:55:35,092 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-05 08:55:35,092 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-05 08:55:35,092 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:55:35] "POST /api/simulate-circuit HTTP/1.1" 200 -
+2025-08-05 08:55:35,879 - werkzeug - INFO -  * Restarting with watchdog (windowsapi)
+2025-08-05 08:55:44,612 - backend.app - INFO - Successfully initialized EnhancedQuantumCircuitSimulator
+2025-08-05 08:55:44,612 - backend.quantum_simulator.state_visualizer - INFO - QuTiP detected – enabling QuTiP backend.
+2025-08-05 08:55:44,619 - backend.app - INFO - Successfully initialized BlochSphereVisualizer
+2025-08-05 08:55:44,620 - backend.app - INFO - Successfully initialized AdvancedQuantumSimulator
+2025-08-05 08:55:44,622 - backend.cryptography.bb84_protocol - INFO - QuTiP operators initialized successfully
+2025-08-05 08:55:44,622 - backend.app - INFO - Successfully initialized BB84Protocol
+2025-08-05 08:55:44,622 - backend.app - INFO - Successfully initialized QuantumChannel
+2025-08-05 08:55:44,622 - backend.app - INFO - Successfully initialized QKDSecurityAnalyzer
+2025-08-05 08:55:44,624 - backend.app - INFO - Successfully initialized ImageGenerator
+2025-08-05 08:55:44,627 - backend.app - INFO - Successfully initialized DataValidator
+2025-08-05 08:55:44,716 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 08:55:44,737 - werkzeug - INFO -  * Debugger PIN: 128-801-660
+2025-08-05 08:56:11,856 - backend.app - INFO - Starting quantum circuit simulation request
+2025-08-05 08:56:11,858 - backend.app - INFO - Received circuit simulation request: {'num_qubits': 2, 'gates': [{'type': 'CNOT', 'control': 0, 'target': 1}, {'type': 'T', 'qubit': 0}], 'shots': 1024, 'include_statevector': True, 'include_bloch_sphere': True}
+2025-08-05 08:56:11,860 - backend.app - INFO - Simulating circuit: 2 qubits, 2 gates, 1024 shots
+2025-08-05 08:56:13,374 - backend.quantum_simulator.enhanced_quantum_circuit_simulator - ERROR - Enhanced histogram generation failed: invalid literal for int() with base 2: '00 00'
+2025-08-05 08:56:16,243 - backend.app - INFO - Circuit simulation completed successfully
+2025-08-05 08:56:16,247 - backend.app - INFO - Circuit simulation result serialization test passed
+2025-08-05 08:56:16,249 - backend.app - INFO - Successfully completed circuit simulation request
+2025-08-05 08:56:16,258 - werkzeug - INFO - 172.16.1.158 - - [05/Aug/2025 08:56:16] "POST /api/simulate-circuit HTTP/1.1" 200 -

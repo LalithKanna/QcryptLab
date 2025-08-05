@@ -9,668 +9,103 @@
     <link rel="stylesheet" href="../css/quantum-visualizations.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            --success-color: #2ecc71;
-            --warning-color: #f39c12;
-            --danger-color: #e74c3c;
-            --info-color: #3498db;
-            --glass-bg: rgba(255,255,255,0.1);
-            --shadow-light: 0 8px 32px rgba(0,0,0,0.1);
-            --shadow-medium: 0 12px 40px rgba(0,0,0,0.15);
-        }
-
-        .protocol-step {
-            background: var(--primary-gradient);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 25px 0;
-            color: white;
-            box-shadow: var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .protocol-step::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes shimmer {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .protocol-step:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .step-number {
-            background: var(--glass-bg);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-size: 1.2em;
-            backdrop-filter: blur(10px);
-        }
-
-        /* Educational explanation boxes */
-        .explanation-box {
-            background: linear-gradient(135deg, #667eea22, #764ba244);
-            border-left: 4px solid var(--info-color);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-            backdrop-filter: blur(5px);
-        }
-
-        .explanation-box h4 {
-            color: var(--info-color);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .key-concept {
-            background: linear-gradient(135deg, #2ecc7122, #27ae6044);
-            border-left: 4px solid var(--success-color);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            color: white;
-        }
-
-        .warning-box {
-            background: linear-gradient(135deg, #f39c1222, #e67e2244);
-            border-left: 4px solid var(--warning-color);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px 0;
-            color: white;
-        }
-
-        .interactive-demo {
-            background: var(--glass-bg);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 15px 0;
-            border: 2px dashed rgba(255,255,255,0.3);
-            transition: border-color 0.3s ease;
-        }
-
-        .interactive-demo:hover {
-            border-color: var(--info-color);
-        }
-
-        .step-by-step {
-            background: var(--glass-bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-        }
-
-        .step-item {
-            display: flex;
-            align-items: flex-start;
-            margin: 15px 0;
-            padding: 10px;
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
-
-        .step-item:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
-        .step-icon {
-            background: var(--secondary-gradient);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .visual-diagram {
-            background: rgba(0,0,0,0.2);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 15px 0;
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .particle-animation {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background: var(--info-color);
-            border-radius: 50%;
-            margin: 0 5px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-        }
-
-        .glossary-term {
-            color: var(--info-color);
-            cursor: help;
-            border-bottom: 1px dotted var(--info-color);
-            position: relative;
-        }
-
-        .glossary-term:hover::after {
-            content: attr(data-definition);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            white-space: nowrap;
-            z-index: 1000;
-            max-width: 200px;
-            white-space: normal;
-        }
-
-        .protocol-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 20px 0;
-        }
-
-        .flow-step {
-            display: flex;
-            align-items: center;
-            background: var(--glass-bg);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid var(--info-color);
-        }
-
-        .flow-arrow {
-            font-size: 2em;
-            color: var(--info-color);
-            text-align: center;
-            margin: 10px 0;
-        }
-
-        .simulation-panel {
-            background: var(--glass-bg);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .control-panel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .control-group {
-            background: var(--glass-bg);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .control-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            font-size: 0.9em;
-        }
-
-        .tooltip {
-            position: relative;
-            cursor: help;
-        }
-
-        .tooltip:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 11px;
-            white-space: nowrap;
-            z-index: 1000;
-            max-width: 250px;
-            white-space: normal;
-        }
-
-        .control-group input[type="number"],
-        .control-group input[type="range"],
-        .control-group select {
-            width: 100%;
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.3);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-size: 14px;
-        }
-
-        .control-group input[type="checkbox"] {
-            transform: scale(1.2);
-            margin-right: 8px;
-        }
-
-        .btn-simulate {
-            background: var(--secondary-gradient);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255,107,107,0.3);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-simulate:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255,107,107,0.4);
-        }
-
-        .btn-simulate:active {
-            transform: translateY(-1px);
-        }
-
-        .btn-simulate:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .results-display {
-            background: rgba(0,0,0,0.2);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 25px 0;
-            font-family: 'JetBrains Mono', monospace;
-            border: 1px solid rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .result-item {
-            background: var(--glass-bg);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .key-display {
-            background: var(--glass-bg);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 15px 0;
-            font-family: 'JetBrains Mono', monospace;
-            word-break: break-all;
-            border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .bit-visualization {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin: 10px 0;
-        }
-
-        .bit {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .bit:hover {
-            transform: scale(1.1);
-        }
-
-        .bit-0 { background: #3498db; color: white; }
-        .bit-1 { background: #e74c3c; color: white; }
-
-        .security-indicator {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin: 10px 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .secure { 
-            background: var(--success-color); 
-            color: white;
-        }
-        .insecure { 
-            background: var(--danger-color); 
-            color: white;
-        }
-        .warning { 
-            background: var(--warning-color); 
-            color: white;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: var(--secondary-gradient);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .tab-container {
-            margin: 20px 0;
-        }
-
-        .tab-buttons {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .tab-button {
-            padding: 10px 20px;
-            background: var(--glass-bg);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .tab-button.active {
-            background: var(--secondary-gradient);
-        }
-
-        .tab-content {
-            display: none;
-            background: var(--glass-bg);
-            padding: 20px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .backend-status {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: var(--glass-bg);
-            padding: 10px 15px;
-            border-radius: 25px;
-            font-size: 12px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .backend-connected {
-            color: var(--success-color);
-            border-color: var(--success-color);
-        }
-
-        .backend-disconnected {
-            color: var(--danger-color);
-            border-color: var(--danger-color);
-        }
-
-        .backend-connecting {
-            color: var(--warning-color);
-            border-color: var(--warning-color);
-        }
-
-        .advanced-analysis {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            color: white;
-        }
-
-        .finite-key-analysis {
-            background: var(--glass-bg);
-            border-radius: 12px;
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .error-animation {
-            animation: errorPulse 0.5s ease-in-out;
-        }
-
-        @keyframes errorPulse {
-            0%, 100% { background-color: rgba(231, 76, 60, 0.1); }
-            50% { background-color: rgba(231, 76, 60, 0.3); }
-        }
-
-        .export-controls {
-            background: var(--glass-bg);
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .export-btn {
-            background: var(--primary-gradient);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            margin: 5px;
-            font-size: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .export-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        @media (max-width: 768px) {
-            .control-panel {
-                grid-template-columns: 1fr;
-            }
-
-            .backend-status {
-                position: relative;
-                top: auto;
-                right: auto;
-                margin: 10px 0;
-            }
-
-            .tab-buttons {
-                flex-direction: column;
-            }
-
-            .protocol-flow {
-                align-items: center;
-            }
-
-            .flow-step {
-                max-width: 90%;
-            }
-        }
-    </style>
 </head>
 <body>
-    <!-- Enhanced Backend Status Indicator -->
-    <div class="backend-status" id="backend-status">
-        <span id="backend-indicator">🔄 Connecting to Python backend...</span>
-    </div>
-
     <header class="main-header">
         <nav class="navbar">
             <div class="nav-container">
-                <h1 class="logo">🔐 QuantumCrypto Tutorial</h1>
+                <h1 class="logo"><a href="../index.html">QuantumCrypto Tutorial</a></h1>
                 <ul class="nav-menu">
-                    <li><a href="../index.html">🏠 Home</a></li>
-                    <li><a href="../quantum-basics/quantum-intro.html">⚛️ Quantum Basics</a></li>
-                    <li><a href="#bb84-protocol" class="active">🔑 BB84 Protocol</a></li>
-                    <li><a href="#about">ℹ️ About</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../quantum-basics/quantum-intro.html">Quantum Basics</a></li>
+                    <li><a href="#bb84-protocol" class="active">BB84 Protocol</a></li>
                 </ul>
             </div>
         </nav>
     </header>
 
-    <main class="main-content">
-        <section id="bb84-protocol" class="hero-section">
-            <div class="hero-container">
-                <h2 class="hero-title">🔐 BB84 Quantum Key Distribution Protocol</h2>
-                <p class="hero-subtitle">
+    <!-- Backend Status Indicator -->
+    <div class="backend-status" id="backend-status">
+        <span id="backend-indicator">🔄 Connecting to Python backend...</span>
+    </div>
+
+    <main class="lesson-content">
+        <div class="container">
+            <div class="lesson-header">
+                <h1>🔐 BB84 Quantum Key Distribution Protocol</h1>
+                <p class="lesson-subtitle">
                     Master the fundamentals of quantum cryptography through interactive learning, 
                     step-by-step explanations, and real Python quantum simulations
                 </p>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-number">1984</span>
-                        <span class="stat-label">Year Invented</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Security Guarantee</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">∞</span>
-                        <span class="stat-label">Computational Security</span>
-                    </div>
+            </div>
+
+            <div class="lesson-navigation">
+                <div class="nav-item current">
+                    <span class="nav-number">01</span>
+                    <span class="nav-title">BB84 Overview</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-number">02</span>
+                    <span class="nav-title">Security Analysis</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-number">03</span>
+                    <span class="nav-title">Simulation</span>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-number">04</span>
+                    <span class="nav-title">Results</span>
                 </div>
             </div>
-        </section>
 
-        <!-- Introduction and Overview Section -->
-        <section class="overview-section">
-            <div class="container">
-                <h2 class="section-title">🎓 What is BB84 Quantum Key Distribution?</h2>
+            <article class="lesson-article">
+                <!-- Introduction Section -->
+                <section class="content-section">
+                    <h2>🎓 What is BB84 Quantum Key Distribution?</h2>
 
-                <div class="explanation-box">
-                    <h4>🤔 The Problem BB84 Solves</h4>
-                    <p>
-                        Traditional cryptography relies on mathematical complexity—it assumes certain problems are hard to solve. 
-                        But what if quantum computers break these assumptions? BB84 offers a revolutionary solution: 
-                        <strong>security based on the laws of physics, not mathematics</strong>.
-                    </p>
-                </div>
-
-                <div class="key-concept">
-                    <h4>🔑 Core Idea</h4>
-                    <p>
-                        BB84 uses <span class="glossary-term" data-definition="Quantum states that cannot be measured without disturbing the system">quantum properties</span> 
-                        to detect eavesdropping. Any attempt to intercept the quantum key will leave detectable traces, 
-                        guaranteeing perfect security through the <span class="glossary-term" data-definition="The quantum mechanical principle that measuring a quantum system necessarily disturbs it">uncertainty principle</span>.
-                    </p>
-                </div>
-
-                <div class="visual-diagram">
-                    <h4>🎯 The BB84 Challenge</h4>
-                    <div style="margin: 20px 0;">
-                        Alice <span class="particle-animation"></span><span class="particle-animation"></span><span class="particle-animation"></span> 
-                        → Eve? → <span class="particle-animation"></span><span class="particle-animation"></span><span class="particle-animation"></span> Bob
+                    <div class="highlight-box">
+                        <h3>🤔 The Problem BB84 Solves</h3>
+                        <p>
+                            Traditional cryptography relies on mathematical complexity—it assumes certain problems are hard to solve. 
+                            But what if quantum computers break these assumptions? BB84 offers a revolutionary solution: 
+                            <strong>security based on the laws of physics, not mathematics</strong>.
+                        </p>
                     </div>
-                    <p><em>Alice sends quantum states to Bob. Can Eve intercept them without being detected?</em></p>
-                </div>
 
-                <!-- Step-by-Step Protocol Explanation -->
-                <div class="protocol-step">
-                    <div class="step-number">📚</div>
-                    <h3>🧠 Understanding the BB84 Protocol</h3>
+                    <div class="highlight-box success">
+                        <h3>🔑 Core Idea</h3>
+                        <p>
+                            BB84 uses quantum properties to detect eavesdropping. Any attempt to intercept the quantum key 
+                            will leave detectable traces, guaranteeing perfect security through the 
+                            <strong>uncertainty principle</strong>.
+                        </p>
+                    </div>
+
+                    <div class="demo-container">
+                        <div class="demo-explanation">
+                            <h4>🎯 The BB84 Challenge</h4>
+                            <div style="margin: 20px 0; text-align: center;">
+                                Alice <span class="particle-animation"></span><span class="particle-animation"></span><span class="particle-animation"></span> 
+                                → Eve? → <span class="particle-animation"></span><span class="particle-animation"></span><span class="particle-animation"></span> Bob
+                            </div>
+                            <p><em>Alice sends quantum states to Bob. Can Eve intercept them without being detected?</em></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Protocol Steps Section -->
+                <section class="content-section">
+                    <h2>🧠 Understanding the BB84 Protocol</h2>
                     <p>Let's break down how BB84 works step by step, with clear explanations and visual examples.</p>
 
-                    <div class="step-by-step">
-                        <h4>📋 Complete Protocol Overview</h4>
+                    <div class="highlight-box">
+                        <h3>📋 Complete Protocol Overview</h3>
                         <div class="protocol-flow">
                             <div class="flow-step">
                                 <div class="step-icon">1</div>
                                 <div>
                                     <strong>Alice's Preparation:</strong> Alice generates random bits (0s and 1s) and randomly chooses 
-                                    measurement bases (<span class="glossary-term" data-definition="Rectilinear basis: horizontal/vertical polarization">+</span> or 
-                                    <span class="glossary-term" data-definition="Diagonal basis: diagonal polarization at ±45°">×</span>) for each bit.
+                                    measurement bases (+ or ×) for each bit.
                                 </div>
                             </div>
                             <div class="flow-arrow">⬇️</div>
@@ -710,108 +145,84 @@
                                 <div class="step-icon">6</div>
                                 <div>
                                     <strong>Error Detection:</strong> They test a random sample of their shared bits to calculate 
-                                    the <span class="glossary-term" data-definition="Quantum Bit Error Rate: percentage of mismatched bits, indicating eavesdropping or noise">QBER</span>. 
-                                    High QBER indicates eavesdropping!
-                                </div>
-                            </div>
-                            <div class="flow-arrow">⬇️</div>
-                            <div class="flow-step">
-                                <div class="step-icon">7</div>
-                                <div>
-                                    <strong>Error Correction:</strong> They use classical error correction to fix any remaining errors 
-                                    in their shared key.
-                                </div>
-                            </div>
-                            <div class="flow-arrow">⬇️</div>
-                            <div class="flow-step">
-                                <div class="step-icon">8</div>
-                                <div>
-                                    <strong>Privacy Amplification:</strong> They compress the key to remove any information 
-                                    that might have leaked to an eavesdropper.
+                                    the QBER. High QBER indicates eavesdropping!
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Interactive Encoding Example -->
-                    <div class="interactive-demo">
-                        <h4>🔬 Interactive Encoding Example</h4>
-                        <p>Let's see how Alice encodes a bit. Click the buttons to explore different combinations:</p>
-                        <div style="text-align: center; margin: 20px 0;">
-                            <button class="export-btn" onclick="showEncoding(0, '+')">Bit 0 in + Basis</button>
-                            <button class="export-btn" onclick="showEncoding(1, '+')">Bit 1 in + Basis</button>
-                            <button class="export-btn" onclick="showEncoding(0, 'x')">Bit 0 in × Basis</button>
-                            <button class="export-btn" onclick="showEncoding(1, 'x')">Bit 1 in × Basis</button>
+                    <div class="demo-container">
+                        <div class="demo-explanation">
+                            <h4>🔬 Interactive Encoding Example</h4>
+                            <p>Let's see how Alice encodes a bit. Click the buttons to explore different combinations:</p>
                         </div>
-                        <div id="encoding-result" style="text-align: center; min-height: 50px; padding: 20px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <div class="demo-controls">
+                            <button class="btn btn-secondary" onclick="showEncoding(0, '+')">Bit 0 in + Basis</button>
+                            <button class="btn btn-secondary" onclick="showEncoding(1, '+')">Bit 1 in + Basis</button>
+                            <button class="btn btn-secondary" onclick="showEncoding(0, 'x')">Bit 0 in × Basis</button>
+                            <button class="btn btn-secondary" onclick="showEncoding(1, 'x')">Bit 1 in × Basis</button>
+                        </div>
+                        <div id="encoding-result" class="demo-results">
                             <p>Click a button above to see how Alice encodes different bit-basis combinations!</p>
                         </div>
                     </div>
 
-                    <div class="warning-box">
-                        <h4>⚠️ Why This Works</h4>
+                    <div class="highlight-box warning">
+                        <h3>⚠️ Why This Works</h3>
                         <p>
                             The key insight is that if Bob measures a photon in the <strong>wrong basis</strong>, 
                             he gets a random result (50% chance of error). But if Eve tries to eavesdrop, 
                             she doesn't know the correct basis either, so she introduces detectable errors!
                         </p>
                     </div>
-                </div>
-                <!-- Security Analysis Explanation -->
-                <div class="protocol-step">
-                    <div class="step-number">🛡️</div>
-                    <h3>🔒 Why is BB84 Secure?</h3>
+                </section>
+
+                <!-- Security Analysis Section -->
+                <section class="content-section">
+                    <h2>🛡️ Why is BB84 Secure?</h2>
                     <p>Understanding the quantum physics behind unbreakable security</p>
 
-                    <div class="step-by-step">
-                        <div class="step-item">
-                            <div class="step-icon">🔍</div>
-                            <div>
-                                <strong>No-Cloning Theorem:</strong> Quantum mechanics forbids creating perfect copies of unknown quantum states. 
-                                Eve cannot simply copy the photons without disturbing them.
-                            </div>
+                    <div class="application-grid">
+                        <div class="app-card">
+                            <h4>🔍 No-Cloning Theorem</h4>
+                            <p>Quantum mechanics forbids creating perfect copies of unknown quantum states. 
+                            Eve cannot simply copy the photons without disturbing them.</p>
                         </div>
-                        <div class="step-item">
-                            <div class="step-icon">📊</div>
-                            <div>
-                                <strong>Measurement Disturbance:</strong> When Eve measures a photon to learn its state, 
-                                she inevitably disturbs it. This introduces errors that Alice and Bob can detect.
-                            </div>
+                        <div class="app-card">
+                            <h4>📊 Measurement Disturbance</h4>
+                            <p>When Eve measures a photon to learn its state, 
+                            she inevitably disturbs it. This introduces errors that Alice and Bob can detect.</p>
                         </div>
-                        <div class="step-item">
-                            <div class="step-icon">🎲</div>
-                            <div>
-                                <strong>Basis Uncertainty:</strong> Eve doesn't know which basis Alice used, so she must guess. 
-                                Wrong guesses lead to errors in Bob's measurements.
-                            </div>
+                        <div class="app-card">
+                            <h4>🎲 Basis Uncertainty</h4>
+                            <p>Eve doesn't know which basis Alice used, so she must guess. 
+                            Wrong guesses lead to errors in Bob's measurements.</p>
                         </div>
-                        <div class="step-item">
-                            <div class="step-icon">📈</div>
-                            <div>
-                                <strong>Statistical Detection:</strong> Even sophisticated attacks leave statistical signatures 
-                                that can be detected through QBER analysis.
-                            </div>
+                        <div class="app-card">
+                            <h4>📈 Statistical Detection</h4>
+                            <p>Even sophisticated attacks leave statistical signatures 
+                            that can be detected through QBER analysis.</p>
                         </div>
                     </div>
 
-                    <div class="key-concept">
-                        <h4>🎯 Security Guarantee</h4>
+                    <div class="highlight-box success">
+                        <h3>🎯 Security Guarantee</h3>
                         <p>
                             BB84 provides <strong>information-theoretic security</strong>: even with unlimited computational power, 
                             an eavesdropper cannot break the protocol without being detected. The security is guaranteed by 
                             the fundamental laws of quantum mechanics, not mathematical assumptions.
                         </p>
                     </div>
-                </div>
+                </section>
 
-                <!-- Enhanced Configuration Section -->
-                <div class="protocol-step">
-                    <div class="step-number">🎯</div>
-                    <h3>🔬 Interactive Quantum Simulation</h3>
+                <!-- Simulation Configuration Section -->
+                <section class="content-section">
+                    <h2>🔬 Interactive Quantum Simulation</h2>
                     <p>Experience authentic BB84 with our Python-powered quantum backend</p>
 
-                    <div class="explanation-box">
-                        <h4>🐍 Professional Python Backend</h4>
+                    <div class="highlight-box">
+                        <h3>🐍 Professional Python Backend</h3>
                         <p>
                             Our simulation uses real quantum computing libraries:
                             <strong>Qiskit</strong> (IBM's quantum framework) for small simulations and 
@@ -820,30 +231,28 @@
                         </p>
                     </div>
 
-                    <div class="simulation-panel">
-                        <h4>🎮 Configure Your Quantum Experiment</h4>
+                    <div class="demo-container">
+                        <div class="demo-explanation">
+                            <h4>🎮 Configure Your Quantum Experiment</h4>
+                        </div>
+                        
                         <div class="control-panel">
                             <div class="control-group">
-                                <label class="tooltip" data-tooltip="The number of quantum bits (photons) Alice will send to Bob. Smaller numbers are great for learning, larger numbers show realistic protocol behavior. Auto-selects the best quantum backend.">
-                                    📊 Number of Qubits to Transmit:
-                                </label>
-                                <input type="number" id="numBits" value="50" min="4" max="1000">
-                                <small>
+                                <label>📊 Number of Qubits to Transmit:</label>
+                                <input type="number" id="numBits" value="50" min="4" max="1000" class="form-input">
+                                <small class="help-text">
                                     🎓 <strong>Educational tip:</strong> Start with 10-20 bits to see individual results clearly, 
                                     then try 100+ for realistic protocol behavior.
                                 </small>
-                                <div style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
-                                    Backend: <span id="backend-preview">QuTiP (≥20 qubits)</span>
-                                </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="tooltip" data-tooltip="Simulate Eve (the eavesdropper) attempting to intercept quantum messages. This demonstrates how BB84 detects security breaches through increased error rates.">
-                                    👁️ Include Eavesdropper (Eve):
-                                </label>
-                                <input type="checkbox" id="includeEve">
-                                <span>Simulate quantum eavesdropping attack</span>
-                                <div class="explanation-box" style="margin-top: 10px; padding: 10px;">
+                                <label>👁️ Include Eavesdropper (Eve):</label>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="includeEve">
+                                    <span>Simulate quantum eavesdropping attack</span>
+                                </div>
+                                <div class="highlight-box info">
                                     <small>
                                         <strong>🎓 What this does:</strong> Eve intercepts each photon, measures it 
                                         (guessing the basis), then sends a new photon to Bob based on her measurement. 
@@ -853,25 +262,23 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="tooltip" data-tooltip="Realistic quantum channels have noise from fiber optic losses, atmospheric interference, and detector imperfections. Higher noise makes key generation more challenging.">
-                                    🌊 Quantum Channel Noise:
-                                </label>
-                                <input type="range" id="noiseLevel" min="0" max="0.3" step="0.01" value="0.05">
-                                <span id="noiseValue">5.0%</span>
-                                <div style="margin-top: 8px; font-size: 12px;">
-                                    <div>0-2%: Excellent lab conditions</div>
-                                    <div>3-8%: Typical fiber optic QKD</div>
-                                    <div>9%+: Challenging conditions</div>
+                                <label>🌊 Quantum Channel Noise:</label>
+                                <input type="range" id="noiseLevel" min="0" max="0.3" step="0.01" value="0.05" class="form-range">
+                                <span id="noiseValue" class="range-value">5.0%</span>
+                                <div class="noise-levels">
+                                    <small>0-2%: Excellent lab conditions</small>
+                                    <small>3-8%: Typical fiber optic QKD</small>
+                                    <small>9%+: Challenging conditions</small>
                                 </div>
                             </div>
 
                             <div class="control-group">
-                                <label class="tooltip" data-tooltip="Advanced security analysis includes finite-key bounds, statistical confidence intervals, attack characterization, and modern error correction analysis.">
-                                    🔧 Security Analysis Level:
-                                </label>
-                                <input type="checkbox" id="advancedAnalysis" checked>
-                                <span>Advanced finite-key security analysis</span>
-                                <div class="key-concept" style="margin-top: 10px; padding: 10px;">
+                                <label>🔧 Security Analysis Level:</label>
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="advancedAnalysis" checked>
+                                    <span>Advanced finite-key security analysis</span>
+                                </div>
+                                <div class="highlight-box success">
                                     <small>
                                         <strong>🔬 Includes:</strong> Renner bounds, statistical confidence intervals, 
                                         attack detection algorithms, and modern LDPC/Polar error correction analysis.
@@ -880,35 +287,18 @@
                             </div>
 
                             <div class="control-group">
-                                <label class="tooltip" data-tooltip="Choose your quantum simulation backend. Auto-select chooses the best option based on problem size.">
-                                    ⚛️ Quantum Computing Backend:
-                                </label>
-                                <select id="backendChoice">
+                                <label>⚛️ Quantum Computing Backend:</label>
+                                <select id="backendChoice" class="form-select">
                                     <option value="auto">🤖 Auto-select (Recommended)</option>
                                     <option value="qiskit">🔬 Force Qiskit (Educational)</option>
                                     <option value="qutip">⚡ Force QuTiP (Performance)</option>
                                 </select>
-                                <div style="margin-top: 8px; font-size: 12px;">
-                                    <div><strong>Qiskit:</strong> Circuit-based, great for learning</div>
-                                    <div><strong>QuTiP:</strong> State-based, handles large systems</div>
-                                </div>
-                            </div>
-
-                            <div class="control-group">
-                                <label class="tooltip" data-tooltip="Analyze the quantum channel properties including fiber losses, atmospheric effects, detector efficiency, and noise characteristics.">
-                                    📡 Quantum Channel Analysis:
-                                </label>
-                                <input type="checkbox" id="channelAnalysis" checked>
-                                <span>Real-world channel characterization</span>
-                                <div style="margin-top: 8px; font-size: 12px; opacity: 0.8;">
-                                    Analyzes fiber loss, turbulence, polarization drift
-                                </div>
                             </div>
                         </div>
 
-                        <div class="warning-box">
+                        <div class="highlight-box warning">
                             <h4>🎓 Learning Tips</h4>
-                            <ul style="margin: 10px 0;">
+                            <ul>
                                 <li><strong>First time?</strong> Try 10 bits, no Eve, 5% noise</li>
                                 <li><strong>See eavesdropping?</strong> Enable Eve and watch QBER increase</li>
                                 <li><strong>Challenge yourself:</strong> Try 100+ bits with Eve and high noise</li>
@@ -916,8 +306,8 @@
                             </ul>
                         </div>
 
-                        <div style="text-align: center; margin-top: 20px;">
-                            <button class="btn-simulate" onclick="runPythonBB84Simulation()" id="simulateBtn">
+                        <div class="demo-controls">
+                            <button class="btn btn-primary" onclick="runPythonBB84Simulation()" id="simulateBtn">
                                 🚀 Start Quantum Key Distribution
                             </button>
                         </div>
@@ -925,20 +315,20 @@
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
                     </div>
-                </div>
-                <!-- Enhanced Results Section -->
-                <div class="protocol-step">
-                    <div class="step-number">📊</div>
-                    <h3>📈 Simulation Results & Analysis</h3>
+                </section>
+
+                <!-- Results Section -->
+                <section class="content-section">
+                    <h2>📈 Simulation Results & Analysis</h2>
                     <p>Comprehensive analysis of your quantum key distribution experiment</p>
 
-                    <div class="simulation-panel">
-                        <div class="results-display" id="simulation-results">
+                    <div class="demo-container">
+                        <div id="simulation-results" class="demo-results">
                             <div style="text-align: center; padding: 40px;">
                                 <div style="font-size: 3em; margin-bottom: 20px;">🎯</div>
                                 <h3>Ready for Quantum Cryptography!</h3>
                                 <p>Configure your parameters above and click "Start Quantum Key Distribution" to begin your BB84 simulation.</p>
-                                <div class="key-concept" style="margin-top: 20px;">
+                                <div class="highlight-box">
                                     <h4>📖 What You'll See</h4>
                                     <ul style="text-align: left; margin: 15px 0;">
                                         <li><strong>Protocol Steps:</strong> Detailed breakdown of each BB84 phase</li>
@@ -954,21 +344,22 @@
                         <div class="export-controls" id="export-controls" style="display: none;">
                             <h4>📤 Export Your Results</h4>
                             <p>Save your simulation data for further analysis or education</p>
-                            <button class="export-btn" onclick="exportResults('json')">📄 Export as JSON</button>
-                            <button class="export-btn" onclick="exportResults('csv')">📊 Export as CSV</button>
-                            <button class="export-btn" onclick="exportResults('pdf')">📋 Generate Report</button>
+                            <div class="demo-controls">
+                                <button class="btn btn-outline" onclick="exportResults('json')">📄 Export as JSON</button>
+                                <button class="btn btn-outline" onclick="exportResults('csv')">📊 Export as CSV</button>
+                                <button class="btn btn-outline" onclick="exportResults('pdf')">📋 Generate Report</button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
                 <!-- Advanced Analysis Section -->
-                <div class="protocol-step">
-                    <div class="step-number">🔬</div>
-                    <h3>🛡️ Advanced Security Analysis</h3>
+                <section class="content-section">
+                    <h2>🛡️ Advanced Security Analysis</h2>
                     <p>Professional-grade security assessment with modern cryptographic tools</p>
 
-                    <div class="explanation-box">
-                        <h4>🎓 Understanding Advanced Analysis</h4>
+                    <div class="highlight-box">
+                        <h3>🎓 Understanding Advanced Analysis</h3>
                         <p>
                             Our advanced analysis goes beyond basic QBER calculation. We implement state-of-the-art 
                             security analysis including <strong>finite-key bounds</strong> (accounting for the fact that 
@@ -977,8 +368,8 @@
                         </p>
                     </div>
 
-                    <div class="simulation-panel">
-                        <div class="advanced-analysis" id="advanced-analysis" style="display: none;">
+                    <div class="demo-container">
+                        <div id="advanced-analysis" style="display: none;">
                             <div class="tab-container">
                                 <div class="tab-buttons">
                                     <button class="tab-button active" onclick="showTab('finite-key-tab')">🔍 Finite-Key Security</button>
@@ -988,7 +379,7 @@
                                 </div>
                                 <div class="tab-content active" id="finite-key-tab">
                                     <h4>🔍 Finite-Key Security Bounds</h4>
-                                    <div class="explanation-box">
+                                    <div class="highlight-box">
                                         <p>
                                             Real-world QKD uses keys of finite length, unlike theoretical analysis that assumes 
                                             infinite-length keys. Finite-key analysis accounts for statistical fluctuations and 
@@ -999,7 +390,7 @@
                                 </div>
                                 <div class="tab-content" id="qber-stats-tab">
                                     <h4>📊 Statistical QBER Analysis</h4>
-                                    <div class="explanation-box">
+                                    <div class="highlight-box">
                                         <p>
                                             QBER (Quantum Bit Error Rate) is the key security metric. We calculate statistical 
                                             confidence intervals and perform hypothesis testing to determine if observed errors 
@@ -1010,7 +401,7 @@
                                 </div>
                                 <div class="tab-content" id="attack-char-tab">
                                     <h4>🎯 Attack Characterization</h4>
-                                    <div class="explanation-box">
+                                    <div class="highlight-box">
                                         <p>
                                             Different eavesdropping attacks leave different signatures in the error patterns. 
                                             Our analysis attempts to identify the most likely attack type and assess the 
@@ -1021,7 +412,7 @@
                                 </div>
                                 <div class="tab-content" id="optimization-tab">
                                     <h4>🔧 Performance Optimization</h4>
-                                    <div class="explanation-box">
+                                    <div class="highlight-box">
                                         <p>
                                             Based on your simulation results, we provide specific recommendations for 
                                             improving protocol performance, including optimal error correction codes, 
@@ -1033,201 +424,76 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Quantum Channel Analysis Section -->
-                <div class="protocol-step">
-                    <div class="step-number">📡</div>
-                    <h3>🌊 Quantum Channel Characterization</h3>
-                    <p>Understanding how quantum information travels through real-world channels</p>
+                <!-- Final Key Display Section -->
+                <section class="content-section">
+                    <h2>🔑 Generated Quantum Key</h2>
 
-                    <div class="explanation-box">
-                        <h4>🛰️ Real-World Quantum Channels</h4>
+                    <div class="highlight-box">
+                        <h3>🎓 Understanding Your Quantum Key</h3>
                         <p>
-                            Perfect quantum channels don't exist in practice. Real QKD systems must deal with 
-                            <strong>fiber optic losses</strong>, <strong>atmospheric turbulence</strong> (for satellite links), 
-                            <strong>detector inefficiencies</strong>, and various noise sources. Our simulation models these 
-                            realistic conditions.
+                            The key shown below was generated using authentic quantum processes. Each bit represents 
+                            a successfully transmitted and verified quantum state. The <strong>entropy</strong> measures 
+                            randomness quality (1.000 is perfect), and the <strong>security status</strong> tells you 
+                            if the key is safe to use for encryption.
                         </p>
                     </div>
 
-                    <div class="simulation-panel">
-                        <div class="tab-container">
-                            <div class="tab-buttons">
-                                <button class="tab-button active" onclick="showTab('channel-tab')">📡 Channel Properties</button>
-                                <button class="tab-button" onclick="showTab('noise-tab')">🌊 Noise Analysis</button>
-                                <button class="tab-button" onclick="showTab('fidelity-tab')">📈 Fidelity Metrics</button>
-                                <button class="tab-button" onclick="showTab('protocols-tab')">🔬 Protocol Comparison</button>
-                            </div>
-                            <div class="tab-content active" id="channel-tab">
-                                <h4>📡 Channel Characteristics</h4>
-                                <div class="explanation-box">
-                                    <p>Analysis of the quantum channel properties including transmission efficiency, 
-                                    error sources, and overall performance metrics.</p>
-                                </div>
-                                <div id="channel-properties">
-                                    <p>Channel analysis will be displayed here after simulation...</p>
-                                </div>
-                            </div>
-                            <div class="tab-content" id="noise-tab">
-                                <h4>🌊 Noise Characterization</h4>
-                                <div class="explanation-box">
-                                    <p>Detailed breakdown of different noise sources and their impact on the quantum key distribution process.</p>
-                                </div>
-                                <div id="noise-analysis">
-                                    <p>Noise characterization will be shown here...</p>
-                                </div>
-                            </div>
-                            <div class="tab-content" id="fidelity-tab">
-                                <h4>📈 Quantum State Fidelity</h4>
-                                <div class="explanation-box">
-                                    <p>Fidelity measures how well quantum states are preserved during transmission. 
-                                    High fidelity indicates good channel quality.</p>
-                                </div>
-                                <div id="fidelity-metrics">
-                                    <p>Fidelity analysis will appear here...</p>
-                                </div>
-                            </div>
-                            <div class="tab-content" id="protocols-tab">
-                                <h4>🔬 Protocol Performance</h4>
-                                <div class="explanation-box">
-                                    <p>Comparison of different quantum backends and their performance characteristics for your specific simulation parameters.</p>
-                                </div>
-                                <div id="protocol-comparison">
-                                    <p>Protocol comparison will be shown here...</p>
-                                </div>
-                            </div>
+                    <div class="demo-container" id="final-key" style="display: none;">
+                        <h3>🔐 Information-Theoretically Secure Key</h3>
+                        <div id="key-content"></div>
+                        <div class="key-info">
+                            <div id="key-length"></div>
+                            <div id="key-entropy"></div>
+                            <div id="backend-used"></div>
+                            <div id="key-metadata"></div>
+                        </div>
+                        <div id="security-status" class="security-indicator"></div>
+
+                        <div class="highlight-box warning">
+                            <h4>🔐 Security Notice</h4>
+                            <p>
+                                This key was generated for educational purposes. In a real QKD system, 
+                                this key would be immediately used for encryption and then securely deleted. 
+                                Never reuse quantum keys!
+                            </p>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-        <!-- Enhanced Key Display Section -->
-        <section class="results-section">
-            <div class="container">
-                <h2 class="section-title">🔑 Generated Quantum Key</h2>
+                </section>
 
-                <div class="explanation-box">
-                    <h4>🎓 Understanding Your Quantum Key</h4>
-                    <p>
-                        The key shown below was generated using authentic quantum processes. Each bit represents 
-                        a successfully transmitted and verified quantum state. The <strong>entropy</strong> measures 
-                        randomness quality (1.000 is perfect), and the <strong>security status</strong> tells you 
-                        if the key is safe to use for encryption.
-                    </p>
-                </div>
+                <!-- Summary Section -->
+                <section class="content-section">
+                    <h2>🎓 What Did You Learn?</h2>
 
-                <div class="key-display" id="final-key" style="display: none;">
-                    <h3>🔐 Information-Theoretically Secure Key</h3>
-                    <div id="key-content"></div>
-                    <div class="key-info">
-                        <div id="key-length"></div>
-                        <div id="key-entropy"></div>
-                        <div id="backend-used"></div>
-                        <div id="key-metadata"></div>
-                    </div>
-                    <div class="security-indicator" id="security-status"></div>
-
-                    <div class="warning-box" style="margin-top: 15px;">
-                        <h4>🔐 Security Notice</h4>
-                        <p>
-                            This key was generated for educational purposes. In a real QKD system, 
-                            this key would be immediately used for encryption and then securely deleted. 
-                            Never reuse quantum keys!
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Educational Summary -->
-        <section class="overview-section">
-            <div class="container">
-                <h2 class="section-title">🎓 What Did You Learn?</h2>
-
-                <div class="protocol-step">
-                    <div class="step-number">🎯</div>
-                    <h3>🧠 Key Takeaways</h3>
-                    <p>Reinforce your understanding with these essential BB84 concepts</p>
-
-                    <div class="step-by-step">
-                        <div class="step-item">
-                            <div class="step-icon">🔬</div>
-                            <div>
-                                <strong>Quantum Physics Enables Security:</strong> BB84's security comes from fundamental 
-                                quantum properties like the no-cloning theorem and measurement disturbance, not mathematical complexity.
+                    <div class="highlight-box success">
+                        <h3>🧠 Key Takeaways</h3>
+                        <div class="application-grid">
+                            <div class="app-card">
+                                <h4>🔬 Quantum Physics Enables Security</h4>
+                                <p>BB84's security comes from fundamental quantum properties like the no-cloning theorem and measurement disturbance, not mathematical complexity.</p>
                             </div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-icon">📊</div>
-                            <div>
-                                <strong>QBER is the Key Metric:</strong> The Quantum Bit Error Rate tells you if someone 
-                                is eavesdropping. Low QBER (≤11%) means secure, high QBER means abort the protocol.
+                            <div class="app-card">
+                                <h4>📊 QBER is the Key Metric</h4>
+                                <p>The Quantum Bit Error Rate tells you if someone is eavesdropping. Low QBER (≤11%) means secure, high QBER means abort the protocol.</p>
                             </div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-icon">🎲</div>
-                            <div>
-                                <strong>Random Basis Selection is Crucial:</strong> Both Alice and Bob must choose bases 
-                                randomly. This ensures that eavesdroppers can't predict the correct measurement basis.
+                            <div class="app-card">
+                                <h4>🎲 Random Basis Selection is Crucial</h4>
+                                <p>Both Alice and Bob must choose bases randomly. This ensures that eavesdroppers can't predict the correct measurement basis.</p>
                             </div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-icon">🔐</div>
-                            <div>
-                                <strong>Information-Theoretic Security:</strong> Unlike classical cryptography, BB84's 
-                                security doesn't depend on computational assumptions—it's guaranteed by physics.
-                            </div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-icon">⚙️</div>
-                            <div>
-                                <strong>Post-Processing is Essential:</strong> Error correction and privacy amplification 
-                                are needed to remove errors and any information that might have leaked to eavesdroppers.
+                            <div class="app-card">
+                                <h4>🔐 Information-Theoretic Security</h4>
+                                <p>Unlike classical cryptography, BB84's security doesn't depend on computational assumptions—it's guaranteed by physics.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="key-concept">
-                        <h4>🌟 Advanced Concepts Explored</h4>
-                        <div class="step-by-step">
-                            <div class="step-item">
-                                <div class="step-icon">📈</div>
-                                <div>
-                                    <strong>Finite-Key Security:</strong> Real protocols use finite-length keys, requiring 
-                                    statistical analysis to account for random fluctuations and provide realistic security bounds.
-                                </div>
-                            </div>
-                            <div class="step-item">
-                                <div class="step-icon">🎯</div>
-                                <div>
-                                    <strong>Attack Detection:</strong> Different eavesdropping strategies leave unique 
-                                    signatures in error patterns, allowing sophisticated attack characterization.
-                                </div>
-                            </div>
-                            <div class="step-item">
-                                <div class="step-icon">📡</div>
-                                <div>
-                                    <strong>Channel Modeling:</strong> Real quantum channels suffer from fiber losses, 
-                                    atmospheric turbulence, and detector inefficiencies that must be carefully modeled.
-                                </div>
-                            </div>
-                            <div class="step-item">
-                                <div class="step-icon">💻</div>
-                                <div>
-                                    <strong>Quantum Computing Integration:</strong> Modern QKD simulations use professional 
-                                    quantum computing frameworks like Qiskit and QuTiP for authentic quantum behavior.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="explanation-box">
-                        <h4>🚀 Next Steps in Quantum Cryptography</h4>
+                    <div class="highlight-box">
+                        <h3>🚀 Next Steps in Quantum Cryptography</h3>
                         <p>
                             Now that you understand BB84, you're ready to explore advanced quantum cryptographic protocols:
                         </p>
-                        <ul style="margin: 15px 0;">
+                        <ul>
                             <li><strong>E91 Protocol:</strong> Uses quantum entanglement for key distribution</li>
                             <li><strong>SARG04:</strong> Improved version of BB84 with better noise tolerance</li>
                             <li><strong>Continuous Variable QKD:</strong> Uses quantum properties of light waves</li>
@@ -1235,10 +501,359 @@
                             <li><strong>Quantum Digital Signatures:</strong> Quantum authentication and non-repudiation</li>
                         </ul>
                     </div>
+                </section>
+            </article>
+
+            <div class="lesson-footer">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+                <div class="lesson-actions">
+                    <a href="../quantum-basics/quantum-intro.html" class="btn btn-outline">← Back to Quantum Basics</a>
+                    <a href="../index.html" class="btn btn-primary">Explore More Protocols →</a>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
+
+    <style>
+        /* Backend Status Indicator */
+        .backend-status {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 25px;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .backend-connected {
+            color: #2ecc71;
+            border-color: #2ecc71;
+        }
+
+        .backend-disconnected {
+            color: #e74c3c;
+            border-color: #e74c3c;
+        }
+
+        .backend-connecting {
+            color: #f39c12;
+            border-color: #f39c12;
+        }
+
+        /* Protocol Flow Styling */
+        .protocol-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-icon {
+            background: var(--primary-color);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 14px;
+            flex-shrink: 0;
+            color: white;
+            font-weight: bold;
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            color: var(--primary-color);
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        /* Control Panel Styling */
+        .control-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .control-group {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--text-color);
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            font-size: 14px;
+        }
+
+        .form-range {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .range-value {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-left: 10px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            transform: scale(1.2);
+        }
+
+        .help-text {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .noise-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-top: 8px;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Particle Animation */
+        .particle-animation {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Tab System */
+        .tab-container {
+            margin: 20px 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 25px;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tab-button.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Export Controls */
+        .export-controls {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Security Indicator */
+        .security-indicator {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 10px 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .security-indicator.secure { 
+            background: #2ecc71; 
+            color: white;
+        }
+
+        .security-indicator.insecure { 
+            background: #e74c3c; 
+            color: white;
+        }
+
+        /* Key Display */
+        .key-info {
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .bit-visualization {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin: 10px 0;
+        }
+
+        .bit {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .bit:hover {
+            transform: scale(1.1);
+        }
+
+        .bit-0 { background: #3498db; color: white; }
+        .bit-1 { background: #e74c3c; color: white; }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .result-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .control-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .backend-status {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 10px 0;
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .protocol-flow {
+                align-items: center;
+            }
+
+            .flow-step {
+                max-width: 90%;
+            }
+        }
+    </style>
+
     <script>
         // Enhanced global state management
         let simulationRunning = false;
@@ -1263,13 +878,13 @@
             }
 
             resultDiv.innerHTML = `
-                <div style="font-size: 2em; margin-bottom: 10px;">
-                    Bit: <span style="color: var(--info-color);">${bit}</span> | 
-                    Basis: <span style="color: var(--success-color);">${basis}</span> | 
-                    Photon: <span style="color: var(--warning-color);">${polarization}</span>
+                <div style="font-size: 1.5em; margin-bottom: 10px; text-align: center;">
+                    Bit: <span style="color: var(--primary-color);">${bit}</span> | 
+                    Basis: <span style="color: #2ecc71;">${basis}</span> | 
+                    Photon: <span style="color: #f39c12;">${polarization}</span>
                 </div>
                 <p><strong>Explanation:</strong> ${explanation}</p>
-                <div style="margin-top: 15px; font-size: 12px; opacity: 0.8;">
+                <div style="margin-top: 15px; font-size: 12px; opacity: 0.8; text-align: center;">
                     ${basis === '+' ? 'Rectilinear basis uses horizontal/vertical polarization' : 'Diagonal basis uses ±45° polarization'}
                 </div>
             `;
@@ -1323,7 +938,6 @@
             const noiseLevel = parseFloat(document.getElementById('noiseLevel').value);
             const advancedAnalysis = document.getElementById('advancedAnalysis').checked;
             const backendChoice = document.getElementById('backendChoice').value;
-            const channelAnalysis = document.getElementById('channelAnalysis').checked;
 
             // Validate parameters
             if (numBits < 4 || numBits > 1000) {
@@ -1416,11 +1030,6 @@
                     await performAdvancedSecurityAnalysis(result);
                 }
 
-                // Channel analysis
-                if (channelAnalysis && backendCapabilities.quantum_channel_simulation) {
-                    await performChannelAnalysis(protocolParams);
-                }
-
                 progressFill.style.width = '100%';
 
                 // Display results
@@ -1431,11 +1040,11 @@
                 console.error('❌ Simulation error:', error);
                 clearInterval(messageInterval);
                 document.getElementById('simulation-results').innerHTML = 
-                    `<div class="error-animation" style="text-align: center; padding: 40px; color: var(--danger-color);">
+                    `<div style="text-align: center; padding: 40px; color: #e74c3c;">
                         <div style="font-size: 3em; margin-bottom: 20px;">❌</div>
                         <h3>Simulation Error</h3>
                         <p><strong>Error:</strong> ${error.message}</p>
-                        <div class="warning-box" style="margin-top: 20px;">
+                        <div class="highlight-box warning" style="margin-top: 20px;">
                             <h4>🔧 Troubleshooting</h4>
                             <ul style="text-align: left;">
                                 <li>Ensure Python backend is running on ${BACKEND_URL}</li>
@@ -1445,10 +1054,10 @@
                             </ul>
                         </div>
                         <div style="margin-top: 20px;">
-                            <button class="btn-simulate" onclick="runPythonBB84Simulation()" style="margin: 5px;">
+                            <button class="btn btn-primary" onclick="runPythonBB84Simulation()" style="margin: 5px;">
                                 🔄 Retry Simulation
                             </button>
-                            <button class="export-btn" onclick="initializeBackend()" style="margin: 5px;">
+                            <button class="btn btn-outline" onclick="initializeBackend()" style="margin: 5px;">
                                 🔌 Reconnect Backend
                             </button>
                         </div>
@@ -1461,6 +1070,7 @@
                 simulationRunning = false;
             }
         }
+
         // Enhanced results display with educational explanations
         function displayPythonResults(result) {
             const resultsDiv = document.getElementById('simulation-results');
@@ -1472,7 +1082,7 @@
             resultsDiv.innerHTML = `
                 <h3>🎉 BB84 Quantum Key Distribution Complete!</h3>
 
-                <div class="explanation-box" style="margin-bottom: 20px;">
+                <div class="highlight-box">
                     <h4>🎓 What Just Happened?</h4>
                     <p>
                         Your quantum simulation used <strong>${backendUsed}</strong> to model authentic quantum physics. 
@@ -1481,11 +1091,6 @@
                         and generated a ${result.final_key_length || result.protocol_steps?.final_key_length || 'N/A'}-bit 
                         ${isSecure ? 'secure' : 'compromised'} key.
                     </p>
-                </div>
-
-                <div class="backend-info" style="background: var(--glass-bg); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
-                    <h4>⚛️ Quantum Backend: ${backendUsed}</h4>
-                    <p><em>${backendReason}</em></p>
                 </div>
 
                 <div class="results-grid">
@@ -1526,27 +1131,13 @@
                     </div>
                     <div class="result-item">
                         <strong>🛡️ Security Status:</strong><br>
-                        <span class="security-indicator ${isSecure ? 'secure' : 'insecure'}" style="padding: 5px 10px; margin-top: 5px; display: inline-block;">
+                        <div class="security-indicator ${isSecure ? 'secure' : 'insecure'}">
                             ${result.security_analysis?.security_level || 'UNKNOWN'}
-                        </span>
-                    </div>
-                    <div class="result-item">
-                        <strong>👁️ Eavesdropping:</strong><br>
-                        ${result.eavesdropper_present ? '🚨 Eve Detected' : '✅ No Eavesdropper'}
-                        <small style="display: block; margin-top: 5px; opacity: 0.8;">
-                            ${result.eavesdropper_present ? 'Attack signatures found' : 'Channel appears secure'}
-                        </small>
-                    </div>
-                    <div class="result-item">
-                        <strong>⏱️ Completed:</strong><br>
-                        ${result.timestamp ? new Date(result.timestamp).toLocaleTimeString() : 'Just now'}
-                        <small style="display: block; margin-top: 5px; opacity: 0.8;">
-                            Execution time: ${result.execution_time_seconds ? (result.execution_time_seconds * 1000).toFixed(0) + 'ms' : 'Unknown'}
-                        </small>
+                        </div>
                     </div>
                 </div>
 
-                <div class="${isSecure ? 'key-concept' : 'warning-box'}" style="margin-top: 25px;">
+                <div class="highlight-box ${isSecure ? 'success' : 'warning'}">
                     <h4>${isSecure ? '🎉 Success!' : '⚠️ Security Alert'}</h4>
                     <p><strong>Quantum Analysis:</strong> ${backendUsed} simulated authentic quantum state evolution</p>
                     <p><strong>Security Assessment:</strong> ${isSecure ? 
@@ -1598,18 +1189,29 @@
             // Finite-key analysis
             if (analysis.security_bounds) {
                 document.getElementById('finite-key-analysis').innerHTML = `
-                    <div class="finite-key-analysis">
-                        <div class="explanation-box">
-                            <h5>📖 Understanding These Metrics</h5>
-                            <p><strong>Effective QBER:</strong> Includes statistical corrections for finite-key effects</p>
-                            <p><strong>Secure Key Bound:</strong> Maximum bits that can be securely extracted</p>
-                            <p><strong>Statistical Fluctuation:</strong> Uncertainty due to finite sample size</p>
+                    <div class="highlight-box">
+                        <h5>📖 Understanding These Metrics</h5>
+                        <p><strong>Effective QBER:</strong> Includes statistical corrections for finite-key effects</p>
+                        <p><strong>Secure Key Bound:</strong> Maximum bits that can be securely extracted</p>
+                        <p><strong>Statistical Fluctuation:</strong> Uncertainty due to finite sample size</p>
+                    </div>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <strong>Effective QBER:</strong><br>
+                            ${(analysis.security_bounds.effective_qber * 100).toFixed(3)}%
                         </div>
-                        <p><strong>Effective QBER:</strong> ${(analysis.security_bounds.effective_qber * 100).toFixed(3)}%</p>
-                        <p><strong>Secure Key Bound:</strong> ${analysis.security_bounds.secure_key_length} bits</p>
-                        <p><strong>Finite-Key Regime:</strong> ${analysis.security_bounds.finite_key_regime}</p>
-                        <p><strong>Statistical Fluctuation:</strong> ±${((analysis.security_bounds.statistical_fluctuation_term || 0) * 100).toFixed(2)}%</p>
-                        <p><strong>Parameter Estimation:</strong> ±${((analysis.security_bounds.parameter_estimation_term || 0) * 100).toFixed(2)}%</p>
+                        <div class="result-item">
+                            <strong>Secure Key Bound:</strong><br>
+                            ${analysis.security_bounds.secure_key_length} bits
+                        </div>
+                        <div class="result-item">
+                            <strong>Finite-Key Regime:</strong><br>
+                            ${analysis.security_bounds.finite_key_regime}
+                        </div>
+                        <div class="result-item">
+                            <strong>Statistical Fluctuation:</strong><br>
+                            ±${((analysis.security_bounds.statistical_fluctuation_term || 0) * 100).toFixed(2)}%
+                        </div>
                     </div>
                 `;
             }
@@ -1618,17 +1220,27 @@
             if (analysis.qber_analysis) {
                 const confidenceIntervals = analysis.qber_analysis.confidence_intervals || {};
                 document.getElementById('qber-analysis').innerHTML = `
-                    <div class="finite-key-analysis">
-                        <div class="explanation-box">
-                            <h5>📊 Statistical Confidence</h5>
-                            <p>Confidence intervals show the range of possible true QBER values based on observed data.</p>
+                    <div class="highlight-box">
+                        <h5>📊 Statistical Confidence</h5>
+                        <p>Confidence intervals show the range of possible true QBER values based on observed data.</p>
+                    </div>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <strong>Measured QBER:</strong><br>
+                            ${(analysis.qber_analysis.qber * 100).toFixed(3)}%
                         </div>
-                        <p><strong>Measured QBER:</strong> ${(analysis.qber_analysis.qber * 100).toFixed(3)}%</p>
-                        <p><strong>95% Confidence Interval:</strong> [${confidenceIntervals['95%'] ? (confidenceIntervals['95%'][0] * 100).toFixed(2) : 'N/A'}%, ${confidenceIntervals['95%'] ? (confidenceIntervals['95%'][1] * 100).toFixed(2) : 'N/A'}%]</p>
-                        <p><strong>Security Level:</strong> ${analysis.qber_analysis.current_security_level}</p>
-                        <p><strong>Sifting Efficiency:</strong> ${(analysis.qber_analysis.sifting_efficiency * 100).toFixed(1)}%</p>
-                        <p><strong>Errors Detected:</strong> ${analysis.qber_analysis.errors}</p>
-                        <p><strong>Sample Reliability:</strong> ${analysis.qber_analysis.reliable ? '✅ Sufficient' : '⚠️ Limited'}</p>
+                        <div class="result-item">
+                            <strong>95% Confidence Interval:</strong><br>
+                            [${confidenceIntervals['95%'] ? (confidenceIntervals['95%'][0] * 100).toFixed(2) : 'N/A'}%, ${confidenceIntervals['95%'] ? (confidenceIntervals['95%'][1] * 100).toFixed(2) : 'N/A'}%]
+                        </div>
+                        <div class="result-item">
+                            <strong>Security Level:</strong><br>
+                            ${analysis.qber_analysis.current_security_level}
+                        </div>
+                        <div class="result-item">
+                            <strong>Sample Reliability:</strong><br>
+                            ${analysis.qber_analysis.reliable ? '✅ Sufficient' : '⚠️ Limited'}
+                        </div>
                     </div>
                 `;
             }
@@ -1636,17 +1248,27 @@
             // Attack analysis
             if (analysis.attack_analysis && analysis.attack_analysis.attack_signatures) {
                 document.getElementById('attack-analysis').innerHTML = `
-                    <div class="finite-key-analysis">
-                        <div class="explanation-box">
-                            <h5>🎯 Attack Detection</h5>
-                            <p>Different eavesdropping methods leave distinctive error signatures that can be identified.</p>
+                    <div class="highlight-box">
+                        <h5>🎯 Attack Detection</h5>
+                        <p>Different eavesdropping methods leave distinctive error signatures that can be identified.</p>
+                    </div>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <strong>Threat Level:</strong><br>
+                            ${analysis.attack_analysis.attack_signatures.threat_level}
                         </div>
-                        <p><strong>Threat Level:</strong> ${analysis.attack_analysis.attack_signatures.threat_level}</p>
-                        <p><strong>Assessment:</strong> ${analysis.attack_analysis.attack_signatures.assessment || 'No assessment available'}</p>
-                        <p><strong>Detection Confidence:</strong> ${analysis.attack_analysis.attack_signatures.confidence || 'Unknown'}</p>
-                        <p><strong>Most Likely Attack:</strong> ${analysis.eavesdropping_analysis?.most_likely_attack || 'None identified'}</p>
-                        ${analysis.attack_analysis.attack_signatures.information_security ? 
-                            `<p><strong>Information Security:</strong> ${analysis.attack_analysis.attack_signatures.information_security}</p>` : ''}
+                        <div class="result-item">
+                            <strong>Assessment:</strong><br>
+                            ${analysis.attack_analysis.attack_signatures.assessment || 'No assessment available'}
+                        </div>
+                        <div class="result-item">
+                            <strong>Detection Confidence:</strong><br>
+                            ${analysis.attack_analysis.attack_signatures.confidence || 'Unknown'}
+                        </div>
+                        <div class="result-item">
+                            <strong>Most Likely Attack:</strong><br>
+                            ${analysis.eavesdropping_analysis?.most_likely_attack || 'None identified'}
+                        </div>
                     </div>
                 `;
             }
@@ -1655,106 +1277,15 @@
             if (analysis.optimization_recommendations) {
                 const recommendations = analysis.optimization_recommendations.slice(0, 5);
                 document.getElementById('optimization-recommendations').innerHTML = `
-                    <div class="finite-key-analysis">
-                        <div class="explanation-box">
-                            <h5>🔧 Performance Tips</h5>
-                            <p>Based on your results, here are specific recommendations for improvement:</p>
-                        </div>
-                        <ul>
-                            ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
-                        </ul>
+                    <div class="highlight-box">
+                        <h5>🔧 Performance Tips</h5>
+                        <p>Based on your results, here are specific recommendations for improvement:</p>
                     </div>
+                    <ul>
+                        ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                    </ul>
                 `;
             }
-        }
-        // Channel analysis
-        async function performChannelAnalysis(protocolParams) {
-            try {
-                const channelParams = {
-                    channel_type: 'bb84_realistic',
-                    parameters: {
-                        noise_level: protocolParams.noise_level,
-                        eavesdropper_present: protocolParams.eavesdropper_present
-                    }
-                };
-
-                const response = await fetch(`${BACKEND_URL}/api/channel/simulate`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(channelParams)
-                });
-
-                if (response.ok) {
-                    const channelAnalysis = await response.json();
-                    if (channelAnalysis.success) {
-                        displayChannelAnalysis(channelAnalysis);
-                    }
-                }
-            } catch (error) {
-                console.error('Channel analysis failed:', error);
-            }
-        }
-
-        function displayChannelAnalysis(analysis) {
-            if (!analysis.success) return;
-            const channelResult = analysis.channel_result || {};
-
-            // Channel properties
-            document.getElementById('channel-properties').innerHTML = `
-                <div class="finite-key-analysis">
-                    <div class="explanation-box">
-                        <h5>📡 About Quantum Channels</h5>
-                        <p>Real quantum communication faces challenges from fiber losses, atmospheric turbulence, and detector limitations.</p>
-                    </div>
-                    <p><strong>Channel Type:</strong> ${channelResult.channel_type || 'BB84 Realistic'}</p>
-                    <p><strong>Status:</strong> ${channelResult.success ? '✅ Operational' : '❌ Failed'}</p>
-                    <p><strong>Backend:</strong> ${channelResult.backend_used || 'QuTiP'}</p>
-                    <p><strong>Total Impact:</strong> ${channelResult.total_channel_impact ? (channelResult.total_channel_impact * 100).toFixed(1) + '%' : 'N/A'}</p>
-                </div>
-            `;
-
-            // Noise analysis
-            if (channelResult.applied_errors) {
-                document.getElementById('noise-analysis').innerHTML = `
-                    <div class="finite-key-analysis">
-                        <div class="explanation-box">
-                            <h5>🌊 Noise Sources in QKD</h5>
-                            <p>Multiple factors contribute to quantum channel noise, each with different characteristics and mitigation strategies.</p>
-                        </div>
-                        <p><strong>🔌 Fiber Loss:</strong> ${(channelResult.applied_errors.fiber_loss * 100).toFixed(2)}%</p>
-                        <p><strong>🌪️ Atmospheric Turbulence:</strong> ${(channelResult.applied_errors.atmospheric_turbulence * 100).toFixed(2)}%</p>
-                        <p><strong>🔄 Polarization Drift:</strong> ${(channelResult.applied_errors.polarization_drift * 100).toFixed(2)}%</p>
-                        <p><strong>📟 Detector Efficiency:</strong> ${(channelResult.applied_errors.detector_efficiency * 100).toFixed(1)}%</p>
-                        <p><strong>🌟 Dark Counts:</strong> ${(channelResult.applied_errors.dark_counts * 100).toFixed(2)}%</p>
-                    </div>
-                `;
-            }
-
-            // Fidelity metrics
-            document.getElementById('fidelity-metrics').innerHTML = `
-                <div class="finite-key-analysis">
-                    <div class="explanation-box">
-                        <h5>📈 Quantum Fidelity</h5>
-                        <p>Fidelity measures how well quantum states are preserved during transmission. Values closer to 1.0 indicate better channel quality.</p>
-                    </div>
-                    <p><strong>Channel Fidelity:</strong> ${channelResult.success ? 'High' : 'Degraded'}</p>
-                    <p><strong>Error Types Applied:</strong> ${channelResult.error_types_applied || 5}</p>
-                    <p><strong>Transmission Success:</strong> ${channelResult.success ? '✅ Successful' : '❌ Failed'}</p>
-                </div>
-            `;
-
-            // Protocol comparison
-            document.getElementById('protocol-comparison').innerHTML = `
-                <div class="finite-key-analysis">
-                    <div class="explanation-box">
-                        <h5>🔬 Backend Performance</h5>
-                        <p>Different quantum simulation backends have varying strengths for different problem sizes and complexities.</p>
-                    </div>
-                    <p><strong>Current Backend:</strong> ${channelResult.backend_used || 'QuTiP'}</p>
-                    <p><strong>Optimization:</strong> ${channelResult.backend_used === 'QuTiP' ? 'Optimized for larger systems' : 'Educational circuit model'}</p>
-                    <p><strong>Performance:</strong> ${channelResult.success ? 'Excellent' : 'Limited by noise'}</p>
-                </div>
-            `;
         }
 
         // Enhanced final key display with educational content
@@ -1771,7 +1302,7 @@
 
             if (key.length > 0) {
                 // Enhanced key visualization with explanations
-                let keyHTML = '<div class="explanation-box"><h4>🔍 Understanding Your Key</h4><p>Each circle represents one bit of your quantum-generated key. Blue circles are 0s, red circles are 1s. The pattern should appear random—any visible patterns could indicate security issues.</p></div>';
+                let keyHTML = '<div class="highlight-box"><h4>🔍 Understanding Your Key</h4><p>Each circle represents one bit of your quantum-generated key. Blue circles are 0s, red circles are 1s. The pattern should appear random—any visible patterns could indicate security issues.</p></div>';
                 keyHTML += '<div class="bit-visualization">';
                 key.slice(0, 50).forEach((bit, index) => {
                     keyHTML += `<span class="bit bit-${bit}" title="Bit ${index + 1}: ${bit} (Click to see details)" onclick="showBitDetails(${index}, ${bit})">${bit}</span>`;
@@ -1794,7 +1325,7 @@
 
                 // Enhanced metadata with educational info
                 keyMetadata.innerHTML = `
-                    <div class="explanation-box">
+                    <div class="highlight-box">
                         <h5>🎓 Key Properties</h5>
                         <p><strong>📅 Generated:</strong> ${result.timestamp ? new Date(result.timestamp).toLocaleString() : 'Just now'}</p>
                         <p><strong>🔒 Protocol:</strong> BB84 Quantum Key Distribution (Bennett-Brassard 1984)</p>
@@ -1948,32 +1479,14 @@
             // Enhanced noise level display
             const noiseLevel = document.getElementById('noiseLevel');
             const noiseValue = document.getElementById('noiseValue');
-            noiseValue.textContent = (parseFloat(noiseLevel.value) * 100).toFixed(1) + '%';
+            if (noiseLevel && noiseValue) {
+                noiseValue.textContent = (parseFloat(noiseLevel.value) * 100).toFixed(1) + '%';
 
-            noiseLevel.addEventListener('input', function() {
-                const percentage = (parseFloat(this.value) * 100).toFixed(1);
-                noiseValue.textContent = percentage + '%';
-            });
-
-            // Backend preview updates
-            const numBits = document.getElementById('numBits');
-            const backendChoice = document.getElementById('backendChoice');
-            const backendPreview = document.getElementById('backend-preview');
-
-            function updateBackendPreview() {
-                const bits = parseInt(numBits.value);
-                const choice = backendChoice.value;
-
-                if (choice === 'auto') {
-                    backendPreview.textContent = bits < 20 ? 'Qiskit (<20 qubits)' : 'QuTiP (≥20 qubits)';
-                } else {
-                    backendPreview.textContent = choice === 'qiskit' ? 'Qiskit (Forced)' : 'QuTiP (Forced)';
-                }
+                noiseLevel.addEventListener('input', function() {
+                    const percentage = (parseFloat(this.value) * 100).toFixed(1);
+                    noiseValue.textContent = percentage + '%';
+                });
             }
-
-            numBits.addEventListener('input', updateBackendPreview);
-            backendChoice.addEventListener('change', updateBackendPreview);
-            updateBackendPreview();
 
             // Enhanced periodic backend check
             setInterval(initializeBackend, 30000); // Check every 30 seconds
@@ -1984,20 +1497,6 @@
                     runPythonBB84Simulation();
                 }
             });
-        });
-
-        // Educational tooltips enhancement
-        document.addEventListener('mouseover', function(e) {
-            if (e.target.classList.contains('glossary-term')) {
-                // Add enhanced hover effect for glossary terms
-                e.target.style.backgroundColor = 'rgba(52, 152, 219, 0.2)';
-            }
-        });
-
-        document.addEventListener('mouseout', function(e) {
-            if (e.target.classList.contains('glossary-term')) {
-                e.target.style.backgroundColor = 'transparent';
-            }
         });
     </script>
 </body>

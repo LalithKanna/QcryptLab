@@ -1,0 +1,4 @@
+[build.environment]
+  NETLIFY_USE_LEGACY_IMAGE = "true"
+[build]
+  command = "pip install --upgrade pip setuptools wheel && pip install -r requirements.txt"
